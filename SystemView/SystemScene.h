@@ -6,6 +6,8 @@
 #include <QState>
 #include <QStateMachine>
 
+#include "ItemEventHandlers.h"
+
 namespace SystemView
 {
 
@@ -28,16 +30,22 @@ public:
 public:
     explicit SystemScene(QObject *parent = 0);
 
-    const MachineStates& states();
+    const MachineStates& states() const;
+
+    const SceneEventHandlers * handlers() const;
     
 signals:
     
 public slots:
 
+friend class AddStaffState;
+
 private:
     QStateMachine stateMachine;
     MachineStates statesVal;
+    const SceneEventHandlers * handlersVal;
     QList<SystemImageItem*> systemImageItems;
+    void setHandlers(const SceneEventHandlers * handlers);
 
     void setupMachine();
 

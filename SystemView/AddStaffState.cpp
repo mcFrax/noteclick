@@ -15,7 +15,7 @@ static SceneEventHandlers handlers;
 AddStaffState::AddStaffState(QState * parent, SystemScene *scene) :
     QState(parent), scene(scene)
 {
-    handlers.systemImageItemHandler = &handler;
+    handlers.HANDLER(SystemImageItem) = &handler;
 }
 
 

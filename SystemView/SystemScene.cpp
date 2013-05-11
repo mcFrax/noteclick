@@ -8,7 +8,7 @@ SystemScene::SystemScene(QObject *parent) :
     setupMachine();
 }
 
-const SystemScene::MachineStates &SystemScene::states()
+const SystemScene::MachineStates &SystemScene::states() const
 {
     return statesVal;
 }
@@ -22,4 +22,14 @@ void SystemScene::setupMachine()
     stateMachine.addState(statesVal.editSystem);
 
     stateMachine.setInitialState(statesVal.editSystem);
+}
+
+const SceneEventHandlers *SystemScene::handlers() const
+{
+    return handlersVal;
+}
+
+void SystemScene::setHandlers(const SceneEventHandlers * handlers)
+{
+    handlersVal = handlers;
 }

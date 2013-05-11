@@ -5,6 +5,8 @@ class QGraphicsItem;
 class QGraphicsSceneMouseEvent;
 class QKeyEvent;
 
+#define HANDLER(CLASS_NAME) CLASS_NAME##Handler
+
 namespace SystemView
 {
 
@@ -18,13 +20,14 @@ public:
 class SceneEventHandlers
 {
 public:
-    ItemEventHandler* systemImageItemHandler;
+    ItemEventHandler* HANDLER(SystemImageItem);
     //ItemEventHandler* staffItemHandler;
     //ItemEventHandler* clefItemHandler;
     //ItemEventHandler* noteItemHandler;
 };
 
 }
+
 
 #define USE_EVENT_HANDLER(METHOD_NAME, ARG_TYPE, HANDLER_NAME, PARENT_CLASS) \
     void METHOD_NAME(ARG_TYPE * event)                                       \
@@ -40,9 +43,9 @@ public:
     }                                                                        \
     //======================================================================//
     
-#define USE_EVENT_HANDLERS(HANDLER_NAME, PARENT_CLASS)                                        \
+#define USE_EVENT_HANDLERS(HANDLER_NAME, PARENT_CLASS)                                                \
     USE_EVENT_HANDLER(mousePressEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS) \
     USE_EVENT_HANDLER(mouseMoveEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS)  \
-    //=======================================================================================//
+    //=============================================================================================//
 
 #endif // ITEMEVENTHANDLERS_H
