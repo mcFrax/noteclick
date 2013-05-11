@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,7 +21,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionLoad_Image_triggered()
 {
+    QString fn = QFileDialog::getOpenFileName(this, tr("Otworz obraz..."));
+    if (fn.isNull()) return;
 
+    scene.addSystemImageItem(fn);
 }
 
 void MainWindow::setupSceneStateTransitions()

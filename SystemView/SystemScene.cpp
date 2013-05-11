@@ -1,4 +1,9 @@
 #include "SystemScene.h"
+#include "SystemImageItem.h"
+
+#include <QPixmap>
+#include <QState>
+#include <QString>
 
 using namespace SystemView;
 
@@ -27,6 +32,22 @@ void SystemScene::setupMachine()
 const SceneEventHandlers *SystemScene::handlers() const
 {
     return handlersVal;
+}
+
+void SystemScene::addSystemImageItem(const QString &filename)
+{
+    QPixmap pixmap(filename);
+
+    if (pixmap.isNull()){
+        emit error(tr("Nie udało się otworzyć pliku: ")+'"'+filename+'"');
+        return;
+    }
+
+    SystemImageItem* newSystem = new SystemImageItem(pixmap);
+    if (!systemImageItems.empty())
+        newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
+    systemImageItems.push_back(newSystem);
+    addItem(newSystem);
 }
 
 void SystemScene::setHandlers(const SceneEventHandlers * handlers)

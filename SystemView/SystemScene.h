@@ -3,8 +3,10 @@
 
 #include <QGraphicsScene>
 #include <QList>
-#include <QState>
 #include <QStateMachine>
+
+class QState;
+class QString;
 
 #include "ItemEventHandlers.h"
 
@@ -35,8 +37,10 @@ public:
     const SceneEventHandlers * handlers() const;
     
 signals:
+    void error(QString errorMessage);
     
 public slots:
+    void addSystemImageItem(const QString & filename);
 
 friend class AddStaffState;
 
