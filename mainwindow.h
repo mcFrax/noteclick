@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "SystemView/SystemScene.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SystemView::SystemScene scene;
+    void setupSceneStateTransitions();
 };
 
 #endif // MAINWINDOW_H

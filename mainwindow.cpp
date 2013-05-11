@@ -27,7 +27,13 @@ void MainWindow::setupSceneStateTransitions()
     scene.states().editSystem->addTransition(
                 ui->toolButton, SIGNAL(clicked()),
                 scene.states().normalCursor);
+<<<<<<< HEAD
 //    scene.states().editSystem->addTransition(
 //                ui->toolButton_2, SIGNAL(clicked()),
 //                scene.states().addStaff);
+=======
+    scene.states().editSystem->addTransition(
+                ui->toolButton_2, SIGNAL(clicked()),
+                scene.states().addStaff);
+>>>>>>> 408d556... MainWindow setup1
 }
