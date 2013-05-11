@@ -1,5 +1,7 @@
 #include "ItemEventHandlers.h"
 
+using namespace SystemView;
+
 bool ItemEventHandler::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
 {
     return 1;

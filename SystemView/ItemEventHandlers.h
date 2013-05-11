@@ -5,6 +5,9 @@ class QGraphicsItem;
 class QGraphicsSceneMouseEvent;
 class QKeyEvent;
 
+namespace SystemView
+{
+
 class ItemEventHandler
 {
 public:
@@ -16,11 +19,12 @@ class SceneEventHandlers
 {
 public:
     ItemEventHandler* systemImageItemHandler;
-    ItemEventHandler* staffItemHandler;
-    ItemEventHandler* clefItemHandler;
-    ItemEventHandler* noteItemHandler;
+    //ItemEventHandler* staffItemHandler;
+    //ItemEventHandler* clefItemHandler;
+    //ItemEventHandler* noteItemHandler;
 };
 
+}
 
 #define USE_EVENT_HANDLER(METHOD_NAME, ARG_TYPE, HANDLER_NAME, PARENT_CLASS) \
     void METHOD_NAME(ARG_TYPE * event)                                       \

@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    setupSceneStateTransitions();
+
+    ui->systemView->setScene(&scene);
 }
 
 MainWindow::~MainWindow()
@@ -16,4 +20,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionLoad_Image_triggered()
 {
 
+}
+
+void MainWindow::setupSceneStateTransitions()
+{
+    scene.states().editSystem->addTransition(
+                ui->toolButton, SIGNAL(clicked()),
+                scene.states().normalCursor);
+//    scene.states().editSystem->addTransition(
+//                ui->toolButton_2, SIGNAL(clicked()),
+//                scene.states().addStaff);
 }

@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    SystemView/ItemEventHandlers.cpp
+    SystemView/ItemEventHandlers.cpp \
+    SystemView/SystemViewItem.cpp \
+    SystemView/SystemScene.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \
-    SystemView/ItemEventHandlers.h
+    SystemView/ItemEventHandlers.h \
+    SystemView/SystemViewItem.h \
+    SystemView/SystemScene.h
 
 FORMS    += mainwindow.ui
