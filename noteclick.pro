@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     SystemView/ItemEventHandlers.cpp \
     SystemView/SystemViewItem.cpp \
-    SystemView/SystemScene.cpp
+    SystemView/SystemScene.cpp \
+    SystemView/AddStaffState.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \
     SystemView/ItemEventHandlers.h \
     SystemView/SystemViewItem.h \
-    SystemView/SystemScene.h
+    SystemView/SystemScene.h \
+    SystemView/AddStaffState.h
 
 FORMS    += mainwindow.ui
