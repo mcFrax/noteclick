@@ -24,7 +24,7 @@ public:
     {
         QState *editSystem;
         QState *normalCursor;
-        //QState *addStaff;
+        QState *addStaff;
         //QState *addClef;
         //QState *addNote;
     };

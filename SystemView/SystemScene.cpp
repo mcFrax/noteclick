@@ -5,11 +5,14 @@
 #include <QState>
 #include <QString>
 
+#include "AddStaffState.h"
+
 using namespace SystemView;
 
 SystemScene::SystemScene(QObject *parent) :
     QGraphicsScene(parent)
 {
+    handlersVal = 0;
     setupMachine();
 }
 
@@ -23,6 +26,8 @@ void SystemScene::setupMachine()
 {
     statesVal.editSystem = new QState();
     statesVal.normalCursor = new QState(statesVal.editSystem);
+    statesVal.addStaff = new AddStaffState(statesVal.editSystem, this);
+
     statesVal.editSystem->setInitialState(statesVal.normalCursor);
     stateMachine.addState(statesVal.editSystem);
 

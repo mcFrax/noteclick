@@ -20,6 +20,7 @@ public:
 class SceneEventHandlers
 {
 public:
+    SceneEventHandlers();
     ItemEventHandler* HANDLER(SystemImageItem);
     //ItemEventHandler* staffItemHandler;
     //ItemEventHandler* clefItemHandler;
