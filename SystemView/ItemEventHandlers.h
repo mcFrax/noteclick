@@ -44,9 +44,9 @@ public:
     }                                                                        \
     //======================================================================//
     
-#define USE_EVENT_HANDLERS(HANDLER_NAME, PARENT_CLASS)                                                \
+#define USE_EVENT_HANDLERS(HANDLER_NAME, PARENT_CLASS)                                       \
     USE_EVENT_HANDLER(mousePressEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS) \
     USE_EVENT_HANDLER(mouseMoveEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS)  \
-    //=============================================================================================//
+    //======================================================================================//
 
 #endif // ITEMEVENTHANDLERS_H

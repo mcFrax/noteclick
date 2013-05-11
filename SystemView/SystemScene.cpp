@@ -32,6 +32,7 @@ void SystemScene::setupMachine()
     stateMachine.addState(statesVal.editSystem);
 
     stateMachine.setInitialState(statesVal.editSystem);
+    stateMachine.start();
 }
 
 const SceneEventHandlers *SystemScene::handlers() const

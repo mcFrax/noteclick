@@ -6,7 +6,7 @@ using namespace SystemView;
 
 class EventHandler : public ItemEventHandler
 {
-    bool mousePressEvent(SystemImageItem *, QGraphicsSceneMouseEvent *) { throw; return 0; }
+    bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *) { throw 1; return 0; }
 };
 
 static EventHandler handler;
