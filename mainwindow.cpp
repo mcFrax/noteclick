@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include <QFileDialog>
+#include <QMessageBox>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,12 +13,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setupSceneStateTransitions();
 
+    connect(&scene, SIGNAL(error(QString)), this, SLOT(showErrorMessage(QString)));
+
     ui->systemView->setScene(&scene);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::showErrorMessage(QString messageText)
+{
+    QMessageBox::critical(this, tr("Błąd"), messageText);
 }
 
 void MainWindow::on_actionLoad_Image_triggered()

@@ -9,6 +9,8 @@ namespace Ui {
 class MainWindow;
 }
 
+class QString;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -16,7 +18,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
+public slots:
+    void showErrorMessage(QString messageText);
+
 private slots:
     void on_actionLoad_Image_triggered();
 
