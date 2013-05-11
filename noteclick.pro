@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    SystemView/ItemEventHandlers.cpp
 
 HEADERS  += mainwindow.h \
-    IdRegisteredClass.h
+    IdRegisteredClass.h \
+    SystemView/ItemEventHandlers.h
 
 FORMS    += mainwindow.ui
