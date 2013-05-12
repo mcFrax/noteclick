@@ -1,0 +1,4 @@
+#ifndef SCORECHANGE_H
+#define SCORECHANGE_H
+
+#endif // SCORECHANGE_H
