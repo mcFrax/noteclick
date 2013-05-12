@@ -31,6 +31,7 @@ HEADERS  += mainwindow.h \
     SystemView/SystemScene.h \
     SystemView/AddStaffState.h \
     SystemView/SystemImageItem.h \
-    Model/ScoreModel.h
+    Model/ScoreModel.h \
+    VersatileSlotArgument.h
 
 FORMS    += mainwindow.ui
