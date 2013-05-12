@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     SystemView/SystemViewItem.cpp \
     SystemView/SystemScene.cpp \
     SystemView/AddStaffState.cpp \
-    SystemView/SystemImageItem.cpp
+    SystemView/SystemImageItem.cpp \
+    Model/ScoreModel.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \
@@ -26,6 +27,7 @@ HEADERS  += mainwindow.h \
     SystemView/SystemViewItem.h \
     SystemView/SystemScene.h \
     SystemView/AddStaffState.h \
-    SystemView/SystemImageItem.h
+    SystemView/SystemImageItem.h \
+    Model/ScoreModel.h
 
 FORMS    += mainwindow.ui
