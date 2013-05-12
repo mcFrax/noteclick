@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     SystemView/SystemScene.cpp \
     SystemView/AddStaffState.cpp \
     SystemView/SystemImageItem.cpp \
-    Model/ScoreModel.cpp
+    Model/ScoreModel.cpp \
+    StaffCoords.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \
@@ -34,6 +35,7 @@ HEADERS  += mainwindow.h \
     Model/ScoreModel.h \
     VersatileSlotArgument.h \
     SignalCommunication/UserAction.h \
-    SignalCommunication/ScoreChange.h
+    SignalCommunication/ScoreChange.h \
+    StaffCoords.h
 
 FORMS    += mainwindow.ui
