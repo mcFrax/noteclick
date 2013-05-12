@@ -3,11 +3,13 @@
 
 #include <QHash>
 
+typedef uint GlobalIdType;
+
 template <uint IdClass>
 class IdRegisteredClass
 {
 public:
-    typedef uint IdType;
+    typedef GlobalIdType IdType;
     IdRegisteredClass()
     {
         do
@@ -58,7 +60,7 @@ template<uint IdClass>
 QHash<typename IdRegisteredClass<IdClass>::IdType, IdRegisteredClass<IdClass>*> IdRegisteredClass<IdClass>::hashmap;
 
 template<uint IdClass>
-uint IdRegisteredClass<IdClass>::nextid = 0;
+typename IdRegisteredClass<IdClass>::IdType IdRegisteredClass<IdClass>::nextid = 0;
 
 typedef IdRegisteredClass<0> ModelIdClass;
 typedef ModelIdClass::IdType ModelId;
