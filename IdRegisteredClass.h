@@ -4,8 +4,7 @@
 #include <QHash>
 #include <stdexcept>
 
-typedef uint GlobalIdType;
-typedef GlobalIdType IdType;
+typedef uint IdType;
 
 //special id values
 const IdType invalidId = IdType(0)-1;
