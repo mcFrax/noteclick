@@ -15,12 +15,12 @@ public:
 
     enum ChangeCategory
     {
-        SystemChange,
-        StructureChange,
-        ScoreChange
+        SystemChanged,
+        StructureChanged,
+        ScoreChanged
     };
 
-    enum SystemChanged
+    enum SystemChangeEnum
     {
         StaffSystemCreated,   //(IdType id, IdType systemImageId, StaffPosition position)
         ClefCreated,          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
@@ -51,7 +51,7 @@ public:
         SystemObjectErased    //(IdType objectId)
     };
 
-    enum StructureChanged
+    enum StructureChangeEnum
     {
         GroupCreated,          //(IdType id, IdType parent_id)
         StaffCreated,          //(IdType id, IdType parent_id)
@@ -62,14 +62,22 @@ public:
         StructureObjectErased  //(IdType id)
     };
 
-    enum ScoreChanged
+    enum ScoreChangeEnum
     {
         TitleChanged           //(QString new_title)
     };
 
 public:
-    ScoreChange(ChangeCategory category, int change, VSA args)
-        : category(category), change(change), args(args)
+    ScoreChange(SystemChangeEnum change, VSA args)
+        : category(SystemChanged), change(change), args(args)
+    {
+    }
+    ScoreChange(StructureChangeEnum change, VSA args)
+        : category(StructureChanged), change(change), args(args)
+    {
+    }
+    ScoreChange(ScoreChangeEnum change, VSA args)
+        : category(ScoreChanged), change(change), args(args)
     {
     }
 

@@ -17,7 +17,7 @@ public:
         ScoreChange
     };
 
-    enum SystemChangeAction
+    enum SystemChangeEnum
     {
         CreateStaffSystem,   //(IdType systemImageId, StaffPosition position)
         CreateClef,          //(IdType staffId, StaffCoords coords, ClefType clefType)
@@ -48,7 +48,7 @@ public:
         EraseSystemObject    //(IdType objectId)
     };
 
-    enum StructureChangeAction
+    enum StructureChangeEnum
     {
         CreateGroup,          //(IdType parent_id)
         CreateStaff,          //(IdType parent_id)
@@ -59,7 +59,7 @@ public:
         EraseStructureObject  //(IdType id)
     };
 
-    enum ScoreChangeAction
+    enum ScoreChangeEnum
     {
         ChangeTitle           //(QString new_title)
     };

@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     SystemView/SystemImageItem.cpp \
     Model/ScoreModel.cpp \
     StaffCoords.cpp \
-    IdRegisteredClass.cpp
+    IdRegisteredClass.cpp \
+    Model/ScoreModel-structure.cpp \
+    Model/ScoreModel-system.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \

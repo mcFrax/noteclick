@@ -46,6 +46,7 @@ class StaffPosition
 
     StaffPosition(const QPolygonF&); //schowane, poki nie ma spojnej polityki wyjatkow; na razie nie sprawdza poprawnosci
 public:
+    StaffPosition();
     StaffPosition(const QPointF&, const QPointF&, const QPointF&, const QPointF&);
 
     QPointF topLeft() const;

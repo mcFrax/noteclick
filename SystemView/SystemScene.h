@@ -39,6 +39,8 @@ public:
     
 signals:
     void error(QString errorMessage);
+    void warning(QString what);
+    void notice(QString what);
     
 public slots:
     void addSystemImageItem(const QString & filename);

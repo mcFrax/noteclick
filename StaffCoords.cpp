@@ -62,6 +62,12 @@ StaffPosition::StaffPosition(const QPolygonF& p)
     recalcMatrices();
 }
 
+StaffPosition::StaffPosition()
+    : polygon(oneSquare)
+{
+    recalcMatrices();
+}
+
 //==================//
 // transformation() //
 //==================//
