@@ -2,74 +2,83 @@
 #define IDREGISTEREDCLASS_H
 
 #include <QHash>
+#include <stdexcept>
 
 typedef uint GlobalIdType;
+typedef GlobalIdType IdType;
 
-template <uint IdClass>
-class IdRegisteredClass
+//special id values
+const IdType invalidId = IdType(0)-1;
+const IdType nothingId = invalidId-1;
+const IdType     anyId = nothingId-1;
+
+bool isSpecialId(IdType id);
+
+class BadIdException : public std::runtime_error
 {
 public:
-    typedef GlobalIdType IdType;
-    IdRegisteredClass()
-    {
-        do
-            idVal = nextid++;
-        while (hashmap.contains(idVal));
-        hashmap.insert(idVal, this);
-    }
-
-    explicit IdRegisteredClass(IdType id)
-    {
-        //byc moze powinno rzucac wyjatkiem, jezli id zajete
-        idVal = id;
-        while (hashmap.contains(idVal))
-            idVal = nextid++;
-        hashmap.insert(idVal, this);
-    }
-
-    virtual ~IdRegisteredClass()
-    {
-        hashmap.remove(idVal);
-    }
-
-    IdType id() const
-    {
-        return idVal;
-    }
-
-    static IdRegisteredClass* getById(IdType id)
-    {
-        return hashmap.value(id);
-    }
-
-    template <typename classname>
-    static classname getByIdAs(IdType id)
-    {
-        //cast referencji, zeby rzucal wyjatkiem przy bledzie
-        return &dynamic_cast<classname>(*(hashmap.value(id)));
-    }
-private:
-    static QHash<IdType, IdRegisteredClass*> hashmap;
-    static IdType nextid;
-    IdType idVal;
+    BadIdException(const char*);
 };
 
-//zmienne statyczne
+class IdRegisteredClass;
 
-template<uint IdClass>
-QHash<typename IdRegisteredClass<IdClass>::IdType, IdRegisteredClass<IdClass>*> IdRegisteredClass<IdClass>::hashmap;
+class IdRegister
+{
+    friend class IdRegisteredClass;
+    QHash<IdType, IdRegisteredClass*> hashmap;
+    IdType nextid;
+    bool freeEverythingAtDestroyVal;
+protected:
+    IdType registerObject(IdRegisteredClass*, IdType wantedId = anyId);
+public:
+    IdRegister(bool freeEverythingAtDestroy = false);
+    ~IdRegister();
 
-template<uint IdClass>
-typename IdRegisteredClass<IdClass>::IdType IdRegisteredClass<IdClass>::nextid = 0;
+    IdRegisteredClass& operator[] (IdType id) const;
 
-typedef IdRegisteredClass<0> ModelIdClass;
-typedef ModelIdClass::IdType ModelId;
+    IdRegisteredClass& ref(IdType id) const;
 
-typedef IdRegisteredClass<1> SystemViewIdClass;
-typedef SystemViewIdClass::IdType SystemViewId;
+    template <typename classname>
+    classname& refAs(IdType id) const
+    {
+        return dynamic_cast<classname>(ref(id));
+    }
 
-typedef IdRegisteredClass<2> VoiceListIdClass;
-typedef VoiceListIdClass::IdType VoiceListId;
+    IdRegisteredClass* ptr(IdType id) const;
+
+    template <typename classname>
+    classname* ptrAs (IdType id) const
+    {
+        return dynamic_cast<classname*>(ptr);
+    }
+
+    bool freeEverythingAtDestroy() const;
+    void setFreeEverythingAtDestroy(bool);
+
+    void unregister(IdType id);
+    void unregister(IdRegisteredClass* ptr);
+};
+
+typedef IdRegister Reg;
+
+
+class IdRegisteredClass
+{
+    friend class IdRegister;
+    IdType idVal;
+    IdRegister* registeredInVal;
+protected:
+    IdRegister& registeredIn() const;
+public:
+    explicit IdRegisteredClass();
+    explicit IdRegisteredClass(IdRegister& reg, IdType id = anyId);
+
+    virtual ~IdRegisteredClass();
+
+    IdType id() const;
+
+    void registerIn(Reg& reg, IdType id = anyId);
+};
 
 
 #endif // IDREGISTEREDCLASS_H

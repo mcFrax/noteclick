@@ -6,11 +6,11 @@
 namespace SystemView
 {
 
-//!Na razie ta klasa nic nie dodaje do SystemViewIdClass, ale to sie moze zmienic
-class SystemViewItem : public SystemViewIdClass
+//!Na razie ta klasa nic nie dodaje do IdRegisteredClass, ale to sie moze zmienic
+class SystemViewItem : public IdRegisteredClass
 {
 public:
-    SystemViewItem();
+    SystemViewItem(IdRegister &, IdType id = anyId);
 };
 
 }

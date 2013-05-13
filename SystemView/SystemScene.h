@@ -9,6 +9,7 @@ class QState;
 class QString;
 
 #include "ItemEventHandlers.h"
+#include "IdRegisteredClass.h"
 
 namespace SystemView
 {
@@ -45,6 +46,7 @@ public slots:
 friend class AddStaffState;
 
 private:
+    Reg idReg;
     QStateMachine stateMachine;
     MachineStates statesVal;
     const SceneEventHandlers * handlersVal;

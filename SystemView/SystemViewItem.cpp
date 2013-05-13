@@ -2,6 +2,7 @@
 
 using namespace SystemView;
 
-SystemViewItem::SystemViewItem()
+SystemViewItem::SystemViewItem(IdRegister& reg, IdType id)
+    : IdRegisteredClass(reg, id)
 {
 }

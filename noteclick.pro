@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     SystemView/AddStaffState.cpp \
     SystemView/SystemImageItem.cpp \
     Model/ScoreModel.cpp \
-    StaffCoords.cpp
+    StaffCoords.cpp \
+    IdRegisteredClass.cpp
 
 HEADERS  += mainwindow.h \
     IdRegisteredClass.h \

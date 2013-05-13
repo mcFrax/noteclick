@@ -2,8 +2,8 @@
 
 using namespace SystemView;
 
-SystemImageItem::SystemImageItem(const QPixmap & pixmap, QGraphicsItem *parent) :
-    QGraphicsPixmapItem(pixmap, parent)
+SystemImageItem::SystemImageItem(Reg &reg, IdType id, const QPixmap & pixmap, QGraphicsItem *parent) :
+    QGraphicsPixmapItem(pixmap, parent), SystemViewItem(reg, id)
 {
 }
 

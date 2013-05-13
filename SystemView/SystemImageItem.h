@@ -5,6 +5,7 @@
 
 #include "ItemEventHandlers.h"
 #include "SystemScene.h"
+#include "SystemViewItem.h"
 
 namespace SystemView
 {
@@ -13,11 +14,11 @@ namespace SystemView
  *
  * System can have many SystemImages, e.g. with different instruments.
  */
-class SystemImageItem : public QGraphicsPixmapItem
+class SystemImageItem : public QGraphicsPixmapItem, public SystemViewItem
 {
     USE_EVENT_HANDLERS(HANDLER(SystemImageItem), QGraphicsPixmapItem)
 public:
-    explicit SystemImageItem(const QPixmap & pixmap, QGraphicsItem *parent = 0);
+    explicit SystemImageItem(Reg &reg, IdType id, const QPixmap & pixmap, QGraphicsItem *parent = 0);
 
 protected:
     SystemScene * systemScene();

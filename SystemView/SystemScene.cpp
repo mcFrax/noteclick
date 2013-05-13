@@ -49,7 +49,7 @@ void SystemScene::addSystemImageItem(const QString &filename)
         return;
     }
 
-    SystemImageItem* newSystem = new SystemImageItem(pixmap);
+    SystemImageItem* newSystem = new SystemImageItem(idReg, anyId, pixmap);
     if (!systemImageItems.empty())
         newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
     systemImageItems.push_back(newSystem);
