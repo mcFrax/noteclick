@@ -4,16 +4,11 @@
 
 using namespace SystemView;
 
-class EventHandler : public ItemEventHandler
-{
-    bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *) { throw 1; return 0; }
-};
-
-static EventHandler handler;
+static AddStaffState::EventHandler handler;
 static SceneEventHandlers handlers;
 
 AddStaffState::AddStaffState(QState * parent, SystemScene *scene) :
-    QState(parent), scene(scene)
+    SystemSceneState(parent, scene)
 {
     handlers.HANDLER(SystemImageItem) = &handler;
 }
@@ -27,4 +22,10 @@ void AddStaffState::onEntry(QEvent *)
 void AddStaffState::onExit(QEvent *)
 {
     scene->setHandlers(0);
+}
+
+
+bool AddStaffState::EventHandler::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
+{
+    return 1;
 }

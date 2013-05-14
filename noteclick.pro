@@ -41,6 +41,7 @@ HEADERS  += \
     SignalCommunication/UserAction.h \
     SignalCommunication/ScoreChange.h \
     StaffCoords.h \
-    MainWindow.h
+    MainWindow.h \
+    SystemView/SystemSceneState.h
 
 FORMS    += mainwindow.ui
