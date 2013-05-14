@@ -20,7 +20,8 @@ public:
     ~MainWindow();
 
 public slots:
-    void showErrorMessage(QString messageText);
+    void handleError(QString messageText);
+    void handleWarning(QString messageText);
 
 private slots:
     void on_actionLoad_Image_triggered();

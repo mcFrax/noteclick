@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QString>
+#include <QtGlobal>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setupSceneStateTransitions();
 
-    connect(&scene, SIGNAL(error(QString)), this, SLOT(showErrorMessage(QString)));
+    connect(&scene, SIGNAL(error(QString)), this, SLOT(handleError(QString)));
+    connect(&scene, SIGNAL(warning(QString)), this, SLOT(handleWarning(QString)));
 
     ui->systemView->setScene(&scene);
 }
@@ -23,10 +25,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::showErrorMessage(QString messageText)
+void MainWindow::handleError(QString messageText)
 {
     QMessageBox::critical(this, tr("Błąd"), messageText);
 }
+
+void MainWindow::handleWarning(QString messageText)
+{
+    const QByteArray& array = messageText.toLocal8Bit();
+    qWarning("%s\n", array.data());
+}
+
 
 void MainWindow::on_actionLoad_Image_triggered()
 {
@@ -45,3 +54,4 @@ void MainWindow::setupSceneStateTransitions()
                 ui->toolButton_2, SIGNAL(clicked()),
                 scene.states().addStaff);
 }
+
