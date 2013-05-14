@@ -15,8 +15,7 @@ QMAKE_CXXFLAGS += -std=c++11
 QMAKE_LFLAGS += -std=c++11
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
+SOURCES +=\
     SystemView/ItemEventHandlers.cpp \
     SystemView/SystemViewItem.cpp \
     SystemView/SystemScene.cpp \
@@ -26,9 +25,11 @@ SOURCES += main.cpp\
     StaffCoords.cpp \
     IdRegisteredClass.cpp \
     Model/ScoreModel-structure.cpp \
-    Model/ScoreModel-system.cpp
+    Model/ScoreModel-system.cpp \
+    Main.cpp \
+    MainWindow.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     IdRegisteredClass.h \
     SystemView/ItemEventHandlers.h \
     SystemView/SystemViewItem.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     VersatileSlotArgument.h \
     SignalCommunication/UserAction.h \
     SignalCommunication/ScoreChange.h \
-    StaffCoords.h
+    StaffCoords.h \
+    MainWindow.h
 
 FORMS    += mainwindow.ui
