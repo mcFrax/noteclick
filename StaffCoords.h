@@ -5,7 +5,7 @@
 #include <QTransform>
 #include <QPolygonF>
 
-#warning ma byc zastapione prawdziwym ScaleDegree
+#warning typedef ma byc zastapiony prawdziwym ScaleDegree
 typedef int ScaleDegree;
 
 //! Wspolrzedne na pieciolinii

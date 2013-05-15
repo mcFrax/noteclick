@@ -2,6 +2,7 @@
 #define SCORECHANGE_H
 
 #include "VersatileSlotArgument.h"
+#include "IdRegisteredClass.h"
 
 class ScoreChange
 {
@@ -22,6 +23,7 @@ public:
 
     enum SystemChangeEnum
     {
+        SystemImageCreated,   //(IdType systemId, IdType systemImageId, SystemImageInfo sysImgInfo)
         StaffSystemCreated,   //(IdType id, IdType systemImageId, StaffPosition position)
         ClefCreated,          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
         KeySignatureCreated,  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
@@ -68,22 +70,23 @@ public:
     };
 
 public:
-    ScoreChange(SystemChangeEnum change, VSA args)
-        : category(SystemChanged), change(change), args(args)
+    ScoreChange(SystemChangeEnum change, VSA args, IdType affectedSystem = noneId)
+        : category(SystemChanged), change(change), args(args), affectedSystem(affectedSystem)
     {
     }
-    ScoreChange(StructureChangeEnum change, VSA args)
-        : category(StructureChanged), change(change), args(args)
+    ScoreChange(StructureChangeEnum change, VSA args, IdType affectedSystem = noneId)
+        : category(StructureChanged), change(change), args(args), affectedSystem(affectedSystem)
     {
     }
-    ScoreChange(ScoreChangeEnum change, VSA args)
-        : category(ScoreChanged), change(change), args(args)
+    ScoreChange(ScoreChangeEnum change, VSA args, IdType affectedSystem = noneId)
+        : category(ScoreChanged), change(change), args(args), affectedSystem(affectedSystem)
     {
     }
 
     const ChangeCategory category;
     const int change;
     const VSA args;
+    const IdType affectedSystem;
 };
 
 #endif // SCORECHANGE_H

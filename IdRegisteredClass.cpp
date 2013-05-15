@@ -3,7 +3,7 @@
 
 bool isSpecialId(IdType id)
 {
-    return id == invalidId || id == nothingId || id == anyId;
+    return id >= firstSpecialId && id <= invalidId;
 }
 
 BadIdException::BadIdException(const char * what)

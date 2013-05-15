@@ -46,6 +46,7 @@ private:
 
 
 
+    void createSystemImage(const VSA& arg);
     void createStaffSystem(const VSA& arg);
     void createClef(const VSA& arg);
     void createKeySignature(const VSA& arg);

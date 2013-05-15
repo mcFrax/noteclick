@@ -7,9 +7,12 @@
 typedef uint IdType;
 
 //special id values
-const IdType invalidId = IdType(0)-1;
-const IdType nothingId = invalidId-1;
-const IdType     anyId = nothingId-1;
+constexpr IdType invalidId = IdType(0)-1;
+constexpr IdType nothingId = invalidId-1;
+constexpr IdType    noneId = nothingId-1;
+constexpr IdType     anyId =    noneId-1;
+
+const IdType firstSpecialId = anyId;
 
 bool isSpecialId(IdType id);
 

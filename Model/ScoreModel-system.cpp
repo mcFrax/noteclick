@@ -4,6 +4,8 @@
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
 
+#include "SystemImageInfo.h"
+
 //tymczasowe definicje niegotowych typów
 #warning temp KeySignature & TimeSignature & NoteValue & PauseValue & ClefType
 typedef int KeySignature;
@@ -18,6 +20,9 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
 {
     switch (static_cast<UserAction::SystemChangeEnum>(action.action))
     {
+    case UserAction::CreateSystemImage:   //(IdType systemId, SystemImageInfo sysImgInfo)
+        createStaffSystem(action.args);
+        return;
     case UserAction::CreateStaffSystem:   //(IdType systemImageId, StaffPosition position)
         createStaffSystem(action.args);
         return;
@@ -102,6 +107,15 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
             +QString::number(action.action));
 }
 
+
+void ScoreModel::createSystemImage(const VSA &arg)
+{
+    IdType systemId; SystemImageInfo info;
+    arg.unpackTo(systemId, info);
+    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemId, info), systemId));
+    emit warning(tr("Not fully handled action"));
+}
 
 void ScoreModel::createStaffSystem(const VSA& arg)
 {

@@ -19,7 +19,7 @@ namespace SystemView
 class SystemImageItem;
 class SystemSceneState;
 
-class SystemScene : public QGraphicsScene
+class SystemScene : public QGraphicsScene, protected IdRegisteredClass
 {
     Q_OBJECT
 
@@ -39,6 +39,8 @@ public:
     const MachineStates& states() const;
 
     const SceneEventHandlers * handlers() const;
+
+    using IdRegisteredClass::id;
     
 signals:
     void error(QString errorMessage);
@@ -62,6 +64,9 @@ private:
     void setHandlers(const SceneEventHandlers * handlers);
 
     void setupMachine();
+
+    void handleSystemChanged(ScoreChange change);
+    void handleScoreChanged(ScoreChange change);
 
 };
 

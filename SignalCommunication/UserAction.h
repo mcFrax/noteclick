@@ -19,6 +19,7 @@ public:
 
     enum SystemChangeEnum
     {
+        CreateSystemImage,   //(IdType systemId, SystemImageInfo sysImgInfo)
         CreateStaffSystem,   //(IdType systemImageId, StaffPosition position)
         CreateClef,          //(IdType staffId, StaffCoords coords, ClefType clefType)
         CreateKeySignature,  //(IdType staffId, StaffCoords coords, KeySignature signature)

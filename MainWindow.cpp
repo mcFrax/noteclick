@@ -6,6 +6,9 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "SignalCommunication/UserAction.h"
+#include "SystemImageInfo.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -56,11 +59,22 @@ void MainWindow::on_actionLoad_Image_triggered()
     QString fn = QFileDialog::getOpenFileName(this, tr("Otworz obraz..."));
     if (fn.isNull()) return;
 
+    score.userAction(
+                UserAction(
+                    UserAction::SystemChange,
+                    UserAction::CreateSystemImage,
+                    vsa(SystemImageInfo(fn))
+                    )
+                );
     #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);
 }
 
 void MainWindow::setupSceneStateTransitions()
 {
+    scene.states().editSystem->addTransition(
+                ui->actionLoad_Image, SIGNAL(triggered()),
+                scene.states().normalCursor);
+
     scene.states().editSystem->addTransition(
                 ui->toolButton, SIGNAL(clicked()),
                 scene.states().normalCursor);
