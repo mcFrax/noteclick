@@ -46,7 +46,7 @@ void ScoreModel::createGroup(const VSA& arg)
     arg.unpackTo(parent_id);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::GroupCreated, vsa(id, parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createStaff(const VSA& arg)
@@ -55,7 +55,7 @@ void ScoreModel::createStaff(const VSA& arg)
     arg.unpackTo(parent_id);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::StaffCreated, vsa(id, parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createVoice(const VSA& arg)
@@ -64,7 +64,7 @@ void ScoreModel::createVoice(const VSA& arg)
     arg.unpackTo(parent_id);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::VoiceCreated, vsa(id, parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveGroup(const VSA& arg)
@@ -72,7 +72,7 @@ void ScoreModel::moveGroup(const VSA& arg)
     IdType id; IdType new_parent_id;
     arg.unpackTo(id, new_parent_id);
     emit changed(ScoreChange(ScoreChange::GroupMoved, vsa(id, new_parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveStaff(const VSA& arg)
@@ -80,7 +80,7 @@ void ScoreModel::moveStaff(const VSA& arg)
     IdType id; IdType new_parent_id;
     arg.unpackTo(id, new_parent_id);
     emit changed(ScoreChange(ScoreChange::StaffMoved, vsa(id, new_parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveVoice(const VSA& arg)
@@ -88,7 +88,7 @@ void ScoreModel::moveVoice(const VSA& arg)
     IdType id; IdType new_parent_id;
     arg.unpackTo(id, new_parent_id);
     emit changed(ScoreChange(ScoreChange::VoiceMoved, vsa(id, new_parent_id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::eraseStructureObject(const VSA& arg)
@@ -96,5 +96,5 @@ void ScoreModel::eraseStructureObject(const VSA& arg)
     IdType id;
     arg.unpackTo(id);
     emit changed(ScoreChange(ScoreChange::StructureObjectErased, vsa(id)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

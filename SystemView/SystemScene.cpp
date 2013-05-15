@@ -114,7 +114,7 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::SynchroMarkIdChanged: //(IdType synchroMarkId, IdType new_synchroId)
 
         case ScoreChange::SystemObjectErased:    //(IdType objectId)
-            emit warning(tr("Not handled system change"));
+            emit warning(tr("Not handled system change")+" ("+__func__+")");
             return;
 
         //Nie wstawiac default!

@@ -63,5 +63,5 @@ void ScoreModel::changeTitle(const VSA& arg)
     QString new_title;
     arg.unpackTo(new_title);
     emit changed(ScoreChange(ScoreChange::GroupCreated, vsa(new_title)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

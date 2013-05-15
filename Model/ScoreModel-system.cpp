@@ -21,7 +21,7 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     switch (static_cast<UserAction::SystemChangeEnum>(action.action))
     {
     case UserAction::CreateSystemImage:   //(IdType systemId, SystemImageInfo sysImgInfo)
-        createStaffSystem(action.args);
+        createSystemImage(action.args);
         return;
     case UserAction::CreateStaffSystem:   //(IdType systemImageId, StaffPosition position)
         createStaffSystem(action.args);
@@ -114,7 +114,7 @@ void ScoreModel::createSystemImage(const VSA &arg)
     arg.unpackTo(systemId, info);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemId, info), systemId));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createStaffSystem(const VSA& arg)
@@ -123,7 +123,7 @@ void ScoreModel::createStaffSystem(const VSA& arg)
     arg.unpackTo(systemImageId, position);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemImageId, position)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createClef(const VSA& arg)
@@ -132,7 +132,7 @@ void ScoreModel::createClef(const VSA& arg)
     arg.unpackTo(staffId, coords, clefType);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefType)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createKeySignature(const VSA& arg)
@@ -141,7 +141,7 @@ void ScoreModel::createKeySignature(const VSA& arg)
     arg.unpackTo(staffId, coords, signature);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::KeySignatureCreated, vsa(id, staffId, coords, signature)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createTimeSignature(const VSA& arg)
@@ -150,7 +150,7 @@ void ScoreModel::createTimeSignature(const VSA& arg)
     arg.unpackTo(staffId, coords, signature);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::TimeSignatureCreated, vsa(id, staffId, coords, signature)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createNote(const VSA& arg)
@@ -159,7 +159,7 @@ void ScoreModel::createNote(const VSA& arg)
     arg.unpackTo(staffId, coords, noteValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::NoteCreated, vsa(id, staffId, coords, noteValue)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createPause(const VSA& arg)
@@ -168,7 +168,7 @@ void ScoreModel::createPause(const VSA& arg)
     arg.unpackTo(staffId, coords, pauseValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::PauseCreated, vsa(id, staffId, coords, pauseValue)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createBarcheck(const VSA& arg)
@@ -177,7 +177,7 @@ void ScoreModel::createBarcheck(const VSA& arg)
     arg.unpackTo(staffId, coords);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::BarcheckCreated, vsa(id, staffId, coords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createSynchroMark(const VSA& arg)
@@ -186,7 +186,7 @@ void ScoreModel::createSynchroMark(const VSA& arg)
     arg.unpackTo(staffId, coords, synchroId);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::SynchroMarkCreated, vsa(id, staffId, coords, synchroId)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createSlur(const VSA& arg)
@@ -195,7 +195,7 @@ void ScoreModel::createSlur(const VSA& arg)
     arg.unpackTo(noteId1, noteId2);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::SlurCreated, vsa(id, noteId1, noteId2)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 
@@ -204,7 +204,7 @@ void ScoreModel::moveStaffSystem(const VSA& arg)
     IdType staffId; StaffPosition newPosition;
     arg.unpackTo(staffId, newPosition);
     emit changed(ScoreChange(ScoreChange::StaffSystemMoved, vsa(staffId, newPosition)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveClef(const VSA& arg)
@@ -212,7 +212,7 @@ void ScoreModel::moveClef(const VSA& arg)
     IdType clefId; StaffCoords newCoords;
     arg.unpackTo(clefId, newCoords);
     emit changed(ScoreChange(ScoreChange::ClefMoved, vsa(clefId, newCoords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveKeySignature(const VSA& arg)
@@ -220,7 +220,7 @@ void ScoreModel::moveKeySignature(const VSA& arg)
     IdType keySignId; StaffCoords newCoords;
     arg.unpackTo(keySignId, newCoords);
     emit changed(ScoreChange(ScoreChange::KeySignatureMoved, vsa(keySignId, newCoords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveTimeSignature(const VSA& arg)
@@ -228,7 +228,7 @@ void ScoreModel::moveTimeSignature(const VSA& arg)
     IdType timeSignId; StaffCoords newCoords;
     arg.unpackTo(timeSignId, newCoords);
     emit changed(ScoreChange(ScoreChange::TimeSignatureMoved, vsa(timeSignId, newCoords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveNote(const VSA& arg)
@@ -236,7 +236,7 @@ void ScoreModel::moveNote(const VSA& arg)
     IdType noteId; StaffCoords coords;
     arg.unpackTo(noteId, coords);
     emit changed(ScoreChange(ScoreChange::NoteMoved, vsa(noteId, coords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::movePause(const VSA& arg)
@@ -244,7 +244,7 @@ void ScoreModel::movePause(const VSA& arg)
     IdType pauseId; StaffCoords coords;
     arg.unpackTo(pauseId, coords);
     emit changed(ScoreChange(ScoreChange::PauseMoved, vsa(pauseId, coords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveBarcheck(const VSA& arg)
@@ -252,7 +252,7 @@ void ScoreModel::moveBarcheck(const VSA& arg)
     IdType barcheckId; StaffCoords coords;
     arg.unpackTo(barcheckId, coords);
     emit changed(ScoreChange(ScoreChange::BarcheckMoved, vsa(barcheckId, coords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::moveSynchroMark(const VSA& arg)
@@ -260,7 +260,7 @@ void ScoreModel::moveSynchroMark(const VSA& arg)
     IdType synchroMarkId; StaffCoords coords;
     arg.unpackTo(synchroMarkId, coords);
     emit changed(ScoreChange(ScoreChange::SynchroMarkMoved, vsa(synchroMarkId, coords)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 
@@ -269,7 +269,7 @@ void ScoreModel::changeClefType(const VSA& arg)
     IdType clefId; ClefType new_clefType;
     arg.unpackTo(clefId, new_clefType);
     emit changed(ScoreChange(ScoreChange::ClefTypeChanged, vsa(clefId, new_clefType)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::changeKeySignature(const VSA& arg)
@@ -277,7 +277,7 @@ void ScoreModel::changeKeySignature(const VSA& arg)
     IdType keySignId; KeySignature new_signature;
     arg.unpackTo(keySignId, new_signature);
     emit changed(ScoreChange(ScoreChange::KeySignatureChanged, vsa(keySignId, new_signature)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::changeTimeSignature(const VSA& arg)
@@ -285,7 +285,7 @@ void ScoreModel::changeTimeSignature(const VSA& arg)
     IdType timeSignId; TimeSignature new_signature;
     arg.unpackTo(timeSignId, new_signature);
     emit changed(ScoreChange(ScoreChange::TimeSignatureChanged, vsa(timeSignId, new_signature)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::changeNoteValue(const VSA& arg)
@@ -293,7 +293,7 @@ void ScoreModel::changeNoteValue(const VSA& arg)
     IdType noteId; NoteValue new_noteValue;
     arg.unpackTo(noteId, new_noteValue);
     emit changed(ScoreChange(ScoreChange::NoteValueChanged, vsa(noteId, new_noteValue)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::changePauseValue(const VSA& arg)
@@ -301,7 +301,7 @@ void ScoreModel::changePauseValue(const VSA& arg)
     IdType pauseId; NoteValue new_noteValue;
     arg.unpackTo(pauseId, new_noteValue);
     emit changed(ScoreChange(ScoreChange::PauseValueChanged, vsa(pauseId, new_noteValue)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::changeSynchroMarkId(const VSA& arg)
@@ -309,7 +309,7 @@ void ScoreModel::changeSynchroMarkId(const VSA& arg)
     IdType synchroMarkId; IdType new_synchroId;
     arg.unpackTo(synchroMarkId, new_synchroId);
     emit changed(ScoreChange(ScoreChange::SynchroMarkIdChanged, vsa(synchroMarkId, new_synchroId)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 
@@ -318,5 +318,5 @@ void ScoreModel::eraseSystemObject(const VSA& arg)
     IdType objectId;
     arg.unpackTo(objectId);
     emit changed(ScoreChange(ScoreChange::SystemObjectErased, vsa(objectId)));
-    emit warning(tr("Not fully handled action"));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
