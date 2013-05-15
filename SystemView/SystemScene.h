@@ -11,6 +11,7 @@ class QString;
 #include "ItemEventHandlers.h"
 #include "IdRegisteredClass.h"
 #include "SignalCommunication/UserAction.h"
+#include "SignalCommunication/ScoreChange.h"
 
 namespace SystemView
 {
@@ -47,7 +48,7 @@ signals:
     void userAction(UserAction);
     
 public slots:
-    void addSystemImageItem(const QString & filename);
+    void scoreChange(ScoreChange change);
 
 friend class SystemSceneState;
 friend class AddStaffState;

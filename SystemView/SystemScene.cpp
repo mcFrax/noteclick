@@ -40,20 +40,10 @@ const SceneEventHandlers *SystemScene::handlers() const
     return handlersVal;
 }
 
-void SystemScene::addSystemImageItem(const QString &filename)
+void SystemScene::scoreChange(ScoreChange change)
 {
-    QPixmap pixmap(filename);
-
-    if (pixmap.isNull()){
-        emit error(tr("Nie udało się otworzyć pliku: ")+'"'+filename+'"');
-        return;
-    }
-
-    SystemImageItem* newSystem = new SystemImageItem(idReg, anyId, pixmap);
-    if (!systemImageItems.empty())
-        newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
-    systemImageItems.push_back(newSystem);
-    addItem(newSystem);
+    static const char* msg = "Wywolanie protezowej funkcji!";
+    emit warning(msg);
 }
 
 void SystemScene::setHandlers(const SceneEventHandlers * handlers)

@@ -16,6 +16,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(&scene, SIGNAL(error(QString)), this, SLOT(handleError(QString)));
     connect(&scene, SIGNAL(warning(QString)), this, SLOT(handleWarning(QString)));
+    connect(&scene, SIGNAL(notice(QString)), this, SLOT(handleNotice(QString)));
+
+    connect(&score, SIGNAL(error(QString)), this, SLOT(handleError(QString)));
+    connect(&score, SIGNAL(warning(QString)), this, SLOT(handleWarning(QString)));
+    connect(&score, SIGNAL(notice(QString)), this, SLOT(handleNotice(QString)));
+
+    connect(&scene, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
+    connect(&score, SIGNAL(scoreChanged(QString)), &scene, SLOT(scoreChange(ScoreChange)));
 
     ui->systemView->setScene(&scene);
 }
@@ -36,13 +44,19 @@ void MainWindow::handleWarning(QString messageText)
     qWarning("%s\n", array.data());
 }
 
+void MainWindow::handleNotice(QString messageText)
+{
+    const QByteArray& array = messageText.toLocal8Bit();
+    qDebug("%s\n", array.data());
+}
+
 
 void MainWindow::on_actionLoad_Image_triggered()
 {
     QString fn = QFileDialog::getOpenFileName(this, tr("Otworz obraz..."));
     if (fn.isNull()) return;
 
-    scene.addSystemImageItem(fn);
+    #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);
 }
 
 void MainWindow::setupSceneStateTransitions()

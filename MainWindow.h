@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "SystemView/SystemScene.h"
+#include "Model/ScoreModel.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ public:
 public slots:
     void handleError(QString messageText);
     void handleWarning(QString messageText);
+    void handleNotice(QString messageText);
 
 private slots:
     void on_actionLoad_Image_triggered();
@@ -29,6 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SystemView::SystemScene scene;
+    Model::ScoreModel score;
     void setupSceneStateTransitions();
 };
 
