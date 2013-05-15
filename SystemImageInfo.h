@@ -3,6 +3,8 @@
 
 #include <QString>
 
+class QPixmap;
+
 class SystemImageInfo
 {
     QString fileNameVal;
@@ -12,6 +14,8 @@ public:
 
     QString fileName() const;
     void setFileName(const QString& fileName);
+
+    QPixmap pixmap() const;
 };
 
 #endif // SYSTEMIMAGEINFO_H

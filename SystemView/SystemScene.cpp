@@ -6,6 +6,7 @@
 #include <QString>
 
 #include "AddStaffState.h"
+#include "SystemImageInfo.h"
 
 using namespace SystemView;
 
@@ -16,7 +17,7 @@ SystemScene::SystemScene(QObject *parent) :
     setupMachine();
 
     #warning tymczasowe id dla SystemScene
-    registerIn(idReg);
+    registerIn(idReg, 1000000);
 }
 
 const SystemScene::MachineStates &SystemScene::states() const
@@ -87,6 +88,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
     switch (static_cast<ScoreChange::SystemChangeEnum>(change.change))
     {
         case ScoreChange::SystemImageCreated:   //(IdType systemId, IdType systemImageId, SystemImageInfo sysImgInfo)
+            systemImageCreated(change);
+            return;
         case ScoreChange::StaffSystemCreated:   //(IdType id, IdType systemImageId, StaffPosition position)
         case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
@@ -143,5 +146,30 @@ void SystemScene::handleScoreChanged(ScoreChange change)
 
     //Tu trafiamy tylko w przypadku niepoprawnej wartosci action.action:
     emit error(tr("Invalid or unhandled ScoreChanged::change value (as ScoreChanged::ScoreChanged) ")
-            +QString::number(change.change));
+               +QString::number(change.change));
+}
+
+void SystemScene::systemImageCreated(const ScoreChange &change)
+{
+    IdType id; IdType sysId; SystemImageInfo info;
+
+    change.args.unpackTo(id, sysId, info);
+
+    if (sysId != this->id()){
+        emit warning(tr("Inconsistent ScoreChange (sysId != this->id())"));
+        return;
+    }
+
+    QPixmap pixmap = info.pixmap();
+
+    if (pixmap.isNull()){
+        emit error(tr("Nie udało się otworzyć pliku: ")+'"'+info.fileName()+'"');
+        return;
+    }
+
+    SystemImageItem* newSystem = new SystemImageItem(idReg, id, pixmap);
+    if (!systemImageItems.empty())
+        newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
+    systemImageItems.push_back(newSystem);
+    addItem(newSystem);
 }

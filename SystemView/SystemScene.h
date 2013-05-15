@@ -68,6 +68,7 @@ private:
     void handleSystemChanged(ScoreChange change);
     void handleScoreChanged(ScoreChange change);
 
+    void systemImageCreated(const ScoreChange& change);
 };
 
 }

@@ -113,7 +113,7 @@ void ScoreModel::createSystemImage(const VSA &arg)
     IdType systemId; SystemImageInfo info;
     arg.unpackTo(systemId, info);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemId, info), systemId));
+    emit changed(ScoreChange(ScoreChange::SystemImageCreated, vsa(id, systemId, info), systemId));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
