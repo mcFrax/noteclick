@@ -19,7 +19,6 @@ public:
     
 signals:
     void changed(ScoreChange change);
-    void systemChanged(IdType systemId, ScoreChange change);
 
     void error(QString what); //byc moze trzeba jakos rozdzielic fatal error/non-fatal error
     void warning(QString what);

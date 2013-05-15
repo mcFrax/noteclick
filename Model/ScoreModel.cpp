@@ -37,7 +37,8 @@ void ScoreModel::userAction(UserAction action)
     }
     catch (std::bad_cast &e)
     {
-        emit error(tr("std::bad_cast caught during action handling: ")+e.what());
+        emit error(tr("std::bad_cast caught during action handling: ")+e.what()+'\n'
+                   +"VSA typeid = "+action.args.typeName());
     }
 }
 

@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&score, SIGNAL(notice(QString)), this, SLOT(handleNotice(QString)));
 
     connect(&scene, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
-    connect(&score, SIGNAL(scoreChanged(QString)), &scene, SLOT(scoreChange(ScoreChange)));
+    connect(&score, SIGNAL(changed(ScoreChange)), &scene, SLOT(scoreChange(ScoreChange)));
 
     ui->systemView->setScene(&scene);
 }
@@ -63,7 +63,7 @@ void MainWindow::on_actionLoad_Image_triggered()
                 UserAction(
                     UserAction::SystemChange,
                     UserAction::CreateSystemImage,
-                    vsa(SystemImageInfo(fn))
+                    vsa(scene.id(), SystemImageInfo(fn))
                     )
                 );
     #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);

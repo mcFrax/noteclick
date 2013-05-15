@@ -76,7 +76,8 @@ void SystemScene::scoreChange(ScoreChange change)
     }
     catch (std::bad_cast &e)
     {
-        emit error(tr("std::bad_cast caught during ScoreChange handling: ")+e.what());
+        emit error(tr("std::bad_cast caught during ScoreChange handling: ")+e.what()+'\n'
+                   +"VSA typeid = "+change.args.typeName());
     }
 }
 

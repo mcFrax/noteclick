@@ -5,6 +5,7 @@
 #include <QSharedData>
 
 #include <tuple>
+#include <string>
 
 //===============================================================//
 //Uzycie:
@@ -29,6 +30,7 @@ class VersatileSlotArgumentDataCommonBase : public QSharedData
 {
 public:
     virtual ~VersatileSlotArgumentDataCommonBase() {}
+    virtual const char* typeName() const = 0;
 };
 
 class VersatileSlotArgument;
@@ -40,10 +42,48 @@ class VersatileSlotArgumentData : public VersatileSlotArgumentDataCommonBase, pu
     friend VersatileSlotArgument vsa(const FArgs & ... args);
 
     VersatileSlotArgumentData(const Args & ...args)
-        : std::tuple<Args...>(args...)
+        : VersatileSlotArgumentDataCommonBase(), std::tuple<Args...>(args...)
     {
     }
+
+    static const std::string className;
+
+public:
+    const char* typeName() const override
+    {
+        return className.c_str();
+    }
 };
+
+template <typename ... Types>
+struct VSADClassName
+{
+    static std::string str()
+    {
+        return std::string();
+    }
+};
+
+template <typename T>
+struct VSADClassName<T>
+{
+    static std::string str()
+    {
+        return typeid(T).name();
+    }
+};
+
+template <typename T, typename ... Types>
+struct VSADClassName<T, Types...>
+{
+    static std::string str()
+    {
+        return std::string(typeid(T).name())+", "+VSADClassName<Types...>::str();
+    }
+};
+
+template <typename ... Args>
+const std::string VersatileSlotArgumentData<Args...>::className = std::string("VSA(")+VSADClassName<Args...>::str()+")";
 
 class VersatileSlotArgument
 {
@@ -65,6 +105,10 @@ public:
         std::tuple<Args...>& tup =
                 dynamic_cast<std::tuple<Args...>&>(vsad);
         std::tie(args...) = tup;
+    }
+    const char* typeName() const
+    {
+        return dpointer->typeName();
     }
 };
 
