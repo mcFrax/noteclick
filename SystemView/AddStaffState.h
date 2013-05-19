@@ -3,6 +3,7 @@
 
 #include "SystemSceneState.h"
 #include "ItemEventHandlers.h"
+#include <QGraphicsPolygonItem>
 
 namespace SystemView
 {
@@ -16,10 +17,25 @@ class AddStaffState : public SystemSceneState, public ItemEventHandler
     void onEntry(QEvent * event);
     void onExit(QEvent * event);
     SceneEventHandlers handlers;
+
+    class StaffPartItem : public QGraphicsPolygonItem
+    {
+        void mousePressEvent(QGraphicsSceneMouseEvent *) override;
+    public:
+        StaffPartItem(QGraphicsItem* parent = 0);
+    };
+
+    StaffPartItem* staffPartItem;
+
 public:
     explicit AddStaffState(QState * parent, SystemScene *scene);
 
-    bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *);
+    bool mouseMoveEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *) override;
+    bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *) override;
+    bool mouseReleaseEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *) override;
+
+signals:
+    void staffSystemAdded();
 };
 
 }

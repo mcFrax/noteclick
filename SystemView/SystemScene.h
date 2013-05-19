@@ -18,6 +18,7 @@ namespace SystemView
 
 class SystemImageItem;
 class SystemSceneState;
+class AddStaffState;
 
 class SystemScene : public QGraphicsScene, protected IdRegisteredClass
 {
@@ -28,7 +29,7 @@ public:
     {
         QState *editSystem;
         QState *normalCursor;
-        QState *addStaff;
+        AddStaffState* addStaff;
         //QState *addClef;
         //QState *addNote;
     };

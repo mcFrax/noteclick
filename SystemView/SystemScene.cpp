@@ -7,6 +7,7 @@
 
 #include "AddStaffState.h"
 #include "SystemImageInfo.h"
+#include "AddStaffState.h"
 
 using namespace SystemView;
 
@@ -31,6 +32,7 @@ void SystemScene::setupMachine()
     statesVal.editSystem = new QState();
     statesVal.normalCursor = new QState(statesVal.editSystem);
     statesVal.addStaff = new AddStaffState(statesVal.editSystem, this);
+    statesVal.addStaff->addTransition(statesVal.addStaff, SIGNAL(staffSystemAdded()), statesVal.editSystem);
 
     statesVal.editSystem->setInitialState(statesVal.normalCursor);
     stateMachine.addState(statesVal.editSystem);
