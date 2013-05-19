@@ -8,6 +8,7 @@
 
 #include "SignalCommunication/UserAction.h"
 #include "SystemImageInfo.h"
+#include "SystemView/AddStaffState.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -61,7 +62,6 @@ void MainWindow::on_actionLoad_Image_triggered()
 
     score.userAction(
                 UserAction(
-                    UserAction::SystemChange,
                     UserAction::CreateSystemImage,
                     vsa(scene.id(), SystemImageInfo(fn))
                     )

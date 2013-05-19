@@ -66,8 +66,16 @@ public:
     };
 
 public:
-    UserAction(ActionCategory category, int action, VSA args)
-        : category(category), action(action), args(args)
+    UserAction(SystemChangeEnum action, VSA args)
+        : category(SystemChange), action(action), args(args)
+    {
+    }
+    UserAction(StructureChangeEnum action, VSA args)
+        : category(StructureChange), action(action), args(args)
+    {
+    }
+    UserAction(ScoreChangeEnum action, VSA args)
+        : category(ScoreChange), action(action), args(args)
     {
     }
 
