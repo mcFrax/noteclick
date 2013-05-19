@@ -1,16 +1,12 @@
 #include "AddStaffState.h"
-#include "ItemEventHandlers.h"
 #include "SystemScene.h"
 
 using namespace SystemView;
 
-static AddStaffState::EventHandler handler;
-static SceneEventHandlers handlers;
-
 AddStaffState::AddStaffState(QState * parent, SystemScene *scene) :
     SystemSceneState(parent, scene)
 {
-    handlers.HANDLER(SystemImageItem) = &handler;
+    handlers.HANDLER(SystemImageItem) = this;
 }
 
 
@@ -25,7 +21,8 @@ void AddStaffState::onExit(QEvent *)
 }
 
 
-bool AddStaffState::EventHandler::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
+bool AddStaffState::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
 {
+    scene->warning(__PRETTY_FUNCTION__);
     return 1;
 }

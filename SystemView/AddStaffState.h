@@ -2,25 +2,24 @@
 #define ADDSTAFFSTATE_H
 
 #include "SystemSceneState.h"
+#include "ItemEventHandlers.h"
 
 namespace SystemView
 {
 
 class SystemScene;
 
-class AddStaffState : public SystemSceneState
+class AddStaffState : public SystemSceneState, public ItemEventHandler
 {
     Q_OBJECT
 
     void onEntry(QEvent * event);
     void onExit(QEvent * event);
+    SceneEventHandlers handlers;
 public:
     explicit AddStaffState(QState * parent, SystemScene *scene);
 
-    class EventHandler : public ItemEventHandler
-    {
-        bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *);
-    };
+    bool mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *);
 };
 
 }
