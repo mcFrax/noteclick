@@ -17,6 +17,13 @@ public:
     virtual bool mouseMoveEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
 };
 
+class IgnoringItemEventHandler : public ItemEventHandler
+{
+public:
+    bool mousePressEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
+    bool mouseMoveEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
+};
+
 class SceneEventHandlers
 {
 public:
@@ -26,6 +33,9 @@ public:
     //ItemEventHandler* clefItemHandler;
     //ItemEventHandler* noteItemHandler;
 };
+
+ItemEventHandler* defaultItemEventHandler();
+ItemEventHandler* ignoringItemEventHandler();
 
 }
 
