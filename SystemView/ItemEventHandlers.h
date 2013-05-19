@@ -15,6 +15,7 @@ class ItemEventHandler
 public:
     virtual bool mousePressEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
     virtual bool mouseMoveEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
+    virtual bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
 };
 
 class IgnoringItemEventHandler : public ItemEventHandler
@@ -22,6 +23,7 @@ class IgnoringItemEventHandler : public ItemEventHandler
 public:
     bool mousePressEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
     bool mouseMoveEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
+    bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
 };
 
 class SceneEventHandlers
@@ -57,6 +59,7 @@ ItemEventHandler* ignoringItemEventHandler();
 #define USE_EVENT_HANDLERS(HANDLER_NAME, PARENT_CLASS)                                       \
     USE_EVENT_HANDLER(mousePressEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS) \
     USE_EVENT_HANDLER(mouseMoveEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS)  \
+    USE_EVENT_HANDLER(mouseReleaseEvent, QGraphicsSceneMouseEvent, HANDLER_NAME, PARENT_CLASS)  \
     //======================================================================================//
 
 #endif // ITEMEVENTHANDLERS_H
