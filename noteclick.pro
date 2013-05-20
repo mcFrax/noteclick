@@ -28,7 +28,8 @@ SOURCES +=\
     Model/ScoreModel-system.cpp \
     Main.cpp \
     MainWindow.cpp \
-    SystemImageInfo.cpp
+    SystemImageInfo.cpp \
+    SystemView/StaffSystemItem.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -44,6 +45,7 @@ HEADERS  += \
     StaffCoords.h \
     MainWindow.h \
     SystemView/SystemSceneState.h \
-    SystemImageInfo.h
+    SystemImageInfo.h \
+    SystemView/StaffSystemItem.h
 
 FORMS    += mainwindow.ui
