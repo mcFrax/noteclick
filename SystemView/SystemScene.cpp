@@ -8,6 +8,7 @@
 #include "AddStaffState.h"
 #include "SystemImageInfo.h"
 #include "AddStaffState.h"
+#include "StaffSystemItem.h"
 
 using namespace SystemView;
 
@@ -93,6 +94,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
             systemImageCreated(change);
             return;
         case ScoreChange::StaffSystemCreated:   //(IdType id, IdType systemImageId, StaffPosition position)
+            staffSystemCreated(change);
+            return;
         case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         case ScoreChange::TimeSignatureCreated: //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
@@ -174,4 +177,19 @@ void SystemScene::systemImageCreated(const ScoreChange &change)
         newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
     systemImageItems.push_back(newSystem);
     addItem(newSystem);
+}
+
+void SystemScene::staffSystemCreated(const ScoreChange &change)
+{
+    IdType id; IdType systemImageId; StaffPosition position;
+
+    change.args.unpackTo(id, systemImageId, position);
+
+    SystemImageItem* system = idReg.ptrAs<SystemImageItem>(systemImageId);
+    if (!system){
+        emit error(QString(__PRETTY_FUNCTION__)+':'+tr("Incorrect id"));
+        return;
+    }
+
+    StaffSystemItem* staff = new StaffSystemItem(position, system);
 }
