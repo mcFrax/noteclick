@@ -51,7 +51,7 @@ public:
     template <typename classname>
     classname* ptrAs (IdType id) const
     {
-        return dynamic_cast<classname*>(ptr);
+        return dynamic_cast<classname*>(ptr(id));
     }
 
     bool freeEverythingAtDestroy() const;

@@ -23,10 +23,14 @@ IdRegister::IdRegister(bool freeEverythingAtDestroy)
 
 IdRegister::~IdRegister()
 {
-    if (!freeEverythingAtDestroyVal) return;
-
-    for (IdRegisteredClass* irc : hashmap)
-        delete irc;
+    auto ircs = hashmap.values();
+    if (freeEverythingAtDestroyVal){
+        for (IdRegisteredClass* irc : ircs)
+            delete irc;
+    } else {
+        for (IdRegisteredClass* irc : ircs)
+            unregister(irc);
+    }
 }
 
 IdType IdRegister::registerObject(IdRegisteredClass * ptr, IdType wantedId)
@@ -125,7 +129,8 @@ IdRegister &IdRegisteredClass::registeredIn() const
 void IdRegisteredClass::registerIn(Reg &reg, IdType id)
 {
     if (registeredInVal) registeredInVal->unregister(this);
-    reg.registerObject(this, id);
+    idVal = reg.registerObject(this, id);
+    registeredInVal = &reg;
 }
 
 
