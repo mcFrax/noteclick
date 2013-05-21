@@ -36,6 +36,7 @@ public:
 
 public:
     explicit SystemScene(QObject *parent = 0);
+    ~SystemScene();
 
     const MachineStates& states() const;
 

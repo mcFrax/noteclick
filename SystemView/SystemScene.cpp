@@ -22,6 +22,11 @@ SystemScene::SystemScene(QObject *parent) :
     registerIn(idReg, 1000000);
 }
 
+SystemScene::~SystemScene()
+{
+    idReg.unregister(this);
+}
+
 const SystemScene::MachineStates &SystemScene::states() const
 {
     return statesVal;
@@ -191,5 +196,5 @@ void SystemScene::staffSystemCreated(const ScoreChange &change)
         return;
     }
 
-    StaffSystemItem* staff = new StaffSystemItem(position, system);
+    StaffSystemItem* staff = new StaffSystemItem(idReg, id, position, system);
 }
