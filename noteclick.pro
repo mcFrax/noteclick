@@ -28,7 +28,17 @@ SOURCES +=\
     Model/ScoreModel-system.cpp \
     Main.cpp \
     MainWindow.cpp \
-    SystemImageInfo.cpp
+    SystemImageInfo.cpp \
+    ListWidget/voicewidget.cpp \
+    ListWidget/staff.cpp \
+    ListWidget/score.cpp \
+    ListWidget/listwidget.cpp \
+    ListWidget/listname.cpp \
+    ListWidget/listitem.cpp \
+    ListWidget/innerlist.cpp \
+    ListWidget/erasebutton.cpp \
+    ListWidget/choirgroup.cpp \
+    ListWidget/box.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -44,6 +54,16 @@ HEADERS  += \
     StaffCoords.h \
     MainWindow.h \
     SystemView/SystemSceneState.h \
-    SystemImageInfo.h
+    SystemImageInfo.h \
+    ListWidget/voicewidget.h \
+    ListWidget/staff.h \
+    ListWidget/score.h \
+    ListWidget/listwidget.h \
+    ListWidget/listname.h \
+    ListWidget/listitem.h \
+    ListWidget/innerlist.h \
+    ListWidget/erasebutton.h \
+    ListWidget/choirgroup.h \
+    ListWidget/box.h
 
 FORMS    += mainwindow.ui
