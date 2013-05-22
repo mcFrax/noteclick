@@ -29,7 +29,9 @@ SOURCES +=\
     Main.cpp \
     MainWindow.cpp \
     SystemImageInfo.cpp \
-    SystemView/StaffSystemItem.cpp
+    SystemView/StaffSystemItem.cpp \
+    CuteMenu.cpp \
+    SystemView/ClefMenu.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -46,6 +48,8 @@ HEADERS  += \
     MainWindow.h \
     SystemView/SystemSceneState.h \
     SystemImageInfo.h \
-    SystemView/StaffSystemItem.h
+    SystemView/StaffSystemItem.h \
+    CuteMenu.h \
+    SystemView/ClefMenu.h
 
 FORMS    += mainwindow.ui
