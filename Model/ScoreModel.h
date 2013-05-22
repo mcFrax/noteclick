@@ -11,12 +11,13 @@
 namespace Model
 {
 
-class ScoreModel : public QObject
+class ScoreModel : public QObject, protected IdRegisteredClass
 {
     Q_OBJECT
 public:
     explicit ScoreModel(QObject *parent = 0);
     
+    static const IdType ScoreId;
 signals:
     void changed(ScoreChange change);
 
@@ -42,7 +43,7 @@ private:
     void moveVoice(const VSA& arg);
 
     void eraseStructureObject(const VSA& arg);
-
+    void renameStructureObject(const VSA& arg);
 
 
     void createSystemImage(const VSA& arg);

@@ -30,6 +30,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&scene, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
     connect(&score, SIGNAL(changed(ScoreChange)), &scene, SLOT(scoreChange(ScoreChange)));
 
+    connect((ui->VoiceList), SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
+    connect(&score, SIGNAL(changed(ScoreChange)), (ui->VoiceList), SLOT(scoreChange(ScoreChange)));
+
+
+
+
+
     ui->systemView->setScene(&scene);
 }
 

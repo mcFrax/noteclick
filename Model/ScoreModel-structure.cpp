@@ -2,6 +2,7 @@
 
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
+#include <QMessageBox>
 
 using namespace Model;
 
@@ -27,9 +28,13 @@ void ScoreModel::handleStructureChangeAction(const UserAction &action)
     case UserAction::MoveVoice:            //(IdType id, IdType new_parent_id)
         moveVoice(action.args);
         return;
-    case UserAction::EraseStructureObject:  //(IdType id)
+    case UserAction::StructureObjectRename:  //(IdType id, QString name)
+        renameStructureObject(action.args);
+        return;
+    case UserAction::StructureObjectErase:  //(IdType id)
         eraseStructureObject(action.args);
         return;
+
     //Nie wstawiac default!
     //Chodzi o to, zeby dostac warn w przypadku nieobslugiwania czegos.
     }
@@ -44,7 +49,11 @@ void ScoreModel::createGroup(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
+
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+
+
+
     emit changed(ScoreChange(ScoreChange::GroupCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
@@ -96,5 +105,14 @@ void ScoreModel::eraseStructureObject(const VSA& arg)
     IdType id;
     arg.unpackTo(id);
     emit changed(ScoreChange(ScoreChange::StructureObjectErased, vsa(id)));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
+}
+
+void ScoreModel::renameStructureObject(const VSA& arg)
+{
+    IdType id;
+    QString name;
+    arg.unpackTo(id, name);
+    emit changed(ScoreChange(ScoreChange::StructureObjectRenamed, vsa(id, name)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

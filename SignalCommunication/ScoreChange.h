@@ -61,7 +61,9 @@ public:
         GroupMoved,            //(IdType id, IdType new_parent_id)
         StaffMoved,            //(IdType id, IdType new_parent_id)
         VoiceMoved,            //(IdType id, IdType new_parent_id)
+        StructureObjectRenamed, //(IdType id, QString name)
         StructureObjectErased  //(IdType id)
+
     };
 
     enum ScoreChangeEnum

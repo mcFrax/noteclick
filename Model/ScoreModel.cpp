@@ -10,8 +10,10 @@ using namespace Model;
 ScoreModel::ScoreModel(QObject *parent) :
     QObject(parent)
 {
+    registerIn(reg, ScoreId);
 }
 
+const IdType ScoreModel::ScoreId = 0;
 
 void ScoreModel::userAction(UserAction action)
 {
