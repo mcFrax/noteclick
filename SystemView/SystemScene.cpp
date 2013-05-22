@@ -7,6 +7,8 @@
 
 #include "AddStaffState.h"
 #include "SystemImageInfo.h"
+#include "AddStaffState.h"
+#include "StaffSystemItem.h"
 
 using namespace SystemView;
 
@@ -20,6 +22,11 @@ SystemScene::SystemScene(QObject *parent) :
     registerIn(idReg, 1000000);
 }
 
+SystemScene::~SystemScene()
+{
+    idReg.unregister(this);
+}
+
 const SystemScene::MachineStates &SystemScene::states() const
 {
     return statesVal;
@@ -31,6 +38,7 @@ void SystemScene::setupMachine()
     statesVal.editSystem = new QState();
     statesVal.normalCursor = new QState(statesVal.editSystem);
     statesVal.addStaff = new AddStaffState(statesVal.editSystem, this);
+    statesVal.addStaff->addTransition(statesVal.addStaff, SIGNAL(staffSystemAdded()), statesVal.editSystem);
 
     statesVal.editSystem->setInitialState(statesVal.normalCursor);
     stateMachine.addState(statesVal.editSystem);
@@ -91,6 +99,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
             systemImageCreated(change);
             return;
         case ScoreChange::StaffSystemCreated:   //(IdType id, IdType systemImageId, StaffPosition position)
+            staffSystemCreated(change);
+            return;
         case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         case ScoreChange::TimeSignatureCreated: //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
@@ -172,4 +182,19 @@ void SystemScene::systemImageCreated(const ScoreChange &change)
         newSystem->setOffset(0, systemImageItems.back()->boundingRect().bottom());
     systemImageItems.push_back(newSystem);
     addItem(newSystem);
+}
+
+void SystemScene::staffSystemCreated(const ScoreChange &change)
+{
+    IdType id; IdType systemImageId; StaffPosition position;
+
+    change.args.unpackTo(id, systemImageId, position);
+
+    SystemImageItem* system = idReg.ptrAs<SystemImageItem>(systemImageId);
+    if (!system){
+        emit error(QString(__PRETTY_FUNCTION__)+':'+tr("Incorrect id"));
+        return;
+    }
+
+    StaffSystemItem* staff = new StaffSystemItem(idReg, id, position, system);
 }

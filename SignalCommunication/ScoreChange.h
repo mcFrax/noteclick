@@ -70,7 +70,7 @@ public:
     };
 
 public:
-    ScoreChange(SystemChangeEnum change, VSA args, IdType affectedSystem = noneId)
+    ScoreChange(SystemChangeEnum change, VSA args, IdType affectedSystem = anyId)
         : category(SystemChanged), change(change), args(args), affectedSystem(affectedSystem)
     {
     }
