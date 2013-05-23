@@ -13,7 +13,7 @@ class ClefMenu : public CuteMenu
     QAction* neutral;
     QAction* other;
 public:
-    explicit ClefMenu(QObject *parent = 0);
+    explicit ClefMenu(QWidget *parent = 0);
 
     QAction* trebleAction() const;
     QAction* bassAction() const;

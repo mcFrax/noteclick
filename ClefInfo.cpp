@@ -1,5 +1,10 @@
 #include "ClefInfo.h"
 
+ClefInfo::ClefInfo()
+    : typeVal(Invalid), position(0), octave(0)
+{
+}
+
 ClefInfo::ClefInfo(ClefType type, int position, int octave)
     : typeVal(type), position(position), octave(octave)
 {
@@ -22,6 +27,9 @@ int ClefInfo::octaveTransposition() const
 
 int ClefInfo::middleCPositionOnStaff() const
 {
-    return position - typeVal - octave*8;
+    if (typeVal == Invalid)
+        return ~unsigned(0) >> 1; //cokolwiek
+    else
+        return position - typeVal - octave*8;
 }
 

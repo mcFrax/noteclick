@@ -101,7 +101,7 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::StaffSystemCreated:   //(IdType id, IdType systemImageId, StaffPosition position)
             staffSystemCreated(change);
             return;
-        case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefType clefType)
+        case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefInfo clefInfo)
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         case ScoreChange::TimeSignatureCreated: //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
         case ScoreChange::NoteCreated:          //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
@@ -119,7 +119,7 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::BarcheckMoved:        //(IdType barcheckId, StaffCoords coords)
         case ScoreChange::SynchroMarkMoved:     //(IdType synchroMarkId, StaffCoords coords)
 
-        case ScoreChange::ClefTypeChanged:      //(IdType clefId, ClefType new_clefType)
+        case ScoreChange::ClefChanged:      //(IdType clefId, ClefInfo new_clefInfo)
         case ScoreChange::KeySignatureChanged:  //(IdType keySignId, KeySignature new_signature)
         case ScoreChange::TimeSignatureChanged: //(IdType timeSignId, TimeSignature new_signature)
         case ScoreChange::NoteValueChanged:     //(IdType noteId, NoteValue new_noteValue)

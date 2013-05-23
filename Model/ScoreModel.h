@@ -65,7 +65,7 @@ private:
     void moveBarcheck(const VSA& arg);
     void moveSynchroMark(const VSA& arg);
 
-    void changeClefType(const VSA& arg);
+    void ChangeClef(const VSA& arg);
     void changeKeySignature(const VSA& arg);
     void changeTimeSignature(const VSA& arg);
     void changeNoteValue(const VSA& arg);

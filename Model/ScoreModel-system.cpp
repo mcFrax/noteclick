@@ -5,14 +5,14 @@
 #include "SignalCommunication/UserAction.h"
 
 #include "SystemImageInfo.h"
+#include "ClefInfo.h"
 
 //tymczasowe definicje niegotowych typów
-#warning temp KeySignature & TimeSignature & NoteValue & PauseValue & ClefType
+#warning temp KeySignature & TimeSignature & NoteValue & PauseValue
 typedef int KeySignature;
 typedef int TimeSignature;
 typedef int NoteValue;
 typedef int PauseValue;
-typedef int ClefType;
 
 using namespace Model;
 
@@ -26,7 +26,7 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     case UserAction::CreateStaffSystem:   //(IdType systemImageId, StaffPosition position)
         createStaffSystem(action.args);
         return;
-    case UserAction::CreateClef:          //(IdType staffId, StaffCoords coords, ClefType clefType)
+    case UserAction::CreateClef:          //(IdType staffId, StaffCoords coords, ClefInfo clefInfo)
         createClef(action.args);
         return;
     case UserAction::CreateKeySignature:  //(IdType staffId, StaffCoords coords, KeySignature signature)
@@ -76,8 +76,8 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
         moveSynchroMark(action.args);
         return;
 
-    case UserAction::ChangeClefType:      //(IdType clefId, ClefType new_clefType)
-        changeClefType(action.args);
+    case UserAction::ChangeClef:      //(IdType clefId, ClefInfo new_clefInfo)
+        ChangeClef(action.args);
         return;
     case UserAction::ChangeKeySignature:  //(IdType keySignId, KeySignature new_signature)
         changeKeySignature(action.args);
@@ -128,10 +128,10 @@ void ScoreModel::createStaffSystem(const VSA& arg)
 
 void ScoreModel::createClef(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; ClefType clefType;
-    arg.unpackTo(staffId, coords, clefType);
+    IdType staffId; StaffCoords coords; ClefInfo clefInfo;
+    arg.unpackTo(staffId, coords, clefInfo);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefType)));
+    emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefInfo)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
@@ -264,11 +264,11 @@ void ScoreModel::moveSynchroMark(const VSA& arg)
 }
 
 
-void ScoreModel::changeClefType(const VSA& arg)
+void ScoreModel::ChangeClef(const VSA& arg)
 {
-    IdType clefId; ClefType new_clefType;
-    arg.unpackTo(clefId, new_clefType);
-    emit changed(ScoreChange(ScoreChange::ClefTypeChanged, vsa(clefId, new_clefType)));
+    IdType clefId; ClefInfo new_clefInfo;
+    arg.unpackTo(clefId, new_clefInfo);
+    emit changed(ScoreChange(ScoreChange::ClefChanged, vsa(clefId, new_clefInfo)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 

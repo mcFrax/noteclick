@@ -21,7 +21,7 @@ public:
     {
         CreateSystemImage,   //(IdType systemId, SystemImageInfo sysImgInfo)
         CreateStaffSystem,   //(IdType systemImageId, StaffPosition position)
-        CreateClef,          //(IdType staffId, StaffCoords coords, ClefType clefType)
+        CreateClef,          //(IdType staffId, StaffCoords coords, ClefInfo clefInfo)
         CreateKeySignature,  //(IdType staffId, StaffCoords coords, KeySignature signature)
         CreateTimeSignature, //(IdType staffId, StaffCoords coords, TimeSignature signature)
         CreateNote,          //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
@@ -39,7 +39,7 @@ public:
         MoveBarcheck,        //(IdType barcheckId, StaffCoords coords)
         MoveSynchroMark,     //(IdType synchroMarkId, StaffCoords coords)
 
-        ChangeClefType,      //(IdType clefId, ClefType new_clefType)
+        ChangeClef,      //(IdType clefId, ClefInfo new_clefInfo)
         ChangeKeySignature,  //(IdType keySignId, KeySignature new_signature)
         ChangeTimeSignature, //(IdType timeSignId, TimeSignature new_signature)
         ChangeNoteValue,     //(IdType noteId, NoteValue new_noteValue)

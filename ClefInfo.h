@@ -3,17 +3,20 @@
 
 class ClefInfo
 {
-    ClefType typeVal;
-    int position;
-    int octave;
 public:
     enum ClefType
     {
         GClef = 4,
         FClef = -4,
-        CClef = 0
+        CClef = 0,
+        Invalid
     };
-
+protected:
+    ClefType typeVal;
+    int position;
+    int octave;
+public:
+    ClefInfo();
     ClefInfo(ClefType type, int position, int octave = 0);
 
     ClefType type() const;

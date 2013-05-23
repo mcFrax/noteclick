@@ -1,13 +1,13 @@
 #include "ClefMenu.h"
 
-ClefMenu::ClefMenu(QObject *parent) :
-    CuteMenu(parent)
+ClefMenu::ClefMenu(QWidget *parent)
+    : CuteMenu(parent)
 {
-    treble = addAction(tr('Treble clef'));
-    bass = addAction(tr('Bass clef'));
-    alto = addAction(tr('Alto clef'));
-    neutral = addAction(tr('Neutral clef'));
-    other = addAction(tr('Other clef'));
+    treble = addAction(tr("Treble clef"));
+    bass = addAction(tr("Bass clef"));
+    alto = addAction(tr("Alto clef"));
+    neutral = addAction(tr("Neutral clef"));
+    other = addAction(tr("Other clef"));
 }
 
 QAction* ClefMenu::trebleAction() const
