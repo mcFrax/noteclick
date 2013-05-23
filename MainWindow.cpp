@@ -9,6 +9,7 @@
 #include "SignalCommunication/UserAction.h"
 #include "SystemImageInfo.h"
 #include "SystemView/AddStaffState.h"
+#include "SystemView/AddClefState.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -81,5 +82,8 @@ void MainWindow::setupSceneStateTransitions()
     scene.states().editSystem->addTransition(
                 ui->toolButton_2, SIGNAL(clicked()),
                 scene.states().addStaff);
+    scene.states().editSystem->addTransition(
+                ui->toolButton_3, SIGNAL(clicked()),
+                scene.states().addClef);
 }
 

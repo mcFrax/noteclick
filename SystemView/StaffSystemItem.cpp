@@ -22,3 +22,8 @@ void StaffSystemItem::setPosition(const StaffPosition &pos)
 {
     this->pos = pos;
 }
+
+SystemScene *StaffSystemItem::systemScene()
+{
+    return dynamic_cast<SystemScene*>(scene());
+}

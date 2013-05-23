@@ -3,6 +3,7 @@
 
 #include <QGraphicsPolygonItem>
 #include "StaffCoords.h"
+#include "SystemScene.h"
 #include "SystemViewItem.h"
 #include "SystemImageItem.h"
 
@@ -11,6 +12,7 @@ namespace SystemView
 
 class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
 {
+    USE_EVENT_HANDLERS(HANDLER(StaffSystemItem), QGraphicsPolygonItem)
     StaffPosition pos;
     //using QGraphicsPolygonItem::setPolygon(const QPolygonF & polygon);
 public:
@@ -20,6 +22,9 @@ public:
 
     const StaffPosition& position() const;
     void setPosition(const StaffPosition& pos);
+
+protected:
+    SystemScene * systemScene();
 };
 
 }

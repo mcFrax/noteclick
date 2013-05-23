@@ -1,37 +1,56 @@
 #include "ClefMenu.h"
 
+#include <QMouseEvent>
+#include <QtGlobal>
+
 ClefMenu::ClefMenu(QWidget *parent)
     : CuteMenu(parent)
 {
-    treble = addAction(tr("Treble clef"));
-    bass = addAction(tr("Bass clef"));
-    alto = addAction(tr("Alto clef"));
-    neutral = addAction(tr("Neutral clef"));
-    other = addAction(tr("Other clef"));
+    treble = new Action(ClefInfo(ClefInfo::GClef, 3), tr("Treble clef"), this);
+    bass = new Action(ClefInfo(ClefInfo::FClef, 7), tr("Bass clef"), this);
+    alto = new Action(ClefInfo(ClefInfo::CClef, 5), tr("Alto clef"), this);
+    other = new Action(ClefInfo(), tr("Other clef"), this);
+    addAction(treble);
+    addAction(bass);
+    addAction(alto);
+    addAction(other);
 }
 
-QAction* ClefMenu::trebleAction() const
+
+ClefMenu::Action::Action(const ClefInfo &clefInfo, const QString &text, QObject *parent)
+    : QAction(text, parent), clefInfo(clefInfo)
+{
+}
+
+ClefMenu::Action::Action(const ClefInfo &clefInfo, const QIcon &icon, const QString &text, QObject *parent)
+    : QAction(icon, text, parent), clefInfo(clefInfo)
+{
+}
+
+ClefMenu::Action* ClefMenu::trebleAction() const
 {
     return treble;
 }
 
-QAction* ClefMenu::bassAction() const
+ClefMenu::Action* ClefMenu::bassAction() const
 {
     return bass;
 }
 
-QAction* ClefMenu::altoAction() const
+ClefMenu::Action* ClefMenu::altoAction() const
 {
     return alto;
 }
 
-QAction* ClefMenu::neutralAction() const
-{
-    return neutral;
-}
-
-QAction* ClefMenu::otherAction() const
+ClefMenu::Action *ClefMenu::otherAction() const
 {
     return other;
+}
+
+void ClefMenu::mouseReleaseEvent(QMouseEvent *e)
+{
+    QMenu::mouseReleaseEvent(e);
+    qDebug("LOLOLOL!\n");
+    deleteLater();
 }
 

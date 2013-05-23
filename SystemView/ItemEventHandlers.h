@@ -31,6 +31,7 @@ class SceneEventHandlers
 public:
     SceneEventHandlers();
     ItemEventHandler* HANDLER(SystemImageItem);
+    ItemEventHandler* HANDLER(StaffSystemItem);
     //ItemEventHandler* staffItemHandler;
     //ItemEventHandler* clefItemHandler;
     //ItemEventHandler* noteItemHandler;

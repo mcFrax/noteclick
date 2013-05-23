@@ -3,7 +3,7 @@
 #include "SystemImageItem.h"
 #include "StaffCoords.h"
 
-#include <cassert>
+#include <QtGlobal>
 #include <QGraphicsSceneMouseEvent>
 
 using namespace SystemView;
@@ -43,9 +43,8 @@ bool AddStaffState::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent * 
 
 bool AddStaffState::mouseReleaseEvent(QGraphicsItem * system, QGraphicsSceneMouseEvent * e)
 {
-    #warning: dobrze byloby wymyslic jakis ladny odpowiednik asserta, ktory nie wysypywalby calego procesu
     SystemImageItem* sys = dynamic_cast<SystemImageItem*>(system);
-    assert(sys);
+    Q_ASSERT(sys);
     if (e->button() != Qt::LeftButton)
         return 1;
     if (!staffPartItem)
