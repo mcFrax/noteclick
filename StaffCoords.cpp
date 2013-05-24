@@ -3,8 +3,8 @@
 #include <cmath>
 
 
-static const QPolygonF oneSquare = QPolygonF() << QPointF(0, 0) << QPointF(1, 0)
-                                               << QPointF(1, 1) << QPointF(0, 1);
+static const QPolygonF oneSquare = QPolygonF() << QPointF(0, 1) << QPointF(1, 1)
+                                               << QPointF(1, 0) << QPointF(0, 0);
 
 //=============//
 // StaffCoords //

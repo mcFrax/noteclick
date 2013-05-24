@@ -74,6 +74,7 @@ private:
 
     void systemImageCreated(const ScoreChange& change);
     void staffSystemCreated(const ScoreChange& change);
+    void clefCreated(const ScoreChange& change);
 };
 
 }

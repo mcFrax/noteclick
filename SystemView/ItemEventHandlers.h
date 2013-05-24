@@ -26,15 +26,18 @@ public:
     bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
 };
 
-class SceneEventHandlers
+struct SceneEventHandlers
 {
-public:
     SceneEventHandlers();
     ItemEventHandler* HANDLER(SystemImageItem);
     ItemEventHandler* HANDLER(StaffSystemItem);
-    //ItemEventHandler* staffItemHandler;
-    //ItemEventHandler* clefItemHandler;
+    ItemEventHandler* HANDLER(ClefItem);
     //ItemEventHandler* noteItemHandler;
+};
+
+struct IgnoringSceneEventHandlers : public SceneEventHandlers
+{
+    IgnoringSceneEventHandlers();
 };
 
 ItemEventHandler* defaultItemEventHandler();

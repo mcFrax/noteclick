@@ -6,9 +6,9 @@
 ClefMenu::ClefMenu(QWidget *parent)
     : CuteMenu(parent)
 {
-    treble = new Action(ClefInfo(ClefInfo::GClef, 3), tr("Treble clef"), this);
-    bass = new Action(ClefInfo(ClefInfo::FClef, 7), tr("Bass clef"), this);
-    alto = new Action(ClefInfo(ClefInfo::CClef, 5), tr("Alto clef"), this);
+    treble = new Action(ClefInfo(ClefInfo::GClef, 2), tr("Treble clef"), this);
+    bass = new Action(ClefInfo(ClefInfo::FClef, 6), tr("Bass clef"), this);
+    alto = new Action(ClefInfo(ClefInfo::CClef, 4), tr("Alto clef"), this);
     other = new Action(ClefInfo(), tr("Other clef"), this);
     addAction(treble);
     addAction(bass);
@@ -50,7 +50,6 @@ ClefMenu::Action *ClefMenu::otherAction() const
 void ClefMenu::mouseReleaseEvent(QMouseEvent *e)
 {
     QMenu::mouseReleaseEvent(e);
-    qDebug("LOLOLOL!\n");
     deleteLater();
 }
 

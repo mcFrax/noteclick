@@ -18,7 +18,6 @@ AddClefState::AddClefState(QState * parent, SystemScene *scene)
 
 bool AddClefState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMouseEvent *e)
 {
-    qDebug("Trolol!\n");
     StaffSystemItem* staff = static_cast<StaffSystemItem*>(staffItem);
     Q_ASSERT(staff);
     if (e->button() != Qt::LeftButton)
@@ -54,7 +53,6 @@ void AddClefState::onExit(QEvent *)
 
 void AddClefState::actionTriggered(QAction * action)
 {
-    qDebug("Przelol!\n");
     ClefMenu* menu = dynamic_cast<ClefMenu*>(sender());
     Q_ASSERT(menu);
     if (action == menu->otherAction()){

@@ -33,7 +33,8 @@ SOURCES +=\
     CuteMenu.cpp \
     SystemView/ClefMenu.cpp \
     ClefInfo.cpp \
-    SystemView/AddClefState.cpp
+    SystemView/AddClefState.cpp \
+    SystemView/ClefItem.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -54,6 +55,7 @@ HEADERS  += \
     CuteMenu.h \
     SystemView/ClefMenu.h \
     ClefInfo.h \
-    SystemView/AddClefState.h
+    SystemView/AddClefState.h \
+    SystemView/ClefItem.h
 
 FORMS    += mainwindow.ui

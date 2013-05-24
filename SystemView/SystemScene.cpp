@@ -10,6 +10,7 @@
 #include "AddStaffState.h"
 #include "AddClefState.h"
 #include "StaffSystemItem.h"
+#include "ClefItem.h"
 
 using namespace SystemView;
 
@@ -103,6 +104,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
             staffSystemCreated(change);
             return;
         case ScoreChange::ClefCreated:          //(IdType id, IdType staffId, StaffCoords coords, ClefInfo clefInfo)
+            clefCreated(change);
+            return;
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         case ScoreChange::TimeSignatureCreated: //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
         case ScoreChange::NoteCreated:          //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
@@ -197,5 +200,20 @@ void SystemScene::staffSystemCreated(const ScoreChange &change)
         return;
     }
 
-    StaffSystemItem* staff = new StaffSystemItem(idReg, id, position, system);
+    new StaffSystemItem(idReg, id, position, system);
+}
+
+void SystemScene::clefCreated(const ScoreChange &change)
+{
+    IdType id; IdType staffId; StaffCoords coords; ClefInfo clefInfo;
+
+    change.args.unpackTo(id, staffId, coords, clefInfo);
+
+    StaffSystemItem* staff = idReg.ptrAs<StaffSystemItem>(staffId);
+    if (!staff){
+        emit error(QString(__PRETTY_FUNCTION__)+':'+tr("Incorrect id"));
+        return;
+    }
+
+    new ClefItem(idReg, id, coords, clefInfo, staff);
 }

@@ -131,6 +131,7 @@ void ScoreModel::createClef(const VSA& arg)
     IdType staffId; StaffCoords coords; ClefInfo clefInfo;
     arg.unpackTo(staffId, coords, clefInfo);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    coords.setY(clefInfo.positionOnStaff()/8.0);
     emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefInfo)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

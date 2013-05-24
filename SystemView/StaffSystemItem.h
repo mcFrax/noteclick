@@ -16,7 +16,7 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     StaffPosition pos;
     //using QGraphicsPolygonItem::setPolygon(const QPolygonF & polygon);
 public:
-    StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent = 0);
+    StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent);
 
     using QGraphicsPolygonItem::QGraphicsItem;
 
