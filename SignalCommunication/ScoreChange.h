@@ -29,7 +29,7 @@ public:
         KeySignatureCreated,  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         TimeSignatureCreated, //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
         NoteCreated,          //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
-        PauseCreated,         //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue pauseValue)
+        RestCreated,         //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue restValue)
         BarcheckCreated,      //(IdType id, IdType staffId, StaffCoords coords)
         SynchroMarkCreated,   //(IdType id, IdType staffId, StaffCoords coords, IdType synchroId)
         SlurCreated,          //(IdType id, IdType noteId1, IdType noteId2)
@@ -39,7 +39,7 @@ public:
         KeySignatureMoved,    //(IdType keySignId, StaffCoords coords)
         TimeSignatureMoved,   //(IdType timeSignId, StaffCoords coords)
         NoteMoved,            //(IdType noteId, StaffCoords coords)
-        PauseMoved,           //(IdType pauseId, StaffCoords coords)
+        RestMoved,           //(IdType restId, StaffCoords coords)
         BarcheckMoved,        //(IdType barcheckId, StaffCoords coords)
         SynchroMarkMoved,     //(IdType synchroMarkId, StaffCoords coords)
 
@@ -47,7 +47,7 @@ public:
         KeySignatureChanged,  //(IdType keySignId, KeySignature new_signature)
         TimeSignatureChanged, //(IdType timeSignId, TimeSignature new_signature)
         NoteValueChanged,     //(IdType noteId, NoteValue new_noteValue)
-        PauseValueChanged,    //(IdType pauseId, NoteValue new_pauseValue)
+        RestValueChanged,    //(IdType restId, NoteValue new_restValue)
         SynchroMarkIdChanged, //(IdType synchroMarkId, IdType new_synchroId)
 
         SystemObjectErased    //(IdType objectId)

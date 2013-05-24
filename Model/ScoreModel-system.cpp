@@ -8,11 +8,11 @@
 #include "ClefInfo.h"
 
 //tymczasowe definicje niegotowych typów
-#warning temp KeySignature & TimeSignature & NoteValue & PauseValue
+#warning temp KeySignature & TimeSignature & NoteValue & RestValue
 typedef int KeySignature;
 typedef int TimeSignature;
 typedef int NoteValue;
-typedef int PauseValue;
+typedef int RestValue;
 
 using namespace Model;
 
@@ -38,8 +38,8 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     case UserAction::CreateNote:          //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
         createNote(action.args);
         return;
-    case UserAction::CreatePause:         //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue pauseValue)
-        createPause(action.args);
+    case UserAction::CreateRest:         //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue restValue)
+        createRest(action.args);
         return;
     case UserAction::CreateBarcheck:      //(IdType staffId, StaffCoords coords)
         createBarcheck(action.args);
@@ -66,8 +66,8 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     case UserAction::MoveNote:            //(IdType noteId, StaffCoords coords)
         moveNote(action.args);
         return;
-    case UserAction::MovePause:           //(IdType pauseId, StaffCoords coords)
-        movePause(action.args);
+    case UserAction::MoveRest:           //(IdType restId, StaffCoords coords)
+        moveRest(action.args);
         return;
     case UserAction::MoveBarcheck:        //(IdType barcheckId, StaffCoords coords)
         moveBarcheck(action.args);
@@ -88,8 +88,8 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     case UserAction::ChangeNoteValue:     //(IdType noteId, NoteValue new_noteValue)
         changeNoteValue(action.args);
         return;
-    case UserAction::ChangePauseValue:    //(IdType pauseId, NoteValue new_pauseValue)
-        changePauseValue(action.args);
+    case UserAction::ChangeRestValue:    //(IdType restId, NoteValue new_restValue)
+        changeRestValue(action.args);
         return;
     case UserAction::ChangeSynchroMarkId: //(IdType synchroMarkId, IdType new_synchroId)
         changeSynchroMarkId(action.args);
@@ -163,12 +163,12 @@ void ScoreModel::createNote(const VSA& arg)
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
-void ScoreModel::createPause(const VSA& arg)
+void ScoreModel::createRest(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; PauseValue pauseValue;
-    arg.unpackTo(staffId, coords, pauseValue);
+    IdType staffId; StaffCoords coords; RestValue restValue;
+    arg.unpackTo(staffId, coords, restValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::PauseCreated, vsa(id, staffId, coords, pauseValue)));
+    emit changed(ScoreChange(ScoreChange::RestCreated, vsa(id, staffId, coords, restValue)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
@@ -240,11 +240,11 @@ void ScoreModel::moveNote(const VSA& arg)
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
-void ScoreModel::movePause(const VSA& arg)
+void ScoreModel::moveRest(const VSA& arg)
 {
-    IdType pauseId; StaffCoords coords;
-    arg.unpackTo(pauseId, coords);
-    emit changed(ScoreChange(ScoreChange::PauseMoved, vsa(pauseId, coords)));
+    IdType restId; StaffCoords coords;
+    arg.unpackTo(restId, coords);
+    emit changed(ScoreChange(ScoreChange::RestMoved, vsa(restId, coords)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
@@ -297,11 +297,11 @@ void ScoreModel::changeNoteValue(const VSA& arg)
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
-void ScoreModel::changePauseValue(const VSA& arg)
+void ScoreModel::changeRestValue(const VSA& arg)
 {
-    IdType pauseId; NoteValue new_noteValue;
-    arg.unpackTo(pauseId, new_noteValue);
-    emit changed(ScoreChange(ScoreChange::PauseValueChanged, vsa(pauseId, new_noteValue)));
+    IdType restId; NoteValue new_noteValue;
+    arg.unpackTo(restId, new_noteValue);
+    emit changed(ScoreChange(ScoreChange::RestValueChanged, vsa(restId, new_noteValue)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 

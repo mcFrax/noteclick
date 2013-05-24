@@ -25,7 +25,7 @@ public:
         CreateKeySignature,  //(IdType staffId, StaffCoords coords, KeySignature signature)
         CreateTimeSignature, //(IdType staffId, StaffCoords coords, TimeSignature signature)
         CreateNote,          //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
-        CreatePause,         //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue pauseValue)
+        CreateRest,         //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue restValue)
         CreateBarcheck,      //(IdType staffId, StaffCoords coords)
         CreateSynchroMark,   //(IdType staffId, StaffCoords coords, IdType synchroId)
         CreateSlur,          //(IdType noteId1, IdType noteId2)
@@ -35,7 +35,7 @@ public:
         MoveKeySignature,    //(IdType keySignId, StaffCoords coords)
         MoveTimeSignature,   //(IdType timeSignId, StaffCoords coords)
         MoveNote,            //(IdType noteId, StaffCoords coords)
-        MovePause,           //(IdType pauseId, StaffCoords coords)
+        MoveRest,           //(IdType restId, StaffCoords coords)
         MoveBarcheck,        //(IdType barcheckId, StaffCoords coords)
         MoveSynchroMark,     //(IdType synchroMarkId, StaffCoords coords)
 
@@ -43,7 +43,7 @@ public:
         ChangeKeySignature,  //(IdType keySignId, KeySignature new_signature)
         ChangeTimeSignature, //(IdType timeSignId, TimeSignature new_signature)
         ChangeNoteValue,     //(IdType noteId, NoteValue new_noteValue)
-        ChangePauseValue,    //(IdType pauseId, NoteValue new_pauseValue)
+        ChangeRestValue,    //(IdType restId, NoteValue new_restValue)
         ChangeSynchroMarkId, //(IdType synchroMarkId, IdType new_synchroId)
 
         EraseSystemObject    //(IdType objectId)
