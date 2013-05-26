@@ -4,6 +4,7 @@
 #include <QLineEdit>
 #include <QDir>
 #include <QMessageBox>
+#include <QSpacerItem>
 
 #include "voicewidget.h"
 #include "listname.h"
@@ -11,12 +12,20 @@
 VoiceWidget::VoiceWidget(QString n, Score *sc, QWidget *parent) :
     ListItem(parent)
 {
+
     score = sc;
     name = new ListName();
     name->setText(n);
     eraseButton = new EraseButton();
+    checkBox = new QCheckBox();
+    radioButton = new QRadioButton();
+
     layout = new QHBoxLayout;
+
+    layout->addWidget(radioButton);
     layout->addWidget(name);
+    layout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding));
+    layout->addWidget(checkBox);
     layout->addWidget(eraseButton);
 
     setLayout(layout);
@@ -34,6 +43,11 @@ VoiceWidget::VoiceWidget(QString n, Score *sc, QWidget *parent) :
     setDraggableType("VoiceWidget");
 
     connect(eraseButton, SIGNAL(clicked()), this, SLOT(erase()));
+    connect(radioButton, SIGNAL(clicked(bool)) , this, SLOT(selected()));
+    connect(checkBox, SIGNAL(clicked()), this, SLOT(checked()));
+    connect(this, SIGNAL(voiceChecked(void*,bool)), score, SLOT(voiceChecked(void*, bool)));
+    connect(this, SIGNAL(voiceSelected(void*, bool)), score, SLOT(voiceSelected(void*, bool)));
+
 
     connect(this, SIGNAL(removed(ListItem*)), score, SLOT(elementRemoved(ListItem*)));
 
@@ -45,7 +59,6 @@ void VoiceWidget::paintEvent(QPaintEvent *)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-    //QLabel::paintEvent(0);
 }
 
 void VoiceWidget::mouseDoubleClickEvent(QMouseEvent *)
@@ -74,6 +87,21 @@ void VoiceWidget::setText(QString n)
     name->setText(n);
 }
 
+
+void VoiceWidget::selected()
+{
+    emit voiceSelected((void*)this, radioButton->isChecked());
+}
+
+void VoiceWidget::checked()
+{
+    emit voiceChecked((void*)this, checkBox->isChecked());
+}
+
+void VoiceWidget::setSelected(bool s)
+{
+    radioButton->setChecked(s);
+}
 
 // TODO to jakoś brzydko wylgąda...
 void VoiceWidget::erase()

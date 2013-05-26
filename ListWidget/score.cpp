@@ -28,7 +28,6 @@ Score::Score(QWidget *parent, QString name) :
 
     setAcceptedDrops(tmp);
 
-    /* TMP */
     addChoirGroup(1,0,"111");
     addChoirGroup(4,0,"4444");
     addStaff(2,1,"staff");
@@ -41,6 +40,8 @@ Score::Score(QWidget *parent, QString name) :
     renameElement(3, "cccc");
     moveElement(2, 4);
     moveElement(3, 5);
+    addVoice(6,2,"lolo");
+
 }
 
 QWidget * Score::defaultElement()
@@ -48,11 +49,10 @@ QWidget * Score::defaultElement()
     return new ChoirGroup("choir", this);
 }
 
-void Score::addElement()
+void Score::slotAddElement()
 {
-    box->addElement(defaultElement());
+    elementAdded(UserAction::CreateGroup, this);
 }
-
 
 void Score::addChoirGroup(IdType id, IdType parentId, QString name)
 {
@@ -108,22 +108,34 @@ void Score::removeElement(IdType id)
     delete element;
 }
 
+void Score::elementAdded(UserAction::StructureChangeEnum action, ListItem *pointer)
+{
+    //box->addElement(defaultElement());
+    IdType pid = pointers.key((void*)pointer);
+
+    UserAction a(action , vsa(pid));
+    emit userAction(a);
+}
+
 void Score::elementRemoved(ListItem *item)
 {
     IdType id = pointers.key((void*)item);
 
-    emit modelElementRemoved(id);
+    UserAction a(UserAction::StructureObjectErase, vsa(id));
+    emit userAction(a);
     //TMP
-    removeElement(id);
+    //removeElement(id);
 }
 
 void Score::elementRenamed(ListItem *item, QString name)
 {
     IdType id = pointers.key((void*)item);
 
-    emit modelElementRenamed(id, name);
+    UserAction a(UserAction::StructureObjectRename , vsa(id, name));
+    emit userAction(a);
+    //emit modelElementRenamed(id, name);
     //TMP
-    renameElement(id, name);
+    //renameElement(id, name);
 
 }
 
@@ -131,11 +143,69 @@ void Score::elementMoved(ListItem *item, ListItem *newParent)
 {
     IdType id = pointers.key((void*)item);
     IdType pid = pointers.key((void*)newParent);
-    emit modelElementMoved(id, pid);
+
+    UserAction::StructureChangeEnum change;
+
+    if (dynamic_cast<ChoirGroup*>(item) != NULL)
+    {
+        change = UserAction::MoveGroup;
+    }
+    else if (dynamic_cast<VoiceWidget*>(item) != NULL)
+    {
+        change = UserAction::MoveVoice;
+    }
+    else //(dynamic_cast<Staff*>(item) != NULL)
+    {
+        change = UserAction::MoveStaff;
+    }
+
+
+    UserAction a(change, vsa(id, pid));
+    emit userAction(a);
+    //emit modelElementMoved(id, pid);
     //TMP
-    moveElement(id, pid);
+    //moveElement(id, pid);
 
 }
+
+
+void Score::voiceSelected(void *p, bool state)
+{
+    if (!state)
+    {
+        selected = NULL;
+        return;
+    }
+
+    if (selected != NULL)
+    {
+        selected->setSelected(false);
+    }
+
+    selected = (VoiceWidget*)p;
+    IdType id = pointers.key(p);
+
+
+    //emit voiceSelected(id);
+}
+
+void Score::voiceChecked(void *p, bool state)
+{
+    IdType id = pointers.key(p);
+
+    if (state)
+    {
+        checked.append(id);
+    }
+    else
+    {
+        int tmp = checked.indexOf(id);
+        checked.removeAt(tmp);
+    }
+
+    //emit voiceChecked()
+}
+
 
 void Score::scoreChange(ScoreChange change)
 {
@@ -144,7 +214,7 @@ void Score::scoreChange(ScoreChange change)
         switch (change.category)
         {
             case ScoreChange::StructureChanged:
-
+                handleStructureChange(change);
                 return;
             case ScoreChange::SystemChanged:
                 //To nas nie obchodzi.
@@ -197,11 +267,11 @@ void Score::handleStructureChange(ScoreChange change)
             return;
         case ScoreChange::StructureObjectErased: //(IdType id)
             change.args.unpackTo(mine);
-            remove(mine);
+            removeElement(mine);
             return;
         case ScoreChange::StructureObjectRenamed:
             change.args.unpackTo(mine, name);
-            rename(mine, name);
+            renameElement(mine, name);
             return;
         //Nie wstawiac default!
         //Chodzi o to, zeby dostac warn w przypadku nieobslugiwania czegos.
@@ -211,5 +281,3 @@ void Score::handleStructureChange(ScoreChange change)
     emit error(tr("Invalid or unhandled ScoreChanged::change value (as ScoreChanged::StructureChanged) ")
             +QString::number(change.change));
 }
-
-

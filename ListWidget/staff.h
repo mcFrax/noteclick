@@ -13,7 +13,7 @@ public:
 signals:
     
 public slots:
-    
+    void slotAddElement();
 protected:
     QWidget * defaultElement();
     Score *score;

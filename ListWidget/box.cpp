@@ -31,7 +31,7 @@ Box::Box(QString name, QWidget *parent) :
     setLayout(layout);
 
     // connecting button
-    connect(addButton, SIGNAL(clicked()), parent, SLOT(addElement()));
+    connect(addButton, SIGNAL(clicked()), parent, SLOT(slotAddElement()));
 }
 
 void Box::setMyStyle()

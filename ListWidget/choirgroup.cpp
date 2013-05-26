@@ -14,6 +14,7 @@ ChoirGroup::ChoirGroup(QString name, Score *sc, QWidget *parent) :
     // setAcceptedDrops
     QSet<QString> tmp;
     tmp.insert("Staff");
+    tmp.insert("ChoirGroup");
 
     setAcceptedDrops(tmp);
     connect(this, SIGNAL(rename(ListItem*,QString)), score, SLOT(elementRenamed(ListItem*,QString)));
@@ -35,4 +36,9 @@ void ChoirGroup::setMyStyle()
 QWidget * ChoirGroup::defaultElement()
 {
     return new Staff("staff", score);
+}
+
+void ChoirGroup::slotAddElement()
+{
+    score->elementAdded(UserAction::CreateStaff, this);
 }

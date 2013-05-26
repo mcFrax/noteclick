@@ -27,7 +27,7 @@ void ScoreModel::handleStructureChangeAction(const UserAction &action)
     case UserAction::MoveVoice:            //(IdType id, IdType new_parent_id)
         moveVoice(action.args);
         return;
-    case UserAction::EraseStructureObject:  //(IdType id)
+    case UserAction::StructureObjectErase:  //(IdType id)
         eraseStructureObject(action.args);
         return;
     //Nie wstawiac default!

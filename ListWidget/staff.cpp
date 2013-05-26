@@ -35,3 +35,7 @@ QWidget * Staff::defaultElement()
     return new VoiceWidget("voice", score);
 }
 
+void Staff::slotAddElement()
+{
+    score->elementAdded(UserAction::CreateVoice, this); //userAction(UserAction);
+}

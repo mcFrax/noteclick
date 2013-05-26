@@ -104,7 +104,7 @@ void InnerList::toggle()
 }
 
 
-void InnerList::addElement()
+void InnerList::slotAddElement()
 {
     box->addElement(defaultElement());
 }

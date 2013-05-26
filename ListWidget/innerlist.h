@@ -19,16 +19,16 @@ class InnerList : public ListItem
 public:
     explicit InnerList(QString name, QWidget *parent = 0);
 
-    void addElement(ListItem *element);
+
     virtual void setText(QString name);
+    void addElement(ListItem *element);
 
 signals:
     void moved(ListItem* element, ListItem* parent);
 
 public slots:
     void toggle();
-    //void addWidget(QWidget *widget);
-    void addElement();
+    virtual void slotAddElement();
     void erase();
 
 protected:

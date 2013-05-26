@@ -1,15 +1,17 @@
 #ifndef SCORE_H
 #define SCORE_H
 
+#include <QList>
+
 #include "listwidget.h"
 #include "SignalCommunication/UserAction.h"
 #include "SignalCommunication/ScoreChange.h"
+class VoiceWidget;
 
 class Score : public ListWidget
 {
     Q_OBJECT
 public:
-    //explicit Score(QWidget *parent = 0);
     explicit Score(QWidget *parent = 0, QString name = "bla");
 
 signals:
@@ -19,25 +21,29 @@ signals:
 
     void userAction(UserAction a);
 
-    //TMP
 
+    //TMP
+    /*
     void modelElementRemoved(IdType id);
     void modelElementRenamed(IdType id, QString name);
     void modelElementMoved(IdType id, IdType pid);
+    */
 public slots:
 
     void scoreChange(ScoreChange sc);
 
-    //TMP
-    void addElement();
-
-
+    // inner slots
     void elementRemoved(ListItem *item);
-
     void elementRenamed(ListItem *item, QString name);
     void elementMoved(ListItem *id, ListItem *to);
+    void elementAdded(UserAction::StructureChangeEnum, ListItem *pid);
+    void slotAddElement();
 
-  /*  void voiceClicked(IdType id);
+    void voiceSelected(void *p, bool state);
+    void voiceChecked(void *p, bool state);
+    /*
+
+    void voiceClicked(IdType id);
     */
 
 protected:
@@ -51,12 +57,14 @@ protected:
 
     void renameElement(IdType id, QString name);
 
-//    void moveChoirGroup(IdType id, IdType oldParent, IdType newParent);
     void moveElement(IdType id, IdType newParent);
 
     void removeElement(IdType id);
 
     void handleStructureChange(ScoreChange change);
+
+    QList<IdType> checked;
+    VoiceWidget *selected;
 };
 
 #endif // SCORE_H
