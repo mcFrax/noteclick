@@ -26,6 +26,7 @@ Staff::Staff(QString name, Score *sc, QWidget *parent) :
 
     connect(this, SIGNAL(rename(ListItem*,QString)), score, SLOT(elementRenamed(ListItem*,QString)));
     connect(this, SIGNAL(moved(ListItem*,ListItem*)), score, SLOT(elementMoved(ListItem*,ListItem*)));
+    connect(this, SIGNAL(removed(ListItem*)), score, SLOT(elementRemoved(ListItem*)));
 
     setAcceptedDrops(tmp);
 }

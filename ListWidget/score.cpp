@@ -186,24 +186,14 @@ void Score::voiceSelected(void *p, bool state)
     IdType id = pointers.key(p);
 
 
-    //emit voiceSelected(id);
+    emit voiceSelectedSignal(id);
 }
 
 void Score::voiceChecked(void *p, bool state)
 {
     IdType id = pointers.key(p);
 
-    if (state)
-    {
-        checked.append(id);
-    }
-    else
-    {
-        int tmp = checked.indexOf(id);
-        checked.removeAt(tmp);
-    }
-
-    //emit voiceChecked()
+    emit voiceCheckedSignal(id, state);
 }
 
 

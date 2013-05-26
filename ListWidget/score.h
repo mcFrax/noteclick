@@ -1,7 +1,6 @@
 #ifndef SCORE_H
 #define SCORE_H
 
-#include <QList>
 
 #include "listwidget.h"
 #include "SignalCommunication/UserAction.h"
@@ -21,7 +20,8 @@ signals:
 
     void userAction(UserAction a);
 
-
+    void voiceCheckedSignal(IdType, bool);
+    void voiceSelectedSignal(IdType);
     //TMP
     /*
     void modelElementRemoved(IdType id);
@@ -63,7 +63,6 @@ protected:
 
     void handleStructureChange(ScoreChange change);
 
-    QList<IdType> checked;
     VoiceWidget *selected;
 };
 

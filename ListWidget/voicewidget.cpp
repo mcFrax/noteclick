@@ -47,8 +47,6 @@ VoiceWidget::VoiceWidget(QString n, Score *sc, QWidget *parent) :
     connect(checkBox, SIGNAL(clicked()), this, SLOT(checked()));
     connect(this, SIGNAL(voiceChecked(void*,bool)), score, SLOT(voiceChecked(void*, bool)));
     connect(this, SIGNAL(voiceSelected(void*, bool)), score, SLOT(voiceSelected(void*, bool)));
-
-
     connect(this, SIGNAL(removed(ListItem*)), score, SLOT(elementRemoved(ListItem*)));
 
 }
