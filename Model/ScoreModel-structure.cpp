@@ -2,6 +2,7 @@
 
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
+#include <QMessageBox>
 
 using namespace Model;
 
@@ -44,7 +45,11 @@ void ScoreModel::createGroup(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
+
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+
+
+
     emit changed(ScoreChange(ScoreChange::GroupCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

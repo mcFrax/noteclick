@@ -28,6 +28,7 @@ Score::Score(QWidget *parent, QString name) :
 
     setAcceptedDrops(tmp);
 
+    /*
     addChoirGroup(1,0,"111");
     addChoirGroup(4,0,"4444");
     addStaff(2,1,"staff");
@@ -41,7 +42,7 @@ Score::Score(QWidget *parent, QString name) :
     moveElement(2, 4);
     moveElement(3, 5);
     addVoice(6,2,"lolo");
-
+*/
 }
 
 QWidget * Score::defaultElement()
@@ -239,6 +240,7 @@ void Score::handleStructureChange(ScoreChange change)
             addChoirGroup(mine, parent);
             return;
         case ScoreChange::StaffCreated:          //(IdType id: IdType parent_id)
+            change.args.unpackTo(mine, parent);
             addStaff(mine, parent);
             return;
         case ScoreChange::VoiceCreated:          //(IdType id: IdType parent_id)
@@ -246,13 +248,11 @@ void Score::handleStructureChange(ScoreChange change)
             addVoice(mine, parent);
             return;
         case ScoreChange::GroupMoved:            //(IdType id: IdType new_parent_id)
-            change.args.unpackTo(mine, parent);
-            return;
+
         case ScoreChange::StaffMoved:            //(IdType id: IdType new_parent_id)
-            change.args.unpackTo(mine, parent);
-            moveElement(mine, parent);
-            return;
+
         case ScoreChange::VoiceMoved:            //(IdType id: IdType new_parent_id)
+            change.args.unpackTo(mine, parent);
             moveElement(mine, parent);
             return;
         case ScoreChange::StructureObjectErased: //(IdType id)
