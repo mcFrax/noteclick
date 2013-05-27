@@ -4,6 +4,10 @@
 #include "innerlist.h"
 
 #include "score.h"
+
+namespace StructureView
+{
+
 class Staff : public InnerList
 {
     Q_OBJECT
@@ -20,4 +24,5 @@ protected:
 
 };
 
+}
 #endif // STAFF_H

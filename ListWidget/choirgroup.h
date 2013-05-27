@@ -4,6 +4,9 @@
 #include "innerlist.h"
 #include "score.h"
 
+namespace StructureView
+{
+
 class ChoirGroup : public InnerList
 {
     Q_OBJECT
@@ -23,4 +26,5 @@ protected:
 
 };
 
+}
 #endif // CHOIRGROUP_H

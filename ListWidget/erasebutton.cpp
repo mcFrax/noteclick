@@ -1,5 +1,7 @@
 #include "erasebutton.h"
 
+using namespace StructureView;
+
 EraseButton::EraseButton(QWidget *parent) :
     QPushButton(parent)
 {

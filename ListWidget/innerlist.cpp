@@ -16,6 +16,9 @@
 #include "erasebutton.h"
 
 
+using namespace StructureView;
+
+
 InnerList::InnerList(QString name, QWidget *parent) :
     ListItem(parent)
 {

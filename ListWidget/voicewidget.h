@@ -11,6 +11,9 @@
 #include "listitem.h"
 #include "score.h"
 
+namespace StructureView
+{
+
 class VoiceWidget : public ListItem
 {
     Q_OBJECT
@@ -45,4 +48,5 @@ protected:
 
 };
 
+}
 #endif // VOICEWIDGET_H

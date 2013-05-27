@@ -4,6 +4,8 @@
 #include "innerlist.h"
 #include <QScrollArea>
 
+namespace StructureView
+{
 
 class ListWidget : public InnerList
 {
@@ -20,8 +22,8 @@ protected:
     QScrollArea *scrollArea;
     QVBoxLayout *scrollLayout;
 
-
-
 };
+
+}
 
 #endif // LISTWIDGET_H

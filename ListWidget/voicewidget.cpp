@@ -9,6 +9,9 @@
 #include "voicewidget.h"
 #include "listname.h"
 
+using namespace StructureView;
+
+
 VoiceWidget::VoiceWidget(QString n, Score *sc, QWidget *parent) :
     ListItem(parent)
 {

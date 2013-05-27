@@ -4,6 +4,9 @@
 #include <QLineEdit>
 #include <QDir>
 
+using namespace StructureView;
+
+
 ListName::ListName(QWidget *parent) :
     QLabel(parent)
 {

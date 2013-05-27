@@ -2,6 +2,9 @@
 
 #include "voicewidget.h"
 
+using namespace StructureView;
+
+
 Staff::Staff(QString name, Score *sc, QWidget *parent) :
     InnerList(name, parent)
 {

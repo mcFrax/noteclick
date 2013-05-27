@@ -8,6 +8,9 @@
 
 #include <QMessageBox>
 
+using namespace StructureView;
+
+
 ListItem::ListItem(QWidget *parent) :
     QWidget(parent)
 {

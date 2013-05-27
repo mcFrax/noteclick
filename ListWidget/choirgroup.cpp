@@ -1,6 +1,8 @@
 #include "choirgroup.h"
 #include "staff.h"
 
+using namespace StructureView;
+
 ChoirGroup::ChoirGroup(QString name, Score *sc, QWidget *parent) :
     InnerList(name, parent)
 {

@@ -5,7 +5,8 @@
 #include <QLabel>
 #include <QHBoxLayout>
 
-
+namespace StructureView
+{
 
 class ListItem : public QWidget
 {
@@ -29,4 +30,5 @@ protected:
 
 };
 
+}
 #endif // LISTITEM_H

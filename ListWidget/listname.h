@@ -3,6 +3,9 @@
 
 #include <QLabel>
 
+namespace StructureView
+{
+
 class ListName : public QLabel
 {
     Q_OBJECT
@@ -19,4 +22,5 @@ private:
     bool disabled;
 };
 
+}
 #endif // LISTNAME_H

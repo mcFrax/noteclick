@@ -13,6 +13,9 @@
 #include "listname.h"
 #include "listitem.h"
 
+namespace StructureView
+{
+
 class InnerList : public ListItem
 {
     Q_OBJECT
@@ -58,8 +61,8 @@ protected:
 private:
     bool hidden;
     
-
-
 };
+
+}
 
 #endif // INNERLIST_H

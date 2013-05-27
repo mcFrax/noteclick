@@ -5,6 +5,9 @@
 #include "listwidget.h"
 #include "SignalCommunication/UserAction.h"
 #include "SignalCommunication/ScoreChange.h"
+
+namespace StructureView
+{
 class VoiceWidget;
 
 class Score : public ListWidget
@@ -66,4 +69,6 @@ protected:
     VoiceWidget *selected;
 };
 
+
+}
 #endif // SCORE_H

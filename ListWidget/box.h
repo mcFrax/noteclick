@@ -6,6 +6,9 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
+namespace StructureView
+{
+
 class Box : public QWidget
 {
     Q_OBJECT
@@ -36,4 +39,5 @@ private:
     void setMyStyle();
 };
 
+}
 #endif // BOX_H

@@ -5,6 +5,8 @@
 
 #include "innerlist.h"
 
+using namespace StructureView;
+
 Box::Box(QWidget *parent) :
     QWidget(parent)
 {

@@ -1,6 +1,9 @@
 #include "listwidget.h"
 
 
+using namespace StructureView;
+
+
 ListWidget::ListWidget(QString name, QWidget *parent) :
     InnerList(name, parent)
 {

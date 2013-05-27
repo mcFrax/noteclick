@@ -6,6 +6,9 @@
 //TMP
 #include <QMessageBox>
 
+using namespace StructureView;
+
+
 Score::Score(QWidget *parent, QString name) :
     ListWidget(name, parent)
 {

@@ -3,6 +3,9 @@
 
 #include <QPushButton>
 
+namespace StructureView
+{
+
 class EraseButton : public QPushButton
 {
     Q_OBJECT
@@ -15,4 +18,5 @@ public slots:
     
 };
 
+}
 #endif // ERASEBUTTON_H
