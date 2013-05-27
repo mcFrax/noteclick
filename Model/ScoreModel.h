@@ -7,6 +7,8 @@
 #include "VersatileSlotArgument.h"
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
+#include "StructureModels.h"
+#include "SystemModels.h"
 
 namespace Model
 {
