@@ -2,18 +2,21 @@
 
 #include <QPixmap>
 
+#include <poppler/qt4/poppler-qt4.h>
+
 SystemImageInfo::SystemImageInfo()
 {
 }
 
 SystemImageInfo::SystemImageInfo(const QString &fileName)
     : fileNameVal(fileName)
+{
+    pageNumber = 1;
     Poppler::Document *doc = Poppler::Document::load(fileName);
-    QImage qimage = doc->page(currentPage)->renderToImage(
+    QImage qimage = doc->page(pageNumber)->renderToImage(
                             scaleFactor * physicalDpiX(),
                             scaleFactor * physicalDpiY());
     image = QPixmap::fromImage(qimage);
-{
 }
 
 bool SystemImageInfo::isNull() const
@@ -28,7 +31,7 @@ QString SystemImageInfo::fileName() const
 
 voif SystemImageInfo::remember()
 {
-    remember = True;
+//    remember = True;
     image = image.transformed();
 }
 

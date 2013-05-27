@@ -2,8 +2,7 @@
 #define SYSTEMIMAGEINFO_H
 
 #include <QString>
-
-class QPixmap;
+#include <QPixmap>
 
 class SystemImageInfo
 {
@@ -12,7 +11,7 @@ class SystemImageInfo
     QTransform transformation;
     QRect frame;
     QPixmap image;
-    bool remember;
+//    bool remember;
 public:
     SystemImageInfo();
     SystemImageInfo(const QString& fileName);
