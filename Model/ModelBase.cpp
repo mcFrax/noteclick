@@ -10,8 +10,7 @@ ModelBase::ModelBase() :
 ModelBase::ModelBase(IdRegister& registered_in, QObject* parent /*= 0*/) :
     QObject(parent), children(QLinkedList<ModelBase*>())
 {
-    this->idVal = registered_in.registerObject(this);
-    this->registeredInVal = &registered_in;
+    registerIn(registered_in);
 }
 
 ModelBase::~ModelBase()

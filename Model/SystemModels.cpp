@@ -102,17 +102,17 @@ Clef::~Clef()
 //{
 //}
 
-//// ------------------------------- TIMESIGNATURE -------------------------------
-//TimeSignature::TimeSignature() :
-//    ModelBase()
-//{
-//}
+// ------------------------------- TIMESIGNATURE -------------------------------
+TimeSignature::TimeSignature() :
+    ModelBase()
+{
+}
 
-//TimeSignature::TimeSignature(IdRegister& registered_in, QObject * parent) :
-//    ModelBase(registered_in, parent)
-//{
-//}
+TimeSignature::TimeSignature(IdRegister& registered_in, QObject * parent) :
+    ModelBase(registered_in, parent)
+{
+}
 
-//TimeSignature::~TimeSignature()
-//{
-//}
+TimeSignature::~TimeSignature()
+{
+}

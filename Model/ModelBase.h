@@ -13,12 +13,12 @@ namespace Model {
 // Klasa, po ktorej dziedzicza wszystkie modele.
 class ModelBase: public QObject, public IdRegisteredClass
 {
+    Q_OBJECT
 public:
     explicit ModelBase();
     explicit ModelBase(IdRegister& registered_in, QObject* parent = 0);
     ~ModelBase();
 private:
-    Q_OBJECT
     QLinkedList<ModelBase*> children;
 };
 

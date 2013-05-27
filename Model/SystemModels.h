@@ -9,7 +9,7 @@ namespace Model {
 
 class System: public ModelBase // a.k.a. Page
 {
-public slots:
+public:
     explicit System();
     explicit System(IdRegister& registered_in, QObject * parent = 0);
     ~System();
@@ -18,14 +18,14 @@ private:
 };
 
 class StaffSystem: public ModelBase {
-public slots:
+public:
     explicit StaffSystem();
     explicit StaffSystem(IdRegister& registered_in, QObject * parent = 0);
     ~StaffSystem();
 };
 
 class StaffSystemElement: public ModelBase {
-public slots:
+public:
     explicit StaffSystemElement();
     explicit StaffSystemElement(IdRegister& registered_in, QObject * parent = 0, StaffCoords coords = StaffCoords());
     explicit StaffSystemElement(IdRegister& registered_in, QObject * parent = 0, qreal coord_x = 0, qreal coord_y = 0);
@@ -37,7 +37,7 @@ protected:
 };
 
 class Clef: public StaffSystemElement {
-public slots:
+public:
     explicit Clef();
     explicit Clef(IdRegister& registered_in, QObject * parent = 0, StaffCoords coords = StaffCoords());
     explicit Clef(IdRegister& registered_in, ClefInfo c_info, ModelBase * parent = 0, StaffCoords coords = StaffCoords());
@@ -48,7 +48,7 @@ private:
 };
 
 //class KeySignature: public ModelBase {
-//public slots:
+//public:
 //    explicit KeySignature();
 //    explicit KeySignature(IdRegister& registered_in, ModelBase * parent = 0);
 //    ~KeySignature();
@@ -57,12 +57,12 @@ private:
 //    //KeySignatureInfo signature;
 //};
 
-//class TimeSignature: public ModelBase {
-//public slots:
-//    explicit TimeSignature();
-//    explicit TimeSignature(IdRegister& registered_in, QObject * parent = 0);
-//    ~TimeSignature();
-//};
+class TimeSignature: public ModelBase {
+public:
+    explicit TimeSignature();
+    explicit TimeSignature(IdRegister& registered_in, QObject * parent = 0);
+    ~TimeSignature();
+};
 
 }
 
