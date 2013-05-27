@@ -28,7 +28,7 @@ void ChoirGroup::setMyStyle()
 {
     setObjectName("ChoirGroup");
     setStyleSheet(
-                "ChoirGroup {"
+                "StructureView--ChoirGroup {"
                 "border-left: 2px solid black;"
                 //"border-top-left-radius: 10px"
                 "}"

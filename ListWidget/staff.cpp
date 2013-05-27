@@ -11,7 +11,7 @@ Staff::Staff(QString name, Score *sc, QWidget *parent) :
     score = sc;
     setObjectName("Staff");
     setStyleSheet(
-                "Staff {"
+                "StructureView--Staff {"
                 "border: 2px solid black;"
                 "}"
         );

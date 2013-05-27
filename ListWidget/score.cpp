@@ -13,6 +13,7 @@ Score::Score(QWidget *parent, QString name) :
     ListWidget(name, parent)
 {
     setObjectName("Score");
+    /*
     setStyleSheet(
         "Score {"
         "border-left: 0px;"
@@ -20,7 +21,7 @@ Score::Score(QWidget *parent, QString name) :
         "border-top: 1 px solid black;"
         "border-bottom: 1 px solid black;}"
         );
-
+    */
     setButtonText("Add ChoirGroup");
 
     pointers[0] = this;
@@ -34,6 +35,8 @@ Score::Score(QWidget *parent, QString name) :
 
     connect(this, SIGNAL(moved(ListItem*,ListItem*)), this, SLOT(elementMoved(ListItem*,ListItem*)));
 
+    //remove X button
+    //headerLayout->removeWidget(eraseButton);
     /*
     addChoirGroup(1,0,"111");
     addChoirGroup(4,0,"4444");
@@ -180,10 +183,11 @@ void Score::elementMoved(ListItem *item, ListItem *newParent)
 void Score::voiceSelected(void *p, bool state)
 {
     if (!state)
-    {
-        selected = NULL;
-        return;
-    }
+   {
+       if ((VoiceWidget*)p ==selected)
+           selected = NULL;
+       return;
+   }
 
     if (selected != NULL)
     {

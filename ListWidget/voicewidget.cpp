@@ -35,7 +35,7 @@ VoiceWidget::VoiceWidget(QString n, Score *sc, QWidget *parent) :
 
     setObjectName("VoiceWidget");
     setStyleSheet(
-                "VoiceWidget {"
+                "StructureView--VoiceWidget {"
                 "border: 1px solid black;"
                 "border-radius: 4px;"
                 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 2,"
