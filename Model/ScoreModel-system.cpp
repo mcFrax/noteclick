@@ -6,10 +6,10 @@
 
 #include "SystemImageInfo.h"
 #include "ClefInfo.h"
+#include "KeySignature.h"
 
 //tymczasowe definicje niegotowych typów
-#warning temp KeySignature & TimeSignature & NoteValue & RestValue
-typedef int KeySignature;
+#warning temp TimeSignature & NoteValue & RestValue
 typedef int TimeSignature;
 typedef int NoteValue;
 typedef int RestValue;
