@@ -17,7 +17,7 @@ BadIdException::BadIdException(const char * what)
 `-------------*/
 
 IdRegister::IdRegister(bool freeEverythingAtDestroy)
-    : nextid(0), freeEverythingAtDestroyVal(freeEverythingAtDestroy)
+    : nextid(1), freeEverythingAtDestroyVal(freeEverythingAtDestroy)
 {
 }
 

@@ -20,13 +20,16 @@ Score::Score(QWidget *parent, QString name) :
 
     setButtonText("Add ChoirGroup");
 
-    setDraggableType("Score");
+    pointers[0] = this;
 
     // setAcceptedDrops
+    setDraggableType("Score");
+
     QSet<QString> tmp;
     tmp.insert("ChoirGroup");
-
     setAcceptedDrops(tmp);
+
+    connect(this, SIGNAL(moved(ListItem*,ListItem*)), this, SLOT(elementMoved(ListItem*,ListItem*)));
 
     /*
     addChoirGroup(1,0,"111");
@@ -142,6 +145,7 @@ void Score::elementRenamed(ListItem *item, QString name)
 
 void Score::elementMoved(ListItem *item, ListItem *newParent)
 {
+
     IdType id = pointers.key((void*)item);
     IdType pid = pointers.key((void*)newParent);
 

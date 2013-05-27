@@ -175,7 +175,6 @@ void InnerList::dropEvent(QDropEvent *event)
                 emit moved((ListItem*)item, (ListItem*)this);
 
 
-
                 if (event->source() == this) {
                     event->setDropAction(Qt::MoveAction);
                     event->accept();
