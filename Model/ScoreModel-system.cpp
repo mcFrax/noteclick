@@ -9,8 +9,8 @@
 
 //tymczasowe definicje niegotowych typów
 #warning temp KeySignature & TimeSignature & NoteValue & RestValue
-typedef int KeySignature;
-typedef int TimeSignature;
+typedef int KeySignatureInfo;
+typedef int TimeSignatureInfo;
 typedef int NoteValue;
 typedef int RestValue;
 
@@ -138,7 +138,7 @@ void ScoreModel::createClef(const VSA& arg)
 
 void ScoreModel::createKeySignature(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; KeySignature signature;
+    IdType staffId; StaffCoords coords; ::KeySignatureInfo signature;
     arg.unpackTo(staffId, coords, signature);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::KeySignatureCreated, vsa(id, staffId, coords, signature)));
@@ -147,7 +147,7 @@ void ScoreModel::createKeySignature(const VSA& arg)
 
 void ScoreModel::createTimeSignature(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; TimeSignature signature;
+    IdType staffId; StaffCoords coords; ::TimeSignatureInfo signature;
     arg.unpackTo(staffId, coords, signature);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::TimeSignatureCreated, vsa(id, staffId, coords, signature)));
@@ -275,7 +275,7 @@ void ScoreModel::ChangeClef(const VSA& arg)
 
 void ScoreModel::changeKeySignature(const VSA& arg)
 {
-    IdType keySignId; KeySignature new_signature;
+    IdType keySignId; ::KeySignatureInfo new_signature;
     arg.unpackTo(keySignId, new_signature);
     emit changed(ScoreChange(ScoreChange::KeySignatureChanged, vsa(keySignId, new_signature)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
@@ -283,7 +283,7 @@ void ScoreModel::changeKeySignature(const VSA& arg)
 
 void ScoreModel::changeTimeSignature(const VSA& arg)
 {
-    IdType timeSignId; TimeSignature new_signature;
+    IdType timeSignId; ::TimeSignatureInfo new_signature;
     arg.unpackTo(timeSignId, new_signature);
     emit changed(ScoreChange(ScoreChange::TimeSignatureChanged, vsa(timeSignId, new_signature)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
