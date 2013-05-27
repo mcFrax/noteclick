@@ -42,7 +42,7 @@ private:
     void moveVoice(const VSA& arg);
 
     void eraseStructureObject(const VSA& arg);
-
+    void renameStructureObject(const VSA& arg);
 
 
     void createSystemImage(const VSA& arg);
