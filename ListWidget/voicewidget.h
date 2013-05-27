@@ -16,7 +16,8 @@ class VoiceWidget : public ListItem
     Q_OBJECT
 public:
     explicit VoiceWidget(QString name, Score *score, QWidget *parent = 0);
-    
+    ~VoiceWidget();
+
     virtual void setText(QString name);
 
     void setSelected(bool);

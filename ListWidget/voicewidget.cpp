@@ -62,7 +62,12 @@ void VoiceWidget::paintEvent(QPaintEvent *)
 void VoiceWidget::mouseDoubleClickEvent(QMouseEvent *)
 {
     bool ok;
-    QString text = QInputDialog::getText(0, tr("Change name"),
+
+    QWidget *ptr = (QWidget*)this;
+    while (ptr != ptr->parent() && !ptr->isWindow())
+        ptr = (QWidget*)ptr->parent();
+
+    QString text = QInputDialog::getText(ptr, tr("Change name"),
                                          tr("Name:"), QLineEdit::Normal,
                                          name->text(), &ok);
     if (ok && !text.isEmpty())
@@ -105,4 +110,9 @@ void VoiceWidget::setSelected(bool s)
 void VoiceWidget::erase()
 {
     emit removed(this);
+}
+
+VoiceWidget::~VoiceWidget()
+{
+    score->voiceSelected(this, false);
 }

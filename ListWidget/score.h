@@ -11,7 +11,7 @@ class Score : public ListWidget
 {
     Q_OBJECT
 public:
-    explicit Score(QWidget *parent = 0, QString name = "bla");
+    explicit Score(QWidget *parent = 0, QString name = "Voice List");
 
 signals:
     void error(QString what);

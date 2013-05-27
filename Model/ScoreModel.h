@@ -11,12 +11,13 @@
 namespace Model
 {
 
-class ScoreModel : public QObject
+class ScoreModel : public QObject, protected IdRegisteredClass
 {
     Q_OBJECT
 public:
     explicit ScoreModel(QObject *parent = 0);
     
+    static const IdType ScoreId;
 signals:
     void changed(ScoreChange change);
 
