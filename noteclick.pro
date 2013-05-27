@@ -14,6 +14,8 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_LFLAGS += -std=c++11
 
+INCLUDEPATH  += /usr/include/poppler/qt4
+LIBS         += -L/usr/lib -lpoppler-qt4
 
 SOURCES +=\
     SystemView/ItemEventHandlers.cpp \

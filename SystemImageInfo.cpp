@@ -2,26 +2,31 @@
 
 #include <QPixmap>
 
-#include <poppler/qt4/poppler-qt4.h>
+#include <poppler-qt4.h>
 
 SystemImageInfo::SystemImageInfo()
 {
 }
 
-SystemImageInfo::SystemImageInfo(const QString &fileName)
-    : fileNameVal(fileName)
+SystemImageInfo::SystemImageInfo(QString fileName,
+                                 QTransform transformation,
+                                 int pageNumber, QRect frame)
+    : fileNameVal(fileName), transformation(transformation),
+      pageNumber(pageNumber), frame(frame)
 {
-    pageNumber = 1;
-    Poppler::Document *doc = Poppler::Document::load(fileName);
-    QImage qimage = doc->page(pageNumber)->renderToImage(
-                            scaleFactor * physicalDpiX(),
-                            scaleFactor * physicalDpiY());
-    image = QPixmap::fromImage(qimage);
+}
+
+SystemImageInfo::SystemImageInfo(QPixmap qpixmap,
+                                 QTransform transformation,
+                                 int pageNumber, QRect frame)
+    : qpixmap(qpixmap), transformation(transformation),
+      pageNumber(pageNumber), frame(frame)
+{
 }
 
 bool SystemImageInfo::isNull() const
 {
-    return (fileNameVal==NULL)&&(QPixmap==NULL);
+    return (fileNameVal.isEmpty())&&(qpixmap.isNull());
 }
 
 QString SystemImageInfo::fileName() const
@@ -29,11 +34,14 @@ QString SystemImageInfo::fileName() const
     return fileNameVal;
 }
 
-voif SystemImageInfo::remember()
+void SystemImageInfo::remember()
 {
 //    remember = True;
-    image = image.transformed();
+    qpixmap = transformed();
+    fileNameVal.clear();
+
 }
+
 
 
 void SystemImageInfo::setFileName(const QString &fileName)
@@ -43,12 +51,22 @@ void SystemImageInfo::setFileName(const QString &fileName)
 
 QPixmap SystemImageInfo::pixmap() const
 {
-    return QPixmap(fileName());
+    if (qpixmap.isNull()){
+        Poppler::Document *doc = Poppler::Document::load(fileNameVal);
+        Poppler::Page * page = doc->page(pageNumber);
+        QSize size = page ->pageSize();
+        int scaleFactor = 1;
+        QImage qimage = page->renderToImage(
+                    scaleFactor * size.width(),
+                    scaleFactor * size.height());
+        return QPixmap::fromImage(qimage);
+    } else {
+        return qpixmap;
+    }
 }
 
 QPixmap SystemImageInfo::transformed() const
 {   
-    QPixmap qmap = SystemImageInfo.pixmap().copy(frame);
-    return qmap.transformed(&transformation, 
-        Qt::TransformationModemode=Qt::FastTransformation);
+    QPixmap qmap = pixmap().copy(frame);
+    return qmap.transformed(transformation, Qt::FastTransformation);
 }
