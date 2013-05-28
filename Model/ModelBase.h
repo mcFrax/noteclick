@@ -4,9 +4,8 @@
 #include <QLinkedList>
 #include <QObject>
 
+//#include "ScoreModel.h" // pieprzy sie przez to
 #include "IdRegisteredClass.h"
-
-//#define NullModel = 0; // pointer
 
 namespace Model {
 
@@ -18,7 +17,9 @@ public:
     explicit ModelBase();
     explicit ModelBase(IdRegister& registered_in, QObject* parent = 0);
     ~ModelBase();
-private:
+protected:
+    void unregister();
+//    ScoreModel * score_model;
     QLinkedList<ModelBase*> children;
 };
 

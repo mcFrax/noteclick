@@ -15,4 +15,10 @@ ModelBase::ModelBase(IdRegister& registered_in, QObject* parent /*= 0*/) :
 
 ModelBase::~ModelBase()
 {
+    this->unregister();
+}
+
+void ModelBase::unregister()
+{
+    registeredIn().unregister(id());
 }

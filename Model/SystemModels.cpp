@@ -2,6 +2,16 @@
 
 using namespace Model;
 
+// ------------------------------- SYSTEMIMAGE ---------------------------
+SystemImage::SystemImage(QString filename) :
+    filename(filename)
+{
+}
+
+SystemImage::~SystemImage()
+{
+}
+
 // ------------------------------- SYSTEM -------------------------------
 System::System() :
     ModelBase()
@@ -32,6 +42,11 @@ StaffSystem::~StaffSystem()
 {
 }
 
+//void StaffSystem::addElement(StaffSystemElement &sse)
+//{
+//    elements.insert(sse.getCoords(), sse);
+//}
+
 // --------------------------- STAFFSYSTEMELEMENT ---------------------------
 StaffSystemElement::StaffSystemElement() :
     ModelBase(), position(StaffCoords())
@@ -52,6 +67,11 @@ StaffSystemElement::~StaffSystemElement()
 {
 }
 
+StaffCoords StaffSystemElement::getCoords()
+{
+    return position;
+}
+
 int StaffSystemElement::compare(const StaffSystemElement& sse2) const
 {
     if (this->position < sse2.position)
@@ -62,9 +82,14 @@ int StaffSystemElement::compare(const StaffSystemElement& sse2) const
         return 1;
 }
 
-inline bool operator < (const StaffSystemElement& s1, const StaffSystemElement& s2)
+inline bool operator< (const StaffSystemElement& s1, const StaffSystemElement& s2)
 {
     return s1.compare(s2) < 0;
+}
+
+inline bool StaffSystemElement::operator= (const StaffSystemElement& sse2) const
+{
+    return compare(sse2) == 0;
 }
 
 // ------------------------------- CLEF -------------------------------
@@ -87,20 +112,20 @@ Clef::~Clef()
 {
 }
 
-//// ------------------------------- KEYSIGNATURE-------------------------------
-//KeySignature::KeySignature() :
-//    ModelBase(), position(StaffCoords())
-//{
-//}
+// ------------------------------- KEYSIGNATURE-------------------------------
+KeySignature::KeySignature() :
+    ModelBase(), position(StaffCoords())
+{
+}
 
-//KeySignature::KeySignature(IdRegister& registered_in, ModelBase * parent) :
-//    ModelBase(registered_in, parent), position(StaffCoords())
-//{
-//}
+KeySignature::KeySignature(IdRegister& registered_in, ModelBase * parent) :
+    ModelBase(registered_in, parent), position(StaffCoords())
+{
+}
 
-//KeySignature::~KeySignature()
-//{
-//}
+KeySignature::~KeySignature()
+{
+}
 
 // ------------------------------- TIMESIGNATURE -------------------------------
 TimeSignature::TimeSignature() :

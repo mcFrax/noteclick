@@ -16,6 +16,7 @@ namespace Model
 class ScoreModel : public QObject
 {
     Q_OBJECT
+    friend class ModelBase;
 public:
     explicit ScoreModel(QObject *parent = 0);
     
