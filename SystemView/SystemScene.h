@@ -20,6 +20,7 @@ class SystemImageItem;
 class SystemSceneState;
 class AddStaffState;
 class AddClefState;
+class VoiceElementItem;
 
 class SystemScene : public QGraphicsScene, protected IdRegisteredClass
 {
@@ -79,6 +80,8 @@ private:
     void systemImageCreated(const ScoreChange& change);
     void staffSystemCreated(const ScoreChange& change);
     void clefCreated(const ScoreChange& change);
+
+    void registerVoiceElement(IdType voiceId, VoiceElementItem * item);
 };
 
 }

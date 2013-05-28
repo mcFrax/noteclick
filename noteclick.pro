@@ -53,7 +53,9 @@ SOURCES +=\
     SystemView/ClefItem.cpp \
     SystemView/NoteMenu.cpp \
     NoteValue.cpp \
-    SystemView/AddNoteState.cpp
+    SystemView/AddNoteState.cpp \
+    SystemView/MusicItem.cpp \
+    SystemView/VoiceElementItem.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -94,6 +96,7 @@ HEADERS  += \
     SystemView/ClefItem.h \
     SystemView/NoteMenu.h \
     NoteValue.h \
-    SystemView/AddNoteState.h
+    SystemView/AddNoteState.h \
+    SystemView/VoiceElementItem.h
 
 FORMS    += mainwindow.ui
