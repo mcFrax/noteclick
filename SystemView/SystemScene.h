@@ -85,6 +85,7 @@ private:
     void systemImageCreated(const ScoreChange& change);
     void staffSystemCreated(const ScoreChange& change);
     void clefCreated(const ScoreChange& change);
+    void noteCreated(const ScoreChange& change);
 
     void registerVoiceElement(IdType voiceId, VoiceElementItem * item);
     void unregisterVoiceElement(IdType voiceId, VoiceElementItem * item);

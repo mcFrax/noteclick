@@ -11,6 +11,7 @@
 #include "AddClefState.h"
 #include "StaffSystemItem.h"
 #include "ClefItem.h"
+#include "NoteItem.h"
 #include "VoiceElementItem.h"
 
 using namespace SystemView;
@@ -137,7 +138,10 @@ void SystemScene::handleSystemChanged(ScoreChange change)
             return;
         case ScoreChange::KeySignatureCreated:  //(IdType id, IdType staffId, StaffCoords coords, KeySignature signature)
         case ScoreChange::TimeSignatureCreated: //(IdType id, IdType staffId, StaffCoords coords, TimeSignature signature)
+            return;
         case ScoreChange::NoteCreated:          //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
+            noteCreated(change);
+            return;
         case ScoreChange::RestCreated:         //(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue restValue)
         case ScoreChange::BarcheckCreated:      //(IdType id, IdType staffId, StaffCoords coords)
         case ScoreChange::SynchroMarkCreated:   //(IdType id, IdType staffId, StaffCoords coords, IdType synchroId)
@@ -245,6 +249,22 @@ void SystemScene::clefCreated(const ScoreChange &change)
     }
 
     new ClefItem(idReg, id, coords, clefInfo, staff);
+}
+
+//(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
+void SystemScene::noteCreated(const ScoreChange &change)
+{
+    IdType id; IdType staffId; StaffCoords coords; IdType voiceId; NoteValue noteValue;
+
+    change.args.unpackTo(id, staffId, coords, voiceId, noteValue);
+
+    StaffSystemItem* staff = idReg.ptrAs<StaffSystemItem>(staffId);
+    if (!staff){
+        emit error(QString(__PRETTY_FUNCTION__)+':'+tr("Incorrect id"));
+        return;
+    }
+
+    new NoteItem(idReg, id, voiceId, staff, noteValue, coords);
 }
 
 void SystemScene::registerVoiceElement(IdType voiceId, VoiceElementItem *item)

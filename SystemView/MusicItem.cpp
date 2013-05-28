@@ -10,7 +10,7 @@ MusicItem::MusicItem(QGraphicsItem *parent) :
     generateStates();
 }
 
-QPixmap MusicItem::changeColor(QPixmap &pixmap, QColor c)
+QPixmap MusicItem::changeColor(const QPixmap &pixmap, QColor c)
 {
     QImage image = pixmap.toImage();
     QRgb old;

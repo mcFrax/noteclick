@@ -1,7 +1,7 @@
 #ifndef NOTEITEM_H
 #define NOTEITEM_H
 
-#include <VoiceElementItem.h>
+#include "VoiceElementItem.h"
 
 #include "NoteValue.h"
 #include "StaffCoords.h"

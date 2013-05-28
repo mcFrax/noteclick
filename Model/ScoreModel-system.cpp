@@ -158,7 +158,7 @@ void ScoreModel::createNote(const VSA& arg)
     IdType staffId; StaffCoords coords; NoteValue noteValue;
     arg.unpackTo(staffId, coords, noteValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::NoteCreated, vsa(id, staffId, coords, noteValue)));
+    emit changed(ScoreChange(ScoreChange::NoteCreated, vsa(id, staffId, coords.roundedToDegree(), noteValue)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
@@ -235,7 +235,7 @@ void ScoreModel::moveNote(const VSA& arg)
 {
     IdType noteId; StaffCoords coords;
     arg.unpackTo(noteId, coords);
-    emit changed(ScoreChange(ScoreChange::NoteMoved, vsa(noteId, coords)));
+    emit changed(ScoreChange(ScoreChange::NoteMoved, vsa(noteId, coords.roundedToDegree())));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 

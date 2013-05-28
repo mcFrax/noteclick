@@ -14,7 +14,7 @@ public:
     explicit MusicItem(QGraphicsItem *parent = 0);
 
 
-    static QPixmap changeColor(QPixmap &pixmap, QColor c);
+    static QPixmap changeColor(const QPixmap &pixmap, QColor c);
 
 signals:
     
