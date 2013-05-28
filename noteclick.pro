@@ -44,7 +44,8 @@ SOURCES +=\
     ListWidget/innerlist.cpp \
     ListWidget/erasebutton.cpp \
     ListWidget/choirgroup.cpp \
-    ListWidget/box.cpp
+    ListWidget/box.cpp \
+    SystemView/MusicItem.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -76,6 +77,7 @@ HEADERS  += \
     ListWidget/innerlist.h \
     ListWidget/erasebutton.h \
     ListWidget/choirgroup.h \
-    ListWidget/box.h
+    ListWidget/box.h \
+    SystemView/MusicItem.h
 
 FORMS    += mainwindow.ui
