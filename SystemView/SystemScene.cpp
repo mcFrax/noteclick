@@ -17,6 +17,7 @@ using namespace SystemView;
 SystemScene::SystemScene(QObject *parent) :
     QGraphicsScene(parent)
 {
+    currentVoiceVal = noneId;
     handlersVal = 0;
     setupMachine();
 
@@ -52,6 +53,11 @@ void SystemScene::setupMachine()
 const SceneEventHandlers *SystemScene::handlers() const
 {
     return handlersVal;
+}
+
+IdType SystemScene::currentVoice() const
+{
+    return currentVoiceVal;
 }
 
 void SystemScene::setHandlers(const SceneEventHandlers * handlers)

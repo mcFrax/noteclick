@@ -1,8 +1,8 @@
-#include "AddClefState.h"
+#include "AddNoteState.h"
 
 #include "StaffSystemItem.h"
-#include "ClefMenu.h"
 #include "SystemScene.h"
+#include "NoteMenu.h"
 
 #include <QtGlobal>
 #include <QGraphicsSceneMouseEvent>
@@ -10,13 +10,13 @@
 
 using namespace SystemView;
 
-AddClefState::AddClefState(QState * parent, SystemScene *scene)
+AddNoteState::AddNoteState(QState * parent, SystemScene *scene)
     : SystemSceneState(parent, scene)
 {
     handlers.HANDLER(StaffSystemItem) = this;
 }
 
-bool AddClefState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMouseEvent *e)
+bool AddNoteState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMouseEvent *e)
 {
     StaffSystemItem* staff = static_cast<StaffSystemItem*>(staffItem);
     Q_ASSERT(staff);
@@ -24,7 +24,7 @@ bool AddClefState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMous
         return 1;
     if (scene->views().size() != 1)
         scene->warning("scene->views().size() != 1");
-    ClefMenu* menu = new ClefMenu(scene->views()[0]);
+    NoteMenu* menu = new NoteMenu(scene->views()[0]);
     connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(actionTriggered(QAction*)));
     staffId = staff->id();
     coords = staff->position().toStaffCoords(e->pos());
@@ -34,30 +34,29 @@ bool AddClefState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMous
     return 0;
 }
 
-bool AddClefState::mouseReleaseEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
+bool AddNoteState::mouseReleaseEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *)
 {
     return 1;
 }
 
-
-void AddClefState::onEntry(QEvent *)
+void AddNoteState::onEntry(QEvent *event)
 {
     scene->setHandlers(&handlers);
 }
 
-void AddClefState::onExit(QEvent *)
+void AddNoteState::onExit(QEvent *event)
 {
     scene->setHandlers(0);
 }
 
 
-void AddClefState::actionTriggered(QAction * action)
+void AddNoteState::actionTriggered(QAction * action)
 {
-    ClefInfo info = static_cast<ClefMenu::Action*>(action)->clefInfo;
-    if (!info.isValid()){
-        scene->error(tr("Not handled yet"));
+    NoteValue value = static_cast<NoteMenu::Action*>(action)->noteValue;
+    if (scene->currentVoice() == noneId){
+        scene->error(tr("Brak biezacego glosu"));
     } else {
-        scene->userAction(UserAction(UserAction::CreateClef, vsa(staffId, coords, info)));
-        emit clefAdded();
+        scene->userAction(UserAction(UserAction::CreateNote, vsa(staffId, coords, scene->currentVoice(), value)));
+        emit noteAdded();
     }
 }

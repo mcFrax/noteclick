@@ -52,7 +52,8 @@ SOURCES +=\
     SystemView/AddClefState.cpp \
     SystemView/ClefItem.cpp \
     SystemView/NoteMenu.cpp \
-    NoteValue.cpp
+    NoteValue.cpp \
+    SystemView/AddNoteState.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -92,6 +93,7 @@ HEADERS  += \
     SystemView/AddClefState.h \
     SystemView/ClefItem.h \
     SystemView/NoteMenu.h \
-    NoteValue.h
+    NoteValue.h \
+    SystemView/AddNoteState.h
 
 FORMS    += mainwindow.ui

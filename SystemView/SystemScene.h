@@ -44,6 +44,8 @@ public:
     const SceneEventHandlers * handlers() const;
 
     using IdRegisteredClass::id;
+
+    IdType currentVoice() const;
     
 signals:
     void error(QString errorMessage);
@@ -58,9 +60,11 @@ public slots:
 friend class SystemSceneState;
 friend class AddStaffState;
 friend class AddClefState;
+friend class AddNoteState;
 
 private:
     Reg idReg;
+    IdType currentVoiceVal;
     QStateMachine stateMachine;
     MachineStates statesVal;
     const SceneEventHandlers * handlersVal;
