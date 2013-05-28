@@ -1,5 +1,6 @@
 #include "musicitem.h"
 
+using namespace MusicItem;
 
 MusicItem::MusicItem(QGraphicsItem *parent) :
     QGraphicsPixmapItem()

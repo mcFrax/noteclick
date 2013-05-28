@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
+namespace MusicItem
+{
 
 class MusicItem : public QGraphicsPixmapItem
 {
@@ -29,4 +31,5 @@ protected:
 
 };
 
+}
 #endif // MUSICITEM_H
