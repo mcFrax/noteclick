@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QList>
+#include <QHash>
 #include <QStateMachine>
 
 class QState;
@@ -57,11 +58,14 @@ signals:
     
 public slots:
     void scoreChange(ScoreChange change);
+    void selectVoice(IdType voiceId);
+    void voiceVisible(IdType voiceId, bool visible);
 
 friend class SystemSceneState;
 friend class AddStaffState;
 friend class AddClefState;
 friend class AddNoteState;
+friend class VoiceElementItem;
 
 private:
     Reg idReg;
@@ -82,6 +86,9 @@ private:
     void clefCreated(const ScoreChange& change);
 
     void registerVoiceElement(IdType voiceId, VoiceElementItem * item);
+    void unregisterVoiceElement(IdType voiceId, VoiceElementItem * item);
+
+    QHash<IdType, QHash<IdType, VoiceElementItem*>> voiceElements;
 };
 
 }

@@ -19,6 +19,7 @@ public:
     };
 
     VoiceElementItem(IdRegister &, IdType id, IdType voiceId, StaffSystemItem *parent, QPixmap active, QPixmap inactive);
+    ~VoiceElementItem();
     const IdType voiceId;
     void setState(VoiceState state);
 protected:

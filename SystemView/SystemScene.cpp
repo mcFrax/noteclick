@@ -11,6 +11,7 @@
 #include "AddClefState.h"
 #include "StaffSystemItem.h"
 #include "ClefItem.h"
+#include "VoiceElementItem.h"
 
 using namespace SystemView;
 
@@ -96,6 +97,18 @@ void SystemScene::scoreChange(ScoreChange change)
         emit error(tr("std::bad_cast caught during ScoreChange handling: ")+e.what()+'\n'
                    +"VSA typeid = "+change.args.typeName());
     }
+}
+
+void SystemScene::selectVoice(IdType voiceId)
+{
+    for (auto item : voiceElements[voiceId])
+        item->setState(VoiceElementItem::ActiveVoice);
+}
+
+void SystemScene::voiceVisible(IdType voiceId, bool visible)
+{
+    for (auto item : voiceElements[voiceId])
+        item->setVisible(visible);
 }
 
 
@@ -222,4 +235,14 @@ void SystemScene::clefCreated(const ScoreChange &change)
     }
 
     new ClefItem(idReg, id, coords, clefInfo, staff);
+}
+
+void SystemScene::registerVoiceElement(IdType voiceId, VoiceElementItem *item)
+{
+    voiceElements[voiceId][item->id()] = item;
+}
+
+void SystemScene::unregisterVoiceElement(IdType voiceId, VoiceElementItem *item)
+{
+    voiceElements[voiceId].remove(item->id());
 }

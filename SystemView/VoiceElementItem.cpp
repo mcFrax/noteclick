@@ -12,7 +12,11 @@ VoiceElementItem::VoiceElementItem(IdRegister & reg, IdType id, IdType voiceId, 
         MusicItem::setState(ActiveVoice);
     else
         MusicItem::setState(InactiveVoice);
-    scene
+}
+
+VoiceElementItem::~VoiceElementItem()
+{
+    systemScene()->unregisterVoiceElement(voiceId, this);
 }
 
 void VoiceElementItem::setState(VoiceElementItem::VoiceState state)
