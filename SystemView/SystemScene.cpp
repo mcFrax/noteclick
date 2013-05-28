@@ -77,7 +77,7 @@ void SystemScene::scoreChange(ScoreChange change)
         switch (change.category)
         {
         case ScoreChange::StructureChanged:
-            //To nas nie obchodzi.
+            handleStructureChanged(change);
             return;
         case ScoreChange::SystemChanged:
             handleSystemChanged(change);
@@ -111,6 +111,16 @@ void SystemScene::voiceVisible(IdType voiceId, bool visible)
         item->setVisible(visible);
 }
 
+
+void SystemScene::handleStructureChanged(ScoreChange change)
+{
+    if (change.change == ScoreChange::StructureObjectErased){
+        int id;
+        change.args.unpackTo(id);
+        if (id == currentVoice())
+            currentVoiceVal = noneId;
+    }
+}
 
 void SystemScene::handleSystemChanged(ScoreChange change)
 {

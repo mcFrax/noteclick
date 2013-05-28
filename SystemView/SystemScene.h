@@ -78,6 +78,7 @@ private:
 
     void setupMachine();
 
+    void handleStructureChanged(ScoreChange change);
     void handleSystemChanged(ScoreChange change);
     void handleScoreChanged(ScoreChange change);
 
