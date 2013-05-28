@@ -49,7 +49,8 @@ SOURCES +=\
     SystemView/SystemImageItem.cpp \
     SystemView/SystemScene.cpp \
     SystemView/SystemViewItem.cpp \
-    SystemView/VoiceElementItem.cpp
+    SystemView/VoiceElementItem.cpp \
+    SystemView/NoteItem.cpp
 
 
 HEADERS  += \
@@ -87,7 +88,8 @@ HEADERS  += \
     SystemView/SystemSceneState.h \
     SystemView/SystemViewItem.h \
     SystemView/VoiceElementItem.h \
-    VersatileSlotArgument.h
+    VersatileSlotArgument.h \
+    SystemView/NoteItem.h
 
 
 FORMS    += mainwindow.ui
