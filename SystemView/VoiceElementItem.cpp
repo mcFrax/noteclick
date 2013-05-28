@@ -7,7 +7,7 @@ VoiceElementItem::VoiceElementItem(IdRegister & reg, IdType id, IdType voiceId, 
 {
     addState(InactiveVoice, inactive);
     addState(ActiveVoice, active);
-    systemScene()->registerVoiceElement(voiceId, this);
+//    systemScene()->registerVoiceElement(voiceId, this);
     if (systemScene()->currentVoice() == voiceId)
         MusicItem::setState(ActiveVoice);
     else

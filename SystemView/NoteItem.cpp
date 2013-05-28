@@ -67,17 +67,17 @@ static void initTranslations()
 static QPixmap pixmapActive(NoteValue val)
 {
     if (!init) { loadPixmaps(); init = 1;}
-    return pixmaps[qMakePair(val.duration(), VEI::ActiveVoice)];
+    return pixmaps.value(qMakePair(val.duration(), VEI::ActiveVoice));
 }
 
 static QPixmap pixmapInactive(NoteValue val)
 {
     if (!init) { loadPixmaps(); init = 1;}
-    return pixmaps[qMakePair(val.duration(), VEI::InactiveVoice)];
+    return pixmaps.value(qMakePair(val.duration(), VEI::InactiveVoice));
 }
 
 static QPoint translation(NoteValue val)
 {
     if (!init) { initTranslations(); init = 1;}
-    return translations[val.duration()];
+    return translations.value(val.duration());
 }

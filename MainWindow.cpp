@@ -10,6 +10,7 @@
 #include "SystemImageInfo.h"
 #include "SystemView/AddStaffState.h"
 #include "SystemView/AddClefState.h"
+#include "SystemView/AddNoteState.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,9 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect((ui->VoiceList), SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
     connect(&score, SIGNAL(changed(ScoreChange)), (ui->VoiceList), SLOT(scoreChange(ScoreChange)));
 
-
-
-
+    connect((ui->VoiceList), SIGNAL(voiceCheckedSignal(IdType,bool)), &scene, SLOT(voiceVisible(IdType,bool)));
+    connect((ui->VoiceList), SIGNAL(voiceSelectedSignal(IdType)), &scene, SLOT(selectVoice(IdType)));
 
     ui->systemView->setScene(&scene);
 }
@@ -92,5 +92,8 @@ void MainWindow::setupSceneStateTransitions()
     scene.states().editSystem->addTransition(
                 ui->toolButton_3, SIGNAL(clicked()),
                 scene.states().addClef);
+    scene.states().editSystem->addTransition(
+                ui->toolButton_4, SIGNAL(clicked()),
+                scene.states().addNote);
 }
 

@@ -5,9 +5,9 @@ NoteMenu::NoteMenu(QWidget *parent) :
 {
     actcount = 0;
 #define ADD_NEW_ACTION_TO_THIS_NOTE_MENU(var, value, string) do {var = new Action(NoteValue(value), tr( #string ), this); addAction(var); ++actcount;}while(0)
-    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(longa, 4, Longa);
-    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(breve, 2, Breve);
-    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(semibreve, 1, Semibreve);
+    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(longa, 4.0, Longa);
+    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(breve, 2.0, Breve);
+    ADD_NEW_ACTION_TO_THIS_NOTE_MENU(semibreve, 1.0, Semibreve);
     ADD_NEW_ACTION_TO_THIS_NOTE_MENU(minim, 0.5, Minim);
     ADD_NEW_ACTION_TO_THIS_NOTE_MENU(crotchet, 0.25, Crotchet);
     ADD_NEW_ACTION_TO_THIS_NOTE_MENU(quaver, 0.125, Quaver);

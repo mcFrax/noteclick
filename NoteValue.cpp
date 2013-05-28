@@ -3,6 +3,7 @@
 #include <cmath>
 
 NoteValue::NoteValue(double val, int dots)
+    : baseval(val), dotsVal(dots)
 {
 }
 

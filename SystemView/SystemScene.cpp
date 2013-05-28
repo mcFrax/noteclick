@@ -9,6 +9,7 @@
 #include "SystemImageInfo.h"
 #include "AddStaffState.h"
 #include "AddClefState.h"
+#include "AddNoteState.h"
 #include "StaffSystemItem.h"
 #include "ClefItem.h"
 #include "NoteItem.h"
@@ -44,6 +45,7 @@ void SystemScene::setupMachine()
     statesVal.normalCursor = new QState(statesVal.editSystem);
     statesVal.addStaff = new AddStaffState(statesVal.editSystem, this);
     statesVal.addClef = new AddClefState(statesVal.editSystem, this);
+    statesVal.addNote = new AddNoteState(statesVal.editSystem, this);
 
     statesVal.editSystem->setInitialState(statesVal.normalCursor);
     stateMachine.addState(statesVal.editSystem);
@@ -102,7 +104,12 @@ void SystemScene::scoreChange(ScoreChange change)
 
 void SystemScene::selectVoice(IdType voiceId)
 {
-    for (auto item : voiceElements[voiceId])
+    if (currentVoiceVal == voiceId) return;
+
+    for (auto item : voiceElements[currentVoiceVal])
+        item->setState(VoiceElementItem::InactiveVoice);
+    currentVoiceVal = voiceId;
+    for (auto item : voiceElements[currentVoiceVal])
         item->setState(VoiceElementItem::ActiveVoice);
 }
 
@@ -251,7 +258,6 @@ void SystemScene::clefCreated(const ScoreChange &change)
     new ClefItem(idReg, id, coords, clefInfo, staff);
 }
 
-//(IdType id, IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
 void SystemScene::noteCreated(const ScoreChange &change)
 {
     IdType id; IdType staffId; StaffCoords coords; IdType voiceId; NoteValue noteValue;

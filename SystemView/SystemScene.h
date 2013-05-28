@@ -21,6 +21,7 @@ class SystemImageItem;
 class SystemSceneState;
 class AddStaffState;
 class AddClefState;
+class AddNoteState;
 class VoiceElementItem;
 
 class SystemScene : public QGraphicsScene, protected IdRegisteredClass
@@ -34,7 +35,7 @@ public:
         QState *normalCursor;
         AddStaffState* addStaff;
         AddClefState *addClef;
-        //QState *addNote;
+        AddNoteState *addNote;
     };
 
 public:

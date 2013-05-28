@@ -155,19 +155,20 @@ void ScoreModel::createTimeSignature(const VSA& arg)
 
 void ScoreModel::createNote(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; NoteValue noteValue;
-    arg.unpackTo(staffId, coords, noteValue);
+    //(IdType staffId, StaffCoords coords, IdType voiceId, NoteValue noteValue)
+    IdType staffId; StaffCoords coords; IdType voiceId; NoteValue noteValue;
+    arg.unpackTo(staffId, coords, voiceId, noteValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::NoteCreated, vsa(id, staffId, coords.roundedToDegree(), noteValue)));
+    emit changed(ScoreChange(ScoreChange::NoteCreated, vsa(id, staffId, coords.roundedToDegree(), voiceId, noteValue)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
 void ScoreModel::createRest(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; NoteValue restValue;
-    arg.unpackTo(staffId, coords, restValue);
+    IdType staffId; StaffCoords coords; IdType voiceId; NoteValue restValue;
+    arg.unpackTo(staffId, coords, voiceId, restValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-    emit changed(ScoreChange(ScoreChange::RestCreated, vsa(id, staffId, coords, restValue)));
+    emit changed(ScoreChange(ScoreChange::RestCreated, vsa(id, staffId, coords, voiceId, restValue)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
 
