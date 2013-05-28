@@ -27,26 +27,6 @@ ClefMenu::Action::Action(const ClefInfo &clefInfo, const QIcon &icon, const QStr
 {
 }
 
-ClefMenu::Action* ClefMenu::trebleAction() const
-{
-    return treble;
-}
-
-ClefMenu::Action* ClefMenu::bassAction() const
-{
-    return bass;
-}
-
-ClefMenu::Action* ClefMenu::altoAction() const
-{
-    return alto;
-}
-
-ClefMenu::Action *ClefMenu::otherAction() const
-{
-    return other;
-}
-
 void ClefMenu::mouseReleaseEvent(QMouseEvent *e)
 {
     QMenu::mouseReleaseEvent(e);

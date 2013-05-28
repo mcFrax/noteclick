@@ -33,3 +33,8 @@ int ClefInfo::middleCPositionOnStaff() const
         return position - typeVal - octave*8;
 }
 
+bool ClefInfo::isValid() const
+{
+    return typeVal != Invalid;
+}
+

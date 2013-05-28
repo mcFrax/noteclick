@@ -28,7 +28,7 @@ bool AddClefState::mousePressEvent(QGraphicsItem * staffItem, QGraphicsSceneMous
     connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(actionTriggered(QAction*)));
     staffId = staff->id();
     coords = staff->position().toStaffCoords(e->pos());
-    menu->popup(e->screenPos(), menu->trebleAction());
+    menu->popup(e->screenPos());
 
     e->accept();
     return 0;
@@ -53,12 +53,12 @@ void AddClefState::onExit(QEvent *)
 
 void AddClefState::actionTriggered(QAction * action)
 {
-    ClefMenu* menu = dynamic_cast<ClefMenu*>(sender());
-    Q_ASSERT(menu);
-    if (action == menu->otherAction()){
+//    ClefMenu* menu = dynamic_cast<ClefMenu*>(sender());
+//    Q_ASSERT(menu);
+    ClefInfo info = static_cast<ClefMenu::Action*>(action)->clefInfo;
+    if (!info.isValid()){
         scene->error(tr("Not handled yet"));
     } else {
-        ClefInfo info = static_cast<ClefMenu::Action*>(action)->clefInfo;
         scene->userAction(UserAction(UserAction::CreateClef, vsa(staffId, coords, info)));
         emit clefAdded();
     }

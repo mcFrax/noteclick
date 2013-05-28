@@ -24,6 +24,8 @@ public:
     int octaveTransposition() const;
 
     int middleCPositionOnStaff() const;
+
+    bool isValid() const;
 };
 
 #endif // CLEFINFO_H

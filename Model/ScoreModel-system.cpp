@@ -6,13 +6,12 @@
 
 #include "SystemImageInfo.h"
 #include "ClefInfo.h"
+#include "NoteValue.h""
 
 //tymczasowe definicje niegotowych typów
-#warning temp KeySignature & TimeSignature & NoteValue & RestValue
+#warning temp KeySignature & TimeSignature
 typedef int KeySignatureInfo;
 typedef int TimeSignatureInfo;
-typedef int NoteValue;
-typedef int RestValue;
 
 using namespace Model;
 
@@ -165,7 +164,7 @@ void ScoreModel::createNote(const VSA& arg)
 
 void ScoreModel::createRest(const VSA& arg)
 {
-    IdType staffId; StaffCoords coords; RestValue restValue;
+    IdType staffId; StaffCoords coords; NoteValue restValue;
     arg.unpackTo(staffId, coords, restValue);
     IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
     emit changed(ScoreChange(ScoreChange::RestCreated, vsa(id, staffId, coords, restValue)));

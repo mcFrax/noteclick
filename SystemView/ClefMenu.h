@@ -29,11 +29,6 @@ private:
     void mouseReleaseEvent(QMouseEvent * e) override;
 public:
     explicit ClefMenu(QWidget *parent = 0);
-
-    Action* trebleAction() const;
-    Action* bassAction() const;
-    Action* altoAction() const;
-    Action* otherAction() const;
 signals:
     
 public slots:

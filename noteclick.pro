@@ -44,7 +44,15 @@ SOURCES +=\
     ListWidget/innerlist.cpp \
     ListWidget/erasebutton.cpp \
     ListWidget/choirgroup.cpp \
-    ListWidget/box.cpp
+    ListWidget/box.cpp \
+    SystemView/StaffSystemItem.cpp \
+    CuteMenu.cpp \
+    SystemView/ClefMenu.cpp \
+    ClefInfo.cpp \
+    SystemView/AddClefState.cpp \
+    SystemView/ClefItem.cpp \
+    SystemView/NoteMenu.cpp \
+    NoteValue.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -76,6 +84,14 @@ HEADERS  += \
     ListWidget/innerlist.h \
     ListWidget/erasebutton.h \
     ListWidget/choirgroup.h \
-    ListWidget/box.h
+    ListWidget/box.h \
+    SystemView/StaffSystemItem.h \
+    CuteMenu.h \
+    SystemView/ClefMenu.h \
+    ClefInfo.h \
+    SystemView/AddClefState.h \
+    SystemView/ClefItem.h \
+    SystemView/NoteMenu.h \
+    NoteValue.h
 
 FORMS    += mainwindow.ui
