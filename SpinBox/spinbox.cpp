@@ -19,16 +19,25 @@ SpinBox::SpinBox(QWidget *parent) :
     minus->setFixedWidth(23);
 
     plusLayout->setMargin(0);
+    plusLayout->setSpacing(0);
+
     spinbox->setRange(0, 0);
 
     plusLayout->addWidget(plus);
-    ///plusLayout->addWidget(minus);
+    //plusLayout->addWidget(minus);
     layout->addLayout(plusLayout);
     layout->addWidget(spinbox);
 
 
 
     setLayout(layout);
+
+    // connecty
+
+    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(changeScore(int)));
+    connect(plus, SIGNAL(clicked()), this, SLOT(addScore()));
+    connect(minus, SIGNAL(clicked()), this, SLOT(eraseScore()));
+
 }
 
 void SpinBox::setIdList(QList<IdType> &list)
@@ -36,7 +45,7 @@ void SpinBox::setIdList(QList<IdType> &list)
     idList = list;
 }
 
-void SpinBox::scoreChange(ScoreChange change)
+void SpinBox::scoreChanged(ScoreChange change)
 {
     try
     {
@@ -68,16 +77,18 @@ void SpinBox::scoreChange(ScoreChange change)
 
 void SpinBox::handleStructureChange(ScoreChange change)
 {
-    IdType mine, parent;
-    QString name;
+    IdType systemId;
 
     switch (static_cast<ScoreChange::StructureChangeEnum>(change.change))
     {
+
     case ScoreChange::SystemCreated:          //(IdType id: IdType parent_id)
-
+        change.args.unpackTo(systemId);
+        systemAdded(systemId);
         return;
-    case ScoreChange::SystemDeleted:          //(IdType id: IdType parent_id)
-
+    case ScoreChange::SystemObjectErased:          //(IdType id: IdType parent_id)
+        change.args.unpackTo(systemId);
+        systemErased(systemId);
         return;
 
         //Nie wstawiac default!
@@ -87,4 +98,31 @@ void SpinBox::handleStructureChange(ScoreChange change)
     //Tu trafiamy tylko w przypadku niepoprawnej wartosci action.action:
     emit error(tr("Invalid or unhandled ScoreChanged::change value (as ScoreChanged::StructureChanged) ")
             +QString::number(change.change));
+}
+
+void SpinBox::systemErased(IdType id)
+{
+
+}
+
+void SpinBox::systemAdded(IdType id)
+{
+
+
+}
+
+
+void SpinBox::changeScore()
+{
+
+}
+
+void SpinBox::addScore()
+{
+
+}
+
+void SpinBox::eraseScore()
+{
+
 }

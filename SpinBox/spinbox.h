@@ -25,8 +25,16 @@ public:
 signals:
     void userAction(UserAction a);
 
+    void error(QString what);
+    void warning(QString what);
+    void notice(QString what);
+
 public slots:
-    void scoreChange(ScoreChange change);
+    void scoreChanged(ScoreChange change);
+
+    void changeScore();
+    void addScore();
+    void eraseScore();
 
 protected:
     // gui
@@ -40,7 +48,8 @@ protected:
     QList<IdType> idList;
 
     void handleStructureChange(ScoreChange change);
-
+    void systemErased(IdType id);
+    void systemAdded(IdType id);
 };
 
 }

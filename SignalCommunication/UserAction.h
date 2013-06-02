@@ -46,6 +46,7 @@ public:
         ChangePauseValue,    //(IdType pauseId, NoteValue new_pauseValue)
         ChangeSynchroMarkId, //(IdType synchroMarkId, IdType new_synchroId)
 
+        CreateSystem, //(IdType id)
         EraseSystemObject    //(IdType objectId)
     };
 

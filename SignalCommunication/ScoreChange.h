@@ -50,6 +50,7 @@ public:
         PauseValueChanged,    //(IdType pauseId, NoteValue new_pauseValue)
         SynchroMarkIdChanged, //(IdType synchroMarkId, IdType new_synchroId)
 
+        SystemCreated, // (IdType id) TODO- napewno tu???
         SystemObjectErased    //(IdType objectId)
     };
 

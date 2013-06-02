@@ -39,7 +39,7 @@
          <widget class="QSpinBox" name="systemSpinBox"/>
         </item>
         <item row="0" column="1">
-         <widget class="SpinBox::SpinBox" name="widget" native="true"/>
+         <widget class="SpinBoxNamespace::SpinBox" name="widget" native="true"/>
         </item>
        </layout>
       </item>
@@ -164,7 +164,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SpinBox::SpinBox</class>
+   <class>SpinBoxNamespace::SpinBox</class>
    <extends>QWidget</extends>
    <header>SpinBox/spinbox.h</header>
    <container>1</container>
