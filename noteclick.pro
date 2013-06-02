@@ -38,7 +38,8 @@ SOURCES +=\
     ListWidget/innerlist.cpp \
     ListWidget/erasebutton.cpp \
     ListWidget/choirgroup.cpp \
-    ListWidget/box.cpp
+    ListWidget/box.cpp \
+    SpinBox/spinbox.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -64,6 +65,8 @@ HEADERS  += \
     ListWidget/innerlist.h \
     ListWidget/erasebutton.h \
     ListWidget/choirgroup.h \
-    ListWidget/box.h
+    ListWidget/box.h \
+    SpinBox/spinbox.h \
+    spinbox.h
 
 FORMS    += mainwindow.ui
