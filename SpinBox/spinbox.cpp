@@ -13,10 +13,10 @@ SpinBox::SpinBox(QWidget *parent) :
     plus = new QPushButton("+");
     minus = new QPushButton("-");
 
-    plus->setFixedHeight(23);
-    plus->setFixedWidth(23);
-    minus->setFixedHeight(23);
-    minus->setFixedWidth(23);
+    plus->setFixedHeight(15);
+    plus->setFixedWidth(15);
+    minus->setFixedHeight(15);
+    minus->setFixedWidth(15);
 
     plusLayout->setMargin(0);
     plusLayout->setSpacing(0);
@@ -24,7 +24,7 @@ SpinBox::SpinBox(QWidget *parent) :
     spinbox->setRange(0, 0);
 
     plusLayout->addWidget(plus);
-    //plusLayout->addWidget(minus);
+    plusLayout->addWidget(minus);
     layout->addLayout(plusLayout);
     layout->addWidget(spinbox);
 
@@ -102,27 +102,49 @@ void SpinBox::handleStructureChange(ScoreChange change)
 
 void SpinBox::systemErased(IdType id)
 {
-
+    int last = spinbox->maximum();
+    idMap.remove(last);
+    spinbox->setMaximum(last-1);
 }
 
 void SpinBox::systemAdded(IdType id)
 {
-
-
+    int last = spinbox->maximum();
+    idMap[last+1] = id;
+    spinbox->setMaximum(last+1);
 }
 
 
-void SpinBox::changeScore()
+void SpinBox::changeScore(int id)
 {
+    IdType systemId = idMap[id];
+    UserAction::SystemChangeEnum change;
 
+    change = UserAction::ChangeSystem;
+
+
+    UserAction a(change, vsa(systemId));
+    emit userAction(a);
 }
 
 void SpinBox::addScore()
 {
+    UserAction::SystemChangeEnum change;
 
+    change = UserAction::CreateSystem;
+
+
+    UserAction a(change, vsa(noneId));
+    emit userAction(a);
 }
 
 void SpinBox::eraseScore()
 {
+    IdType id = idMap[spinbox->value()];
+    UserAction::SystemChangeEnum change;
 
+    change = UserAction::EraseSystemObject;
+
+    UserAction a(change, vsa(id));
+    emit userAction(a);
 }

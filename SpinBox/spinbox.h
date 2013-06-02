@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QList>
+#include <QMap>
 #include "SignalCommunication/UserAction.h"
 #include "SignalCommunication/ScoreChange.h"
 
@@ -32,7 +33,7 @@ signals:
 public slots:
     void scoreChanged(ScoreChange change);
 
-    void changeScore();
+    void changeScore(int id);
     void addScore();
     void eraseScore();
 
@@ -46,6 +47,7 @@ protected:
 
     // bebechy
     QList<IdType> idList;
+    QMap<int, IdType> idMap;
 
     void handleStructureChange(ScoreChange change);
     void systemErased(IdType id);
