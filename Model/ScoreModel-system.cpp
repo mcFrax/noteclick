@@ -98,6 +98,14 @@ void ScoreModel::handleSystemChangeAction(const UserAction &action)
     case UserAction::EraseSystemObject:    //(IdType objectId)
         eraseSystemObject(action.args);
         return;
+
+    case UserAction::CreateSystem:
+        createSystem(action.args);
+        return;
+    case UserAction::ChangeSystem:
+        changeSystem(action.args);
+        return;
+
     //Nie wstawiac default!
     //Chodzi o to, zeby dostac warn w przypadku nieobslugiwania czegos.
     }
@@ -318,5 +326,21 @@ void ScoreModel::eraseSystemObject(const VSA& arg)
     IdType objectId;
     arg.unpackTo(objectId);
     emit changed(ScoreChange(ScoreChange::SystemObjectErased, vsa(objectId)));
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
+}
+
+void ScoreModel::changeSystem(const VSA& arg)
+{
+    IdType objectId;
+    arg.unpackTo(objectId);
+    emit warning(tr("Not fully handled action")+" ("+__func__+")");
+
+}
+
+void ScoreModel::createSystem(const VSA &arg)
+{
+    arg; // ne używamy arg
+    IdType id = IdRegisteredClass(reg).id();
+    emit changed(ScoreChange(ScoreChange::SystemCreated, vsa(id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }

@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect((ui->VoiceList), SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
     connect(&score, SIGNAL(changed(ScoreChange)), (ui->VoiceList), SLOT(scoreChange(ScoreChange)));
 
+    connect(ui->properSpinBox, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
+    connect(&score, SIGNAL(changed(ScoreChange)), ui->properSpinBox, SLOT(scoreChanged(ScoreChange)));
 
 
 
