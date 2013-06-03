@@ -339,7 +339,8 @@ void ScoreModel::changeSystem(const VSA& arg)
 
 void ScoreModel::createSystem(const VSA &arg)
 {
-    arg; // ne używamy arg
+    int listPosition; // ne używamy arg
+    arg.unpackTo(listPosition);
     IdType id = IdRegisteredClass(reg).id();
     emit changed(ScoreChange(ScoreChange::SystemCreated, vsa(id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");

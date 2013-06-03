@@ -116,6 +116,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::PauseValueChanged:    //(IdType pauseId, NoteValue new_pauseValue)
         case ScoreChange::SynchroMarkIdChanged: //(IdType synchroMarkId, IdType new_synchroId)
 
+        case ScoreChange::SystemCreated:
+
         case ScoreChange::SystemObjectErased:    //(IdType objectId)
             emit warning(tr("Not handled system change")+" ("+__func__+")");
             return;

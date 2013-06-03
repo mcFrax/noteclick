@@ -33,9 +33,9 @@ signals:
 public slots:
     void scoreChanged(ScoreChange change);
 
-    void changeScore(int id);
-    void addScore();
-    void eraseScore();
+    void changeSystem(int id);
+    void addSystem();
+    void eraseSystem();
 
 protected:
     // gui

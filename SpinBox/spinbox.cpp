@@ -34,9 +34,9 @@ SpinBox::SpinBox(QWidget *parent) :
 
     // connecty
 
-    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(changeScore(int)));
-    connect(plus, SIGNAL(clicked()), this, SLOT(addScore()));
-    connect(minus, SIGNAL(clicked()), this, SLOT(eraseScore()));
+    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(changeSystem(int)));
+    connect(plus, SIGNAL(clicked()), this, SLOT(addSystem()));
+    connect(minus, SIGNAL(clicked()), this, SLOT(eraseSystem()));
 
 }
 
@@ -81,7 +81,7 @@ void SpinBox::scoreChanged(ScoreChange change)
         }
 
         //Tu trafiamy tylko w przypadku niepoprawnej wartosci action.category:
-        emit error(tr("Invalid ScoreChange::category value ")+QString::number(change.category));
+        emit warning(tr("Invalid ScoreChange::category value ")+QString::number(change.category));
     }
     catch (std::bad_cast &e)
     {
@@ -94,7 +94,6 @@ void SpinBox::scoreChanged(ScoreChange change)
 void SpinBox::handleStructureChange(ScoreChange change)
 {
     IdType systemId;
-
 
     switch (static_cast<ScoreChange::SystemChangeEnum>(change.change))
     {
@@ -152,7 +151,7 @@ void SpinBox::systemAdded(IdType id)
 }
 
 
-void SpinBox::changeScore(int id)
+void SpinBox::changeSystem(int id)
 {
     IdType systemId = idMap[id];
     UserAction::SystemChangeEnum change;
@@ -164,17 +163,18 @@ void SpinBox::changeScore(int id)
     emit userAction(a);
 }
 
-void SpinBox::addScore()
+void SpinBox::addSystem()
 {
+    int pos = spinbox->value();
     UserAction::SystemChangeEnum change;
 
     change = UserAction::CreateSystem;
 
-    UserAction a(change, vsa(noneId));
+    UserAction a(change, vsa(pos));
     emit userAction(a);
 }
 
-void SpinBox::eraseScore()
+void SpinBox::eraseSystem()
 {
     IdType id = idMap[spinbox->value()];
     UserAction::SystemChangeEnum change;
