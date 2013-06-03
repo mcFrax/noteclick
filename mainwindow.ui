@@ -35,9 +35,6 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="2">
-         <widget class="QSpinBox" name="systemSpinBox"/>
-        </item>
         <item row="0" column="1">
          <widget class="SpinBoxNamespace::SpinBox" name="properSpinBox" native="true"/>
         </item>
