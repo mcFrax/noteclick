@@ -86,17 +86,26 @@ void MainWindow::setupSceneStateTransitions()
                 ui->actionLoad_Image, SIGNAL(triggered()),
                 scene.states().normalCursor);
 
+    scene.states().editSystem->assignProperty(ui->toolButton, "down", false);
+    scene.states().editSystem->assignProperty(ui->toolButton_2, "down", false);
+    scene.states().editSystem->assignProperty(ui->toolButton_3, "down", false);
+    scene.states().editSystem->assignProperty(ui->toolButton_4, "down", false);
+
     scene.states().editSystem->addTransition(
                 ui->toolButton, SIGNAL(clicked()),
                 scene.states().normalCursor);
+    scene.states().normalCursor->assignProperty(ui->toolButton, "down", true);
     scene.states().editSystem->addTransition(
                 ui->toolButton_2, SIGNAL(clicked()),
                 scene.states().addStaff);
+    scene.states().addStaff->assignProperty(ui->toolButton_2, "down", true);
     scene.states().editSystem->addTransition(
                 ui->toolButton_3, SIGNAL(clicked()),
                 scene.states().addClef);
+    scene.states().addClef->assignProperty(ui->toolButton_3, "down", true);
     scene.states().editSystem->addTransition(
                 ui->toolButton_4, SIGNAL(clicked()),
                 scene.states().addNote);
+    scene.states().addNote->assignProperty(ui->toolButton_4, "down", true);
 }
 
