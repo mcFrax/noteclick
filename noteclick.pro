@@ -50,8 +50,10 @@ SOURCES +=\
     SystemView/SystemScene.cpp \
     SystemView/SystemViewItem.cpp \
     SystemView/VoiceElementItem.cpp \
-    SystemView/NoteItem.cpp
-
+    SystemView/NoteItem.cpp \
+    Model/SystemModels.cpp \
+    Model/StructureModels.cpp \
+    Model/ModelBase.cpp
 
 HEADERS  += \
     ClefInfo.h \
@@ -89,8 +91,10 @@ HEADERS  += \
     SystemView/SystemViewItem.h \
     SystemView/VoiceElementItem.h \
     VersatileSlotArgument.h \
-    SystemView/NoteItem.h
-
+    SystemView/NoteItem.h \
+    Model/SystemModels.h \
+    Model/StructureModels.h \
+    Model/ModelBase.h
 
 FORMS    += mainwindow.ui
 

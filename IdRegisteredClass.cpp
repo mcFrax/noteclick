@@ -123,6 +123,7 @@ IdType IdRegisteredClass::id() const
 
 IdRegister &IdRegisteredClass::registeredIn() const
 {
+    // a co jesli registeredInVal jest nullem?
     return *registeredInVal;
 }
 

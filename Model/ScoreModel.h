@@ -7,6 +7,8 @@
 #include "VersatileSlotArgument.h"
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
+#include "StructureModels.h"
+#include "SystemModels.h"
 
 namespace Model
 {
@@ -14,6 +16,7 @@ namespace Model
 class ScoreModel : public QObject, protected IdRegisteredClass
 {
     Q_OBJECT
+    friend class ModelBase;
 public:
     explicit ScoreModel(QObject *parent = 0);
     

@@ -50,9 +50,7 @@ void ScoreModel::createGroup(const VSA& arg)
     IdType parent_id;
     arg.unpackTo(parent_id);
 
-    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
-
-
+    IdType id = ChoirGroup(this, reg).id();
 
     emit changed(ScoreChange(ScoreChange::GroupCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
@@ -62,7 +60,8 @@ void ScoreModel::createStaff(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
-    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    IdType id = Staff(this, reg).id();
+//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
     emit changed(ScoreChange(ScoreChange::StaffCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
@@ -71,7 +70,8 @@ void ScoreModel::createVoice(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
-    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    IdType id = Voice(this, reg).id();
+//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
     emit changed(ScoreChange(ScoreChange::VoiceCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
