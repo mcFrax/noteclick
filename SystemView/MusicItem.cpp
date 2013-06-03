@@ -3,7 +3,7 @@
 using namespace SystemView;
 
 MusicItem::MusicItem(QGraphicsItem *parent) :
-    QGraphicsPixmapItem()
+    QGraphicsPixmapItem(parent)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     currentState = -1;
