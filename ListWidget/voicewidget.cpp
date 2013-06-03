@@ -109,13 +109,30 @@ void VoiceWidget::setSelected(bool s)
     radioButton->setChecked(s);
 }
 
+void VoiceWidget::setChecked(bool s)
+{
+    checkBox->setChecked(s);
+}
+
+void VoiceWidget::clickRadio()
+{
+    radioButton->click();
+}
+
+void VoiceWidget::clickCheckBox()
+{
+    checkBox->click();
+}
+
 // TODO to jakoś brzydko wylgąda...
 void VoiceWidget::erase()
 {
     emit removed(this);
 }
 
+
 VoiceWidget::~VoiceWidget()
 {
     score->voiceSelected(this, false);
+    score->voiceDeleted();
 }

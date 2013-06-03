@@ -130,7 +130,7 @@ void SystemScene::handleStructureChanged(ScoreChange change)
         IdType id;
         change.args.unpackTo(id);
         if (id == currentVoice())
-            currentVoiceVal = noneId;
+            selectVoice(noneId);
     }
 }
 
@@ -173,6 +173,8 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::NoteValueChanged:     //(IdType noteId, NoteValue new_noteValue)
         case ScoreChange::RestValueChanged:    //(IdType restId, NoteValue new_restValue)
         case ScoreChange::SynchroMarkIdChanged: //(IdType synchroMarkId, IdType new_synchroId)
+
+        case ScoreChange::SystemCreated:
 
         case ScoreChange::SystemObjectErased:    //(IdType objectId)
             emit warning(tr("Not handled system change")+" ("+__func__+")");

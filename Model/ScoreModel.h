@@ -59,6 +59,8 @@ private:
     void createBarcheck(const VSA& arg);
     void createSynchroMark(const VSA& arg);
     void createSlur(const VSA& arg);
+    void createSystem(const VSA& arg);
+
 
     void moveStaffSystem(const VSA& arg);
     void moveClef(const VSA& arg);
@@ -75,6 +77,7 @@ private:
     void changeNoteValue(const VSA& arg);
     void changeRestValue(const VSA& arg);
     void changeSynchroMarkId(const VSA& arg);
+    void changeSystem(const VSA& arg);
 
     void eraseSystemObject(const VSA& arg);
 

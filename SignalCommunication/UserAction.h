@@ -46,6 +46,8 @@ public:
         ChangeRestValue,    //(IdType restId, NoteValue new_restValue)
         ChangeSynchroMarkId, //(IdType synchroMarkId, IdType new_synchroId)
 
+        CreateSystem, //(int position)
+        ChangeSystem, //(IdType id)
         EraseSystemObject    //(IdType objectId)
     };
 

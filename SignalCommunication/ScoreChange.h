@@ -50,6 +50,7 @@ public:
         RestValueChanged,    //(IdType restId, NoteValue new_restValue)
         SynchroMarkIdChanged, //(IdType synchroMarkId, IdType new_synchroId)
 
+        SystemCreated, // (IdType id) TODO- napewno tu???
         SystemObjectErased    //(IdType objectId)
     };
 

@@ -37,6 +37,7 @@ SOURCES +=\
     NoteValue.cpp \
     StaffCoords.cpp \
     SystemImageInfo.cpp \
+    SpinBox/spinbox.cpp \
     SystemView/AddClefState.cpp \
     SystemView/AddNoteState.cpp \
     SystemView/AddStaffState.cpp \
@@ -76,6 +77,18 @@ HEADERS  += \
     SignalCommunication/UserAction.h \
     StaffCoords.h \
     SystemImageInfo.h \
+    ListWidget/voicewidget.h \
+    ListWidget/staff.h \
+    ListWidget/score.h \
+    ListWidget/listwidget.h \
+    ListWidget/listname.h \
+    ListWidget/listitem.h \
+    ListWidget/innerlist.h \
+    ListWidget/erasebutton.h \
+    ListWidget/choirgroup.h \
+    ListWidget/box.h \
+    SpinBox/spinbox.h \
+    spinbox.h \
     SystemView/AddClefState.h \
     SystemView/AddNoteState.h \
     SystemView/AddStaffState.h \

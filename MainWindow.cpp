@@ -34,8 +34,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect((ui->VoiceList), SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
     connect(&score, SIGNAL(changed(ScoreChange)), (ui->VoiceList), SLOT(scoreChange(ScoreChange)));
 
+    connect(ui->properSpinBox, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
+    connect(&score, SIGNAL(changed(ScoreChange)), ui->properSpinBox, SLOT(scoreChanged(ScoreChange)));
+
     connect((ui->VoiceList), SIGNAL(voiceCheckedSignal(IdType,bool)), &scene, SLOT(voiceVisible(IdType,bool)));
     connect((ui->VoiceList), SIGNAL(voiceSelectedSignal(IdType)), &scene, SLOT(selectVoice(IdType)));
+
 
     ui->systemView->setScene(&scene);
 }

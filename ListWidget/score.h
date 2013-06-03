@@ -16,6 +16,8 @@ class Score : public ListWidget
 public:
     explicit Score(QWidget *parent = 0, QString name = "Voice List");
 
+    void voiceDeleted();
+
 signals:
     void error(QString what);
     void warning(QString what);
@@ -25,6 +27,7 @@ signals:
 
     void voiceCheckedSignal(IdType, bool);
     void voiceSelectedSignal(IdType);
+
     //TMP
     /*
     void modelElementRemoved(IdType id);
@@ -67,6 +70,7 @@ protected:
     void handleStructureChange(ScoreChange change);
 
     VoiceWidget *selected;
+    int voiceCounter;
 };
 
 

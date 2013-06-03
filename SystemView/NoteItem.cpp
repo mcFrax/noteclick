@@ -19,7 +19,7 @@ NoteItem::NoteItem(IdRegister & reg, IdType id, IdType voiceId, StaffSystemItem 
     : VEI(reg, id, voiceId, parent, pixmapActive(value), pixmapInactive(value))
 {
     setPos(parent->position().fromStaffCoords(coords));
-    translate(-translation(value).x(), -translation(value).y());
+    setOffset(-translation(value).x(), -translation(value).y());
 }
 
 
