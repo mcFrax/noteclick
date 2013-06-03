@@ -26,6 +26,7 @@ Score::Score(QWidget *parent, QString name) :
 
     pointers[0] = this;
 
+    voiceCounter = 0;
     // setAcceptedDrops
     setDraggableType("Score");
 
@@ -89,13 +90,19 @@ void Score::addStaff(IdType id, IdType parentId, QString name)
 
 
 void Score::addVoice(IdType id, IdType parentId, QString name)
-{
+{ 
     Staff *parent =  (Staff*)pointers[parentId];
     VoiceWidget *newElement = new VoiceWidget(name, this);
 
     pointers[id] = newElement;
     parent->addElement(newElement);
 
+    if (!voiceCounter)
+    {
+        newElement->clickRadio();
+    }
+
+    voiceCounter++;
 }
 
 void Score::renameElement(IdType id, QString name)
@@ -185,11 +192,11 @@ void Score::elementMoved(ListItem *item, ListItem *newParent)
 void Score::voiceSelected(void *p, bool state)
 {
     if (!state)
-   {
-       if ((VoiceWidget*)p ==selected)
+    {
+       if ((VoiceWidget*)p == selected)
            selected = NULL;
        return;
-   }
+    }
 
     if (selected != NULL)
     {
@@ -199,7 +206,7 @@ void Score::voiceSelected(void *p, bool state)
     selected = (VoiceWidget*)p;
     IdType id = pointers.key(p);
 
-
+    selected->setChecked(true);
     emit voiceSelectedSignal(id);
 }
 
@@ -208,6 +215,11 @@ void Score::voiceChecked(void *p, bool state)
     IdType id = pointers.key(p);
 
     emit voiceCheckedSignal(id, state);
+}
+
+void Score::voiceDeleted()
+{
+    voiceCounter--;
 }
 
 

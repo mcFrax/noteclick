@@ -24,6 +24,9 @@ public:
     virtual void setText(QString name);
 
     void setSelected(bool);
+    void setChecked(bool);
+    void clickCheckBox();
+    void clickRadio();
 
 signals:
     void clicked();
