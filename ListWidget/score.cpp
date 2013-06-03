@@ -35,6 +35,8 @@ Score::Score(QWidget *parent, QString name) :
 
     connect(this, SIGNAL(moved(ListItem*,ListItem*)), this, SLOT(elementMoved(ListItem*,ListItem*)));
 
+    selected = 0;
+
     //remove X button
     //headerLayout->removeWidget(eraseButton);
     /*

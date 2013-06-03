@@ -32,13 +32,13 @@ bool IgnoringItemEventHandler::mouseReleaseEvent(QGraphicsItem *, QGraphicsScene
     return 0;
 }
 
-ItemEventHandler* defaultItemEventHandler()
+ItemEventHandler* SystemView::defaultItemEventHandler()
 {
     static ItemEventHandler instance;
     return &instance;
 }
 
-ItemEventHandler* ignoringItemEventHandler()
+ItemEventHandler* SystemView::ignoringItemEventHandler()
 {
     static IgnoringItemEventHandler instance;
     return &instance;
@@ -48,4 +48,14 @@ ItemEventHandler* ignoringItemEventHandler()
 SceneEventHandlers::SceneEventHandlers()
 {
     HANDLER(SystemImageItem) = 0;
+    HANDLER(StaffSystemItem) = 0;
+    HANDLER(ClefItem) = 0;
+}
+
+
+IgnoringSceneEventHandlers::IgnoringSceneEventHandlers()
+{
+    HANDLER(SystemImageItem) = ignoringItemEventHandler();
+    HANDLER(StaffSystemItem) = ignoringItemEventHandler();
+    HANDLER(ClefItem) = ignoringItemEventHandler();
 }

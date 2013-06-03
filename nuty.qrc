@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/nuty">
+        <file>nuty/1.png</file>
+        <file>nuty/2.png</file>
+        <file>nuty/4.png</file>
+        <file>nuty/8.png</file>
+        <file>nuty/16.png</file>
+        <file>nuty/32.png</file>
+        <file>nuty/64.png</file>
+        <file>nuty/128.png</file>
+        <file>nuty/breve.png</file>
+        <file>nuty/longa.png</file>
+    </qresource>
+</RCC>

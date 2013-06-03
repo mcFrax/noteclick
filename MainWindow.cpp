@@ -9,6 +9,8 @@
 #include "SignalCommunication/UserAction.h"
 #include "SystemImageInfo.h"
 #include "SystemView/AddStaffState.h"
+#include "SystemView/AddClefState.h"
+#include "SystemView/AddNoteState.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -35,7 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->properSpinBox, SIGNAL(userAction(UserAction)), &score, SLOT(userAction(UserAction)));
     connect(&score, SIGNAL(changed(ScoreChange)), ui->properSpinBox, SLOT(scoreChanged(ScoreChange)));
 
-
+    connect((ui->VoiceList), SIGNAL(voiceCheckedSignal(IdType,bool)), &scene, SLOT(voiceVisible(IdType,bool)));
+    connect((ui->VoiceList), SIGNAL(voiceSelectedSignal(IdType)), &scene, SLOT(selectVoice(IdType)));
 
 
     ui->systemView->setScene(&scene);
@@ -75,7 +78,6 @@ void MainWindow::on_actionLoad_Image_triggered()
                     vsa(scene.id(), SystemImageInfo(fn))
                     )
                 );
-    #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);
 }
 
 void MainWindow::setupSceneStateTransitions()
@@ -90,5 +92,11 @@ void MainWindow::setupSceneStateTransitions()
     scene.states().editSystem->addTransition(
                 ui->toolButton_2, SIGNAL(clicked()),
                 scene.states().addStaff);
+    scene.states().editSystem->addTransition(
+                ui->toolButton_3, SIGNAL(clicked()),
+                scene.states().addClef);
+    scene.states().editSystem->addTransition(
+                ui->toolButton_4, SIGNAL(clicked()),
+                scene.states().addNote);
 }
 

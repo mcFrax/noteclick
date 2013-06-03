@@ -7,6 +7,8 @@
 #include "VersatileSlotArgument.h"
 #include "SignalCommunication/ScoreChange.h"
 #include "SignalCommunication/UserAction.h"
+#include "StructureModels.h"
+#include "SystemModels.h"
 
 namespace Model
 {
@@ -14,6 +16,7 @@ namespace Model
 class ScoreModel : public QObject, protected IdRegisteredClass
 {
     Q_OBJECT
+    friend class ModelBase;
 public:
     explicit ScoreModel(QObject *parent = 0);
     
@@ -52,7 +55,7 @@ private:
     void createKeySignature(const VSA& arg);
     void createTimeSignature(const VSA& arg);
     void createNote(const VSA& arg);
-    void createPause(const VSA& arg);
+    void createRest(const VSA& arg);
     void createBarcheck(const VSA& arg);
     void createSynchroMark(const VSA& arg);
     void createSlur(const VSA& arg);
@@ -64,15 +67,15 @@ private:
     void moveKeySignature(const VSA& arg);
     void moveTimeSignature(const VSA& arg);
     void moveNote(const VSA& arg);
-    void movePause(const VSA& arg);
+    void moveRest(const VSA& arg);
     void moveBarcheck(const VSA& arg);
     void moveSynchroMark(const VSA& arg);
 
-    void changeClefType(const VSA& arg);
+    void ChangeClef(const VSA& arg);
     void changeKeySignature(const VSA& arg);
     void changeTimeSignature(const VSA& arg);
     void changeNoteValue(const VSA& arg);
-    void changePauseValue(const VSA& arg);
+    void changeRestValue(const VSA& arg);
     void changeSynchroMarkId(const VSA& arg);
     void changeSystem(const VSA& arg);
 

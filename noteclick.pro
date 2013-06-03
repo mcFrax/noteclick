@@ -15,46 +15,67 @@ QMAKE_CXXFLAGS += -std=c++11
 QMAKE_LFLAGS += -std=c++11
 
 
-SOURCES +=\
-    SystemView/ItemEventHandlers.cpp \
-    SystemView/SystemViewItem.cpp \
-    SystemView/SystemScene.cpp \
-    SystemView/AddStaffState.cpp \
-    SystemView/SystemImageItem.cpp \
-    Model/ScoreModel.cpp \
-    StaffCoords.cpp \
+SOURCES +=\    
+    ClefInfo.cpp \
+    CuteMenu.cpp \
     IdRegisteredClass.cpp \
-    Model/ScoreModel-structure.cpp \
-    Model/ScoreModel-system.cpp \
+    ListWidget/box.cpp \
+    ListWidget/choirgroup.cpp \
+    ListWidget/erasebutton.cpp \
+    ListWidget/innerlist.cpp \
+    ListWidget/listitem.cpp \
+    ListWidget/listname.cpp \
+    ListWidget/listwidget.cpp \
+    ListWidget/score.cpp \
+    ListWidget/staff.cpp \
+    ListWidget/voicewidget.cpp \
     Main.cpp \
     MainWindow.cpp \
+    Model/ScoreModel.cpp \
+    Model/ScoreModel-structure.cpp \
+    Model/ScoreModel-system.cpp \
+    NoteValue.cpp \
+    StaffCoords.cpp \
     SystemImageInfo.cpp \
-    ListWidget/voicewidget.cpp \
-    ListWidget/staff.cpp \
-    ListWidget/score.cpp \
-    ListWidget/listwidget.cpp \
-    ListWidget/listname.cpp \
-    ListWidget/listitem.cpp \
-    ListWidget/innerlist.cpp \
-    ListWidget/erasebutton.cpp \
-    ListWidget/choirgroup.cpp \
-    ListWidget/box.cpp \
-    SpinBox/spinbox.cpp
+    SpinBox/spinbox.cpp \
+    SystemView/AddClefState.cpp \
+    SystemView/AddNoteState.cpp \
+    SystemView/AddStaffState.cpp \
+    SystemView/ClefItem.cpp \
+    SystemView/ClefMenu.cpp \
+    SystemView/ItemEventHandlers.cpp \
+    SystemView/MusicItem.cpp \
+    SystemView/NoteMenu.cpp \
+    SystemView/StaffSystemItem.cpp \
+    SystemView/SystemImageItem.cpp \
+    SystemView/SystemScene.cpp \
+    SystemView/SystemViewItem.cpp \
+    SystemView/VoiceElementItem.cpp \
+    SystemView/NoteItem.cpp \
+    Model/SystemModels.cpp \
+    Model/StructureModels.cpp \
+    Model/ModelBase.cpp
 
 HEADERS  += \
+    ClefInfo.h \
+    CuteMenu.h \
     IdRegisteredClass.h \
-    SystemView/ItemEventHandlers.h \
-    SystemView/SystemViewItem.h \
-    SystemView/SystemScene.h \
-    SystemView/AddStaffState.h \
-    SystemView/SystemImageItem.h \
-    Model/ScoreModel.h \
-    VersatileSlotArgument.h \
-    SignalCommunication/UserAction.h \
-    SignalCommunication/ScoreChange.h \
-    StaffCoords.h \
+    ListWidget/box.h \
+    ListWidget/choirgroup.h \
+    ListWidget/erasebutton.h \
+    ListWidget/innerlist.h \
+    ListWidget/listitem.h \
+    ListWidget/listname.h \
+    ListWidget/listwidget.h \
+    ListWidget/score.h \
+    ListWidget/staff.h \
+    ListWidget/voicewidget.h \
     MainWindow.h \
-    SystemView/SystemSceneState.h \
+    Model/ScoreModel.h \
+    NoteValue.h \
+    SignalCommunication/ScoreChange.h \
+    SignalCommunication/UserAction.h \
+    StaffCoords.h \
     SystemImageInfo.h \
     ListWidget/voicewidget.h \
     ListWidget/staff.h \
@@ -67,6 +88,28 @@ HEADERS  += \
     ListWidget/choirgroup.h \
     ListWidget/box.h \
     SpinBox/spinbox.h \
-    spinbox.h
+    spinbox.h \
+    SystemView/AddClefState.h \
+    SystemView/AddNoteState.h \
+    SystemView/AddStaffState.h \
+    SystemView/ClefItem.h \
+    SystemView/ClefMenu.h \
+    SystemView/ItemEventHandlers.h \
+    SystemView/MusicItem.h \
+    SystemView/NoteMenu.h \
+    SystemView/StaffSystemItem.h \
+    SystemView/SystemImageItem.h \
+    SystemView/SystemScene.h \
+    SystemView/SystemSceneState.h \
+    SystemView/SystemViewItem.h \
+    SystemView/VoiceElementItem.h \
+    VersatileSlotArgument.h \
+    SystemView/NoteItem.h \
+    Model/SystemModels.h \
+    Model/StructureModels.h \
+    Model/ModelBase.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    nuty.qrc
