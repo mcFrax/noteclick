@@ -130,7 +130,7 @@ void SystemScene::handleStructureChanged(ScoreChange change)
         IdType id;
         change.args.unpackTo(id);
         if (id == currentVoice())
-            currentVoiceVal = noneId;
+            selectVoice(noneId);
     }
 }
 
