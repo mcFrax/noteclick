@@ -18,36 +18,38 @@ static QPoint translation(NoteValue);
 NoteItem::NoteItem(IdRegister & reg, IdType id, IdType voiceId, StaffSystemItem *parent, NoteValue value, StaffCoords coords)
     : VEI(reg, id, voiceId, parent, pixmapActive(value), pixmapInactive(value))
 {
+    setPos(parent->position().fromStaffCoords(coords));
     translate(-translation(value).x(), -translation(value).y());
 }
 
 
 static QMap<QPair<double, VEI::VoiceState>, QPixmap> pixmaps;
 static QMap<double, QPoint> translations;
-static bool init = 0;
+static bool initP = 0;
+static bool initT = 0;
 
 static void loadPixmaps()
 {
-    pixmaps[qMakePair(4.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":longa.png"), Qt::yellow);
-    pixmaps[qMakePair(4.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":longa.png"), Qt::blue);
-    pixmaps[qMakePair(2.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":breve.png"), Qt::yellow);
-    pixmaps[qMakePair(2.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":breve.png"), Qt::blue);
-    pixmaps[qMakePair(1.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":1.png"), Qt::yellow);
-    pixmaps[qMakePair(1.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":1.png"), Qt::blue);
-    pixmaps[qMakePair(0.5, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":2.png"), Qt::yellow);
-    pixmaps[qMakePair(0.5, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":2.png"), Qt::blue);
-    pixmaps[qMakePair(0.25, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":4.png"), Qt::yellow);
-    pixmaps[qMakePair(0.25, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":4.png"), Qt::blue);
-    pixmaps[qMakePair(0.125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":8.png"), Qt::yellow);
-    pixmaps[qMakePair(0.125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":8.png"), Qt::blue);
-    pixmaps[qMakePair(0.0625, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":16.png"), Qt::yellow);
-    pixmaps[qMakePair(0.0625, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":16.png"), Qt::blue);
-    pixmaps[qMakePair(0.03125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":32.png"), Qt::yellow);
-    pixmaps[qMakePair(0.03125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":32.png"), Qt::blue);
-    pixmaps[qMakePair(0.015625, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":64.png"), Qt::yellow);
-    pixmaps[qMakePair(0.015625, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":64.png"), Qt::blue);
-    pixmaps[qMakePair(0.0078125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":128.png"), Qt::yellow);
-    pixmaps[qMakePair(0.0078125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":128.png"), Qt::blue);
+    pixmaps[qMakePair(4.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/longa.png"), Qt::yellow);
+    pixmaps[qMakePair(4.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/longa.png"), Qt::blue);
+    pixmaps[qMakePair(2.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/breve.png"), Qt::yellow);
+    pixmaps[qMakePair(2.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/breve.png"), Qt::blue);
+    pixmaps[qMakePair(1.0, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/1.png"), Qt::yellow);
+    pixmaps[qMakePair(1.0, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/1.png"), Qt::blue);
+    pixmaps[qMakePair(0.5, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/2.png"), Qt::yellow);
+    pixmaps[qMakePair(0.5, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/2.png"), Qt::blue);
+    pixmaps[qMakePair(0.25, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/4.png"), Qt::yellow);
+    pixmaps[qMakePair(0.25, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/4.png"), Qt::blue);
+    pixmaps[qMakePair(0.125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/8.png"), Qt::yellow);
+    pixmaps[qMakePair(0.125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/8.png"), Qt::blue);
+    pixmaps[qMakePair(0.0625, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/16.png"), Qt::yellow);
+    pixmaps[qMakePair(0.0625, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/16.png"), Qt::blue);
+    pixmaps[qMakePair(0.03125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/32.png"), Qt::yellow);
+    pixmaps[qMakePair(0.03125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/32.png"), Qt::blue);
+    pixmaps[qMakePair(0.015625, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/64.png"), Qt::yellow);
+    pixmaps[qMakePair(0.015625, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/64.png"), Qt::blue);
+    pixmaps[qMakePair(0.0078125, VEI::ActiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/128.png"), Qt::yellow);
+    pixmaps[qMakePair(0.0078125, VEI::InactiveVoice)] = MusicItem::changeColor(QPixmap(":/nuty/nuty/128.png"), Qt::blue);
 }
 
 static void initTranslations()
@@ -66,18 +68,18 @@ static void initTranslations()
 
 static QPixmap pixmapActive(NoteValue val)
 {
-    if (!init) { loadPixmaps(); init = 1;}
+    if (!initP) { loadPixmaps(); initP = 1;}
     return pixmaps.value(qMakePair(val.duration(), VEI::ActiveVoice));
 }
 
 static QPixmap pixmapInactive(NoteValue val)
 {
-    if (!init) { loadPixmaps(); init = 1;}
+    if (!initP) { loadPixmaps(); initP = 1;}
     return pixmaps.value(qMakePair(val.duration(), VEI::InactiveVoice));
 }
 
 static QPoint translation(NoteValue val)
 {
-    if (!init) { initTranslations(); init = 1;}
+    if (!initT) { initTranslations(); initT = 1;}
     return translations.value(val.duration());
 }

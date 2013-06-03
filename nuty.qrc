@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/nuty">
         <file>nuty/1.png</file>
         <file>nuty/2.png</file>
         <file>nuty/4.png</file>
