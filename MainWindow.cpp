@@ -74,7 +74,6 @@ void MainWindow::on_actionLoad_Image_triggered()
                     vsa(scene.id(), SystemImageInfo(fn))
                     )
                 );
-    #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);
 }
 
 void MainWindow::setupSceneStateTransitions()

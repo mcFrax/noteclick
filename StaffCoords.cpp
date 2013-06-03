@@ -34,7 +34,7 @@ StaffCoords StaffCoords::roundedToDegree() const
     return StaffCoords(x(), round(y()*8)/8.0);
 }
 
-ScaleDegree StaffCoords::degree() const
+int StaffCoords::positionOnStaff() const
 {
     return round(y()*8);
 }

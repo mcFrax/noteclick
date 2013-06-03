@@ -10,7 +10,7 @@ ModelBase::ModelBase() :
 }
 
 ModelBase::ModelBase(ScoreModel *sm_ptr, IdRegister& registered_in, QObject* parent /*= 0*/) :
-    QObject(parent), children(QLinkedList<ModelBase*>()), score_model(sm_ptr)
+    QObject(parent), score_model(sm_ptr), children(QLinkedList<ModelBase*>())
 {
     registerIn(registered_in);
 }

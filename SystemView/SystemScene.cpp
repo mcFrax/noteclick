@@ -127,7 +127,7 @@ void SystemScene::voiceVisible(IdType voiceId, bool visible)
 void SystemScene::handleStructureChanged(ScoreChange change)
 {
     if (change.change == ScoreChange::StructureObjectErased){
-        int id;
+        IdType id;
         change.args.unpackTo(id);
         if (id == currentVoice())
             currentVoiceVal = noneId;

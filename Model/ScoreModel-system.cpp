@@ -6,7 +6,7 @@
 
 #include "SystemImageInfo.h"
 #include "ClefInfo.h"
-#include "NoteValue.h""
+#include "NoteValue.h"
 
 //tymczasowe definicje niegotowych typów
 #warning temp KeySignature & TimeSignature

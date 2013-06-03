@@ -39,12 +39,12 @@ bool AddNoteState::mouseReleaseEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *
     return 1;
 }
 
-void AddNoteState::onEntry(QEvent *event)
+void AddNoteState::onEntry(QEvent *)
 {
     scene->setHandlers(&handlers);
 }
 
-void AddNoteState::onExit(QEvent *event)
+void AddNoteState::onExit(QEvent *)
 {
     scene->setHandlers(0);
 }

@@ -6,7 +6,7 @@ CuteMenu::CuteMenu(QWidget *parent) :
 }
 
 
-void CuteMenu::mouseReleaseEvent(QMouseEvent *e)
+void CuteMenu::mouseReleaseEvent(QMouseEvent *)
 {
     deleteLater();
 }

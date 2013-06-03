@@ -5,9 +5,6 @@
 #include <QTransform>
 #include <QPolygonF>
 
-#warning typedef ma byc zastapiony prawdziwym ScaleDegree
-typedef int ScaleDegree;
-
 //! Wspolrzedne na pieciolinii
 struct StaffCoords : public QPointF
 {
@@ -27,7 +24,7 @@ struct StaffCoords : public QPointF
     void roundToDegree();
     StaffCoords roundedToDegree() const;
 
-    ScaleDegree degree() const;
+    int positionOnStaff() const;
 };
 
 inline bool operator < (const StaffCoords& c1, const StaffCoords& c2)

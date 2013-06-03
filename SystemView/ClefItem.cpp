@@ -2,6 +2,7 @@
 
 #include <QPainterPath>
 #include <QtGlobal>
+#include <cassert>
 
 #include "StaffSystemItem.h"
 
@@ -86,7 +87,8 @@ const QPainterPath &painterPath(ClefInfo::ClefType clefType)
     case ClefInfo::CClef:
         return cClefPath;
     case ClefInfo::Invalid:
+    default:
         Q_ASSERT(false);
-        return QPainterPath();
     }
+    assert(false); //bo __builtin_unreachable(); uznałem za nieprzenośne.
 }
