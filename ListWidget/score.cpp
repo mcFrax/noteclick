@@ -101,7 +101,10 @@ void Score::addVoice(IdType id, IdType parentId, QString name)
     {
         newElement->clickRadio();
     }
-
+    else
+    {
+        newElement->clickCheckBox();
+    }
     voiceCounter++;
 }
 
