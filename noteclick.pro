@@ -99,4 +99,5 @@ HEADERS  += \
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    nuty.qrc
+    nuty.qrc \
+    icons.qrc
