@@ -4,10 +4,10 @@
 #include <QLinkedList>
 #include <QObject>
 
-//#include "ScoreModel.h" // pieprzy sie przez to
 #include "IdRegisteredClass.h"
 
 namespace Model {
+class ScoreModel;
 
 // Klasa, po ktorej dziedzicza wszystkie modele.
 class ModelBase: public QObject, public IdRegisteredClass
@@ -15,12 +15,14 @@ class ModelBase: public QObject, public IdRegisteredClass
     Q_OBJECT
 public:
     explicit ModelBase();
-    explicit ModelBase(IdRegister& registered_in, QObject* parent = 0);
+//    explicit ModelBase(IdRegister& registered_in, QObject* parent = 0); // obsolete
+    explicit ModelBase(ScoreModel *sm_ptr, IdRegister& registered_in, QObject* parent = 0);
     ~ModelBase();
 protected:
     void unregister();
-//    ScoreModel * score_model;
+    ScoreModel * score_model;
     QLinkedList<ModelBase*> children;
+    void emitEraseSignal();
 };
 
 }

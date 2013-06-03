@@ -121,8 +121,8 @@ void ScoreModel::createStaffSystem(const VSA& arg)
 {
     IdType systemImageId; StaffPosition position;
     arg.unpackTo(systemImageId, position);
-    IdType id = StaffSystem(reg).id();
-//    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    IdType id = StaffSystem(this, reg).id();
+//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
     emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemImageId, position)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
@@ -131,8 +131,8 @@ void ScoreModel::createClef(const VSA& arg)
 {
     IdType staffId; StaffCoords coords; ClefInfo clefInfo;
     arg.unpackTo(staffId, coords, clefInfo);
-    IdType id = Clef(reg).id();
-//    IdType id = IdRegisteredClass(reg).id(); // <brzydkie, ale chwilowo bedzie dzialac.
+    IdType id = Clef(this, reg).id();
+//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
     coords.setY(clefInfo.positionOnStaff()/8.0);
     emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefInfo)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");

@@ -8,28 +8,30 @@ namespace Model {
 
 class ChoirGroup : public ModelBase
 {
-public slots:
+private:
     explicit ChoirGroup();
-    explicit ChoirGroup(IdRegister& registered_in, QObject * parent = 0);
+public:
+    explicit ChoirGroup(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~ChoirGroup();
 };
 
 class Staff : public ModelBase
 {
-public slots:
+private:
     explicit Staff();
-    explicit Staff(IdRegister& registered_in, QObject * parent = 0);
+public:
+    explicit Staff(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~Staff();
 };
 
 class Voice : public ModelBase
 {
-public slots:
-    explicit Voice();
-    explicit Voice(IdRegister& registered_in, QObject * parent = 0);
-    ~Voice();
 private:
     QString name;
+    explicit Voice();
+public:
+    explicit Voice(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
+    ~Voice();
 };
 
 }

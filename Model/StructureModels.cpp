@@ -8,8 +8,8 @@ ChoirGroup::ChoirGroup() :
 {
 }
 
-ChoirGroup::ChoirGroup(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+ChoirGroup::ChoirGroup(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 
@@ -23,8 +23,8 @@ Staff::Staff() :
 {
 }
 
-Staff::Staff(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+Staff::Staff(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 
@@ -38,8 +38,8 @@ Voice::Voice() :
 {
 }
 
-Voice::Voice(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+Voice::Voice(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 

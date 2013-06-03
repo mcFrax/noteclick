@@ -18,8 +18,8 @@ System::System() :
 {
 }
 
-System::System(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+System::System(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 
@@ -33,8 +33,8 @@ StaffSystem::StaffSystem() :
 {
 }
 
-StaffSystem::StaffSystem(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+StaffSystem::StaffSystem(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 
@@ -53,13 +53,13 @@ StaffSystemElement::StaffSystemElement() :
 {
 }
 
-StaffSystemElement::StaffSystemElement(IdRegister& registered_in, QObject * parent, StaffCoords coords) :
-    ModelBase(registered_in, parent), position(coords)
+StaffSystemElement::StaffSystemElement(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent, StaffCoords coords) :
+    ModelBase(sm_ptr, registered_in, parent), position(coords)
 {
 }
 
-StaffSystemElement::StaffSystemElement(IdRegister& registered_in, QObject * parent, qreal coord_x, qreal coord_y) :
-    ModelBase(registered_in, parent), position(StaffCoords(coord_x, coord_y))
+StaffSystemElement::StaffSystemElement(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent, qreal coord_x, qreal coord_y) :
+    ModelBase(sm_ptr, registered_in, parent), position(StaffCoords(coord_x, coord_y))
 {
 }
 
@@ -98,13 +98,13 @@ Clef::Clef() :
 {
 }
 
-Clef::Clef(IdRegister& registered_in, QObject *parent, StaffCoords coords) :
-    StaffSystemElement(registered_in, parent, coords), info(ClefInfo())
+Clef::Clef(ScoreModel *sm_ptr, IdRegister& registered_in, QObject *parent, StaffCoords coords) :
+    StaffSystemElement(sm_ptr, registered_in, parent, coords), info(ClefInfo())
 {
 }
 
-Clef::Clef(IdRegister& registered_in, ClefInfo c_info, ModelBase * parent, StaffCoords coords) :
-    StaffSystemElement(registered_in, parent, coords), info(c_info)
+Clef::Clef(ScoreModel *sm_ptr, IdRegister& registered_in, ClefInfo c_info, ModelBase * parent, StaffCoords coords) :
+    StaffSystemElement(sm_ptr, registered_in, parent, coords), info(c_info)
 {
 }
 
@@ -118,8 +118,8 @@ KeySignature::KeySignature() :
 {
 }
 
-KeySignature::KeySignature(IdRegister& registered_in, ModelBase * parent) :
-    ModelBase(registered_in, parent), position(StaffCoords())
+KeySignature::KeySignature(ScoreModel *sm_ptr, IdRegister& registered_in, ModelBase * parent) :
+    ModelBase(sm_ptr, registered_in, parent), position(StaffCoords())
 {
 }
 
@@ -133,8 +133,8 @@ TimeSignature::TimeSignature() :
 {
 }
 
-TimeSignature::TimeSignature(IdRegister& registered_in, QObject * parent) :
-    ModelBase(registered_in, parent)
+TimeSignature::TimeSignature(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
+    ModelBase(sm_ptr, registered_in, parent)
 {
 }
 
