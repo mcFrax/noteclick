@@ -42,7 +42,23 @@ SpinBox::SpinBox(QWidget *parent) :
 
 void SpinBox::setIdList(QList<IdType> &list)
 {
-    idList = list;
+    idMap.clear();
+    int i =0;
+    foreach(IdType id, list)
+    {
+        i++;
+        idMap[i] = id;
+    }
+
+    if (i)
+    {
+        spinbox->setRange(1, i);
+    }
+    else
+    {
+        spinbox->setRange(0, 0);
+    }
+
 }
 
 void SpinBox::scoreChanged(ScoreChange change)

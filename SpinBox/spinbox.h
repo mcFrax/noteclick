@@ -46,7 +46,6 @@ protected:
     QPushButton* minus;
 
     // bebechy
-    QList<IdType> idList;
     QMap<int, IdType> idMap;
 
     void handleStructureChange(ScoreChange change);
