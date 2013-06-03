@@ -5,6 +5,7 @@ using namespace SystemView;
 VoiceElementItem::VoiceElementItem(IdRegister & reg, IdType id, IdType voiceId, StaffSystemItem *parent, QPixmap active, QPixmap inactive)
     : MusicItem(parent), SystemViewItem(reg, id), voiceId(voiceId), active(active), inactive(inactive)
 {
+    systemScene()->registerVoiceElement(voiceId, this);
     addState(InactiveVoice, inactive);
     addState(ActiveVoice, active);
 //    systemScene()->registerVoiceElement(voiceId, this);

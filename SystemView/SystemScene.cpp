@@ -30,6 +30,10 @@ SystemScene::SystemScene(QObject *parent) :
 
 SystemScene::~SystemScene()
 {
+    for (QHash<IdType, VoiceElementItem*>& hash : voiceElements){
+        while(!hash.empty())
+            delete(*(hash.begin()));
+    }
     idReg.unregister(this);
 }
 
