@@ -34,7 +34,8 @@ SOURCES +=\
     SystemView/ClefMenu.cpp \
     ClefInfo.cpp \
     SystemView/AddClefState.cpp \
-    SystemView/ClefItem.cpp
+    SystemView/ClefItem.cpp \
+    systemimagedialog.cpp
 
 HEADERS  += \
     IdRegisteredClass.h \
@@ -56,6 +57,8 @@ HEADERS  += \
     SystemView/ClefMenu.h \
     ClefInfo.h \
     SystemView/AddClefState.h \
-    SystemView/ClefItem.h
+    SystemView/ClefItem.h \
+    systemimagedialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    systemimagedialog.ui

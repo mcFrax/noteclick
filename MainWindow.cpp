@@ -60,14 +60,14 @@ void MainWindow::on_actionLoad_Image_triggered()
 {
     QString fn = QFileDialog::getOpenFileName(this, tr("Otworz obraz..."));
     if (fn.isNull()) return;
-
+/*
     score.userAction(
                 UserAction(
                     UserAction::CreateSystemImage,
                     vsa(scene.id(), SystemImageInfo(fn))
                     )
                 );
-    #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);
+    #warning to juz nie dziala, a nic nowego nie ma! scene.addSystemImageItem(fn);*/
 }
 
 void MainWindow::setupSceneStateTransitions()
