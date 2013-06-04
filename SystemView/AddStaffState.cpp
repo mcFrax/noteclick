@@ -2,7 +2,7 @@
 #include "SystemScene.h"
 #include "SystemImageItem.h"
 #include "StaffCoords.h"
-
+#include "StaffSystemItem.h"
 #include <QtGlobal>
 #include <QGraphicsSceneMouseEvent>
 
@@ -51,6 +51,8 @@ bool AddStaffState::mouseReleaseEvent(QGraphicsItem * system, QGraphicsSceneMous
         staffPartItem = new StaffPartItem(sys);
     QPolygonF poly = staffPartItem->polygon();
     poly << e->pos();
+    QVector<QPointF> vec;
+
     switch (staffPartItem->polygon().size())
     {
     case 0:
@@ -59,8 +61,13 @@ bool AddStaffState::mouseReleaseEvent(QGraphicsItem * system, QGraphicsSceneMous
         staffPartItem->setPolygon(poly);
         break;
     case 3:
+
+
+        vec = StaffSystemItem::setPointOrder(poly);
+
         scene->userAction(UserAction(UserAction::CreateStaffSystem,
-                vsa(sys->id(), StaffPosition(poly[0], poly[1], poly[2], poly[3]))));
+                vsa(sys->id(), StaffPosition(vec[0], vec[1], vec[2], vec[3]))));
+
         emit staffSystemAdded();
         delete staffPartItem;
         staffPartItem = 0;
