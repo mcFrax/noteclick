@@ -55,7 +55,7 @@ public:
         this->staff = staff;
         this->number = number;
         this->size = size;
-        setPen(QColor(0,0,0,255));
+        setPen(QColor(0,200,0,255));
         setBrush(QColor(0,0,0,255));
         setFlag(ItemSendsScenePositionChanges);
         setFlag(ItemIsMovable);
