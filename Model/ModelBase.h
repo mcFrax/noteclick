@@ -7,7 +7,7 @@
 #include "IdRegisteredClass.h"
 
 namespace Model {
-class ScoreModel;
+class ScoreModel; // forward declaration
 
 // Klasa, po ktorej dziedzicza wszystkie modele.
 class ModelBase: public QObject, public IdRegisteredClass

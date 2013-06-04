@@ -7,6 +7,11 @@ NoteValue::NoteValue(double val, int dots)
 {
 }
 
+NoteValue::NoteValue(const NoteValue& copy) :
+    baseval(copy.baseval), dotsVal(copy.dotsVal)
+{
+}
+
 NoteValue NoteValue::dotted() const
 {
     return NoteValue(baseval, dotsVal+1);

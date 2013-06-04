@@ -28,8 +28,9 @@ class Voice : public ModelBase
 {
 private:
     QString name;
-    explicit Voice();
+
 public:
+    explicit Voice();
     explicit Voice(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~Voice();
 };

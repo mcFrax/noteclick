@@ -2,7 +2,7 @@
 #define SYSTEMMODELS_H
 
 #include <QList>
-#include <QMap>
+#include <QMultiMap>
 #include <QString>
 #include "ModelBase.h"
 #include "StaffCoords.h"
@@ -37,12 +37,12 @@ class StaffSystemElement; // forward declaration
 
 class StaffSystem: public ModelBase {
 protected:
-    QMap<StaffCoords, StaffSystemElement> elements;
+    QMultiMap<StaffCoords, StaffSystemElement*> elements;
     explicit StaffSystem();
 public:
     explicit StaffSystem(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~StaffSystem();
-//    void addElement(StaffSystemElement &sse);
+    void addElement(StaffSystemElement *sse);
 };
 
 // -----------------------------------------------------------------------------

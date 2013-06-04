@@ -92,6 +92,11 @@ inline bool StaffSystemElement::operator= (const StaffSystemElement& sse2) const
     return compare(sse2) == 0;
 }
 
+void StaffSystem::addElement(StaffSystemElement *sse)
+{
+    elements.insert(sse->getCoords(), sse);
+}
+
 // ------------------------------- CLEF -------------------------------
 Clef::Clef() :
     StaffSystemElement(), info(ClefInfo())

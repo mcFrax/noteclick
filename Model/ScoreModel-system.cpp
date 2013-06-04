@@ -129,7 +129,7 @@ void ScoreModel::createStaffSystem(const VSA& arg)
     IdType systemImageId; StaffPosition position;
     arg.unpackTo(systemImageId, position);
 
-    IdType id = (new StaffSystem(this, reg))->id();
+    IdType id = (new StaffSystem(this, reg))->id(); // trzeba dodac parenta StaffSystemu jako trzeci argument konstruktora
 
     emit changed(ScoreChange(ScoreChange::StaffSystemCreated, vsa(id, systemImageId, position)));
 }
@@ -139,7 +139,7 @@ void ScoreModel::createClef(const VSA& arg)
     IdType staffId; StaffCoords coords; ClefInfo clefInfo;
     arg.unpackTo(staffId, coords, clefInfo);
 
-    IdType id = (new Clef(this, reg))->id();
+    IdType id = (new Clef(this, reg))->id(); // trzeba dodac parenta Clefu jako trzeci argument konstruktora
 
     coords.setY(clefInfo.positionOnStaff()/8.0);
     emit changed(ScoreChange(ScoreChange::ClefCreated, vsa(id, staffId, coords, clefInfo)));

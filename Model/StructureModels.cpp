@@ -45,4 +45,5 @@ Voice::Voice(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) :
 
 Voice::~Voice()
 {
+    // TODO: moze sie okazac konieczne przejscie po wszystkich dzieciach i usuniecie osobno
 }

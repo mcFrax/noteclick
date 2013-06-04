@@ -12,6 +12,7 @@ class NoteValue
     int dotsVal;
 public:
     NoteValue(double val = 1, int dots = 0);
+    NoteValue(const NoteValue& copy);
 
     NoteValue dotted() const; //dodaj kropke
     int dots() const;

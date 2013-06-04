@@ -60,8 +60,8 @@ void ScoreModel::createStaff(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
-    IdType id = Staff(this, reg).id();
-//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
+    IdType id = (new Staff(this, reg))->id(); // trzeba dodac parenta Staffu jako trzeci argument konstruktora
+
     emit changed(ScoreChange(ScoreChange::StaffCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
@@ -70,8 +70,8 @@ void ScoreModel::createVoice(const VSA& arg)
 {
     IdType parent_id;
     arg.unpackTo(parent_id);
-    IdType id = Voice(this, reg).id();
-//    IdType id = IdRegisteredClass(reg).id(); // OBSOLETE
+    IdType id = (new Voice(this, reg))->id(); // trzeba dodac parenta Voice'a jako trzeci argument konstruktora
+
     emit changed(ScoreChange(ScoreChange::VoiceCreated, vsa(id, parent_id)));
     emit warning(tr("Not fully handled action")+" ("+__func__+")");
 }
