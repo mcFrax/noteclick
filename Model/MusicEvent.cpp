@@ -19,15 +19,21 @@ MusicEvent::~MusicEvent()
 Clef * MusicEvent::precedingClef()
 {
     StaffSystemElement * it = this->previous();
-    while (dynamic_cast<Clef*>(it) == 0)
+    while (dynamic_cast<Clef*>(it) == 0 || this->parentStaffSystem->amIFirst(this))
         it = it->previous();
-    return dynamic_cast<Clef*>(it);
+    if (this->parentStaffSystem->amIFirst(this))
+        return NULL;
+    else
+        return dynamic_cast<Clef*>(it);
 }
 
 KeySignature * MusicEvent::precedingKeySignature()
 {
     StaffSystemElement * it = this->previous();
-    while (dynamic_cast<KeySignature*>(it) == 0)
+    while (dynamic_cast<KeySignature*>(it) == 0 || this->parentStaffSystem->amIFirst(this))
         it = it->previous();
-    return dynamic_cast<KeySignature*>(it);
+    if (this->parentStaffSystem->amIFirst(this))
+        return NULL;
+    else
+        return dynamic_cast<KeySignature*>(it);
 }

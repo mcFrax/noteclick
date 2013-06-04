@@ -44,6 +44,8 @@ public:
     ~StaffSystem();
     void addElement(StaffSystemElement *sse);
     QMultiMap<StaffCoords, StaffSystemElement*>::Iterator findMe(StaffSystemElement *child_sse); // zwraca iterator do obiektu child_sse w mapie StaffSystemu
+    bool amIFirst(StaffSystemElement *child_sse);
+    bool amILast(StaffSystemElement *child_sse);
 };
 
 // -----------------------------------------------------------------------------

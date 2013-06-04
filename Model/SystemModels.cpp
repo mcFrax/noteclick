@@ -52,6 +52,16 @@ QMultiMap<StaffCoords, StaffSystemElement*>::Iterator StaffSystem::findMe(StaffS
     return elements.find(child_sse->getCoords(), child_sse);
 }
 
+bool StaffSystem::amIFirst(StaffSystemElement *child_sse)
+{
+    return findMe(child_sse) == elements.begin() + 1;
+}
+
+bool StaffSystem::amILast(StaffSystemElement *child_sse)
+{
+    return findMe(child_sse) == elements.end() - 1;
+}
+
 // --------------------------- STAFFSYSTEMELEMENT ---------------------------
 StaffSystemElement::StaffSystemElement() :
     ModelBase(), position(StaffCoords())
@@ -100,13 +110,19 @@ inline bool StaffSystemElement::operator= (const StaffSystemElement& sse2) const
 StaffSystemElement * StaffSystemElement::previous()
 {
     StaffSystem *dad = static_cast<StaffSystem*>(parent());
-    return (--(dad->findMe(this))).value();
+    if (!dad->amIFirst(this))
+        return (--(dad->findMe(this))).value();
+    else
+        return NULL;
 }
 
 StaffSystemElement * StaffSystemElement::next()
 {
     StaffSystem *dad = static_cast<StaffSystem*>(parent());
-    return (++(dad->findMe(this))).value();
+    if (!dad->amILast(this))
+        return (++(dad->findMe(this))).value();
+    else
+        return NULL;
 }
 
 // ------------------------------- CLEF -------------------------------
