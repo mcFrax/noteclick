@@ -10,6 +10,8 @@
 namespace SystemView
 {
 
+class Corner;
+
 class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
 {
     USE_EVENT_HANDLERS(HANDLER(StaffSystemItem), QGraphicsPolygonItem)
@@ -23,8 +25,53 @@ public:
     const StaffPosition& position() const;
     void setPosition(const StaffPosition& pos);
 
+    //corners - wojtek
+    void adjustCorner(int number);
+    void setCorners(int size);
+
+    static QVector<QPointF> setPointOrder(QVector<QPointF> vector);
 protected:
     SystemScene * systemScene();
+
+    // corners - wojtek
+    const int left_top = 0;
+    const int right_top = 1;
+    const int right_bottom = 2;
+    const int left_bottom = 3;
+
+    Corner *corner[4];
+
+
+};
+
+
+
+class Corner : public QGraphicsRectItem
+{
+public:
+    Corner(StaffSystemItem* staff, int number, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent = 0):QGraphicsRectItem(x, y, w, h, parent)
+    {
+        this->staff = staff;
+        this->number = number;
+    }
+
+protected:
+
+    int number;
+    StaffSystemItem* staff;
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value)
+    {
+        switch (change) {
+        case ItemPositionHasChanged:
+            staff->adjustCorner(number);
+            break;
+        default:
+            break;
+        };
+
+        return QGraphicsItem::itemChange(change, value);
+    }
+
 };
 
 }
