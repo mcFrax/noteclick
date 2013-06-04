@@ -7,16 +7,49 @@
 
 using namespace SystemView;
 
+class StaffSystemItem::LedgerSpaceItem : public QGraphicsPolygonItem
+{
+    StaffSystemItem* staff;
+public:
+    LedgerSpaceItem(StaffSystemItem*parent) : QGraphicsPolygonItem(parent), staff(parent) {}
+    void hoverMoveEvent(QGraphicsSceneHoverEvent * event) { staff->hoverMoveEvent(event); }
+    void hoverEnterEvent(QGraphicsSceneHoverEvent * event) { staff->hoverEnterEvent(event); }
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent * event) { staff->hoverLeaveEvent(event); }
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) { event->ignore(); }
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) { event->ignore(); }
+};
+
+static const double ledgerSpaceSize = 0.5;
+
 StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent)
     : QGraphicsPolygonItem(pos.toQPolygonF(), parent), SystemViewItem(reg, id), pos(pos)
 {
     setBrush(QColor(0,255,0,80));
     setPen(QColor(0,255,0,200));
     setAcceptHoverEvents(1);
-//    topLedgerSpace =
-//    bottomLedgerSpace =
-//    topLedgerSpace->setAcceptHoverEvents(1);
-//    bottomLedgerSpace->setAcceptHoverEvents(1);
+    topLedgerSpace = new LedgerSpaceItem(this);
+    bottomLedgerSpace = new LedgerSpaceItem(this);
+    topLedgerSpace->setAcceptHoverEvents(1);
+    bottomLedgerSpace->setAcceptHoverEvents(1);
+
+    QPolygonF ledsp;
+    ledsp << position().fromStaffCoords(QPointF(0, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1));
+    ledsp << position().fromStaffCoords(QPointF(0, 1));
+    topLedgerSpace->setPolygon(ledsp);
+    topLedgerSpace->setBrush(QColor(30,255,30,60));
+    topLedgerSpace->setPen(QColor(0,0,0,0));
+
+    ledsp.clear();
+    ledsp << position().fromStaffCoords(QPointF(0, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, -ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(0, -ledgerSpaceSize));
+    bottomLedgerSpace->setPolygon(ledsp);
+    bottomLedgerSpace->setBrush(QColor(50,255,50,60));
+    bottomLedgerSpace->setPen(QColor(0,0,0,0));
+
     lineHighlight = new QGraphicsPolygonItem(this);
     spaceHighlight = new QGraphicsPolygonItem(this);
     lineHighlight->setVisible(0);

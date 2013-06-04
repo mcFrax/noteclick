@@ -18,6 +18,7 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     StaffPosition pos;
     //using QGraphicsPolygonItem::setPolygon(const QPolygonF & polygon);
     class LedgerSpaceItem;
+    friend class StaffSystemItem::LedgerSpaceItem;
     LedgerSpaceItem* topLedgerSpace;
     LedgerSpaceItem* bottomLedgerSpace;
     QGraphicsPolygonItem* lineHighlight;
@@ -25,7 +26,6 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    friend class StaffSystemItem::LedgerSpaceItem;
 public:
     StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent);
 
