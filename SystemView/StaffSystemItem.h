@@ -29,8 +29,7 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    void updateHighlights();
-    void updateLedgerSpaces();
+
 public:
     StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent);
 
@@ -47,8 +46,8 @@ public:
 protected:
     SystemScene * systemScene();
 
-    void updateHighlight();
-
+    void updateHighlights();
+    void updateLedgerSpaces();
     // corners - wojtek
     const int left_top = 0;
     const int right_top = 1;

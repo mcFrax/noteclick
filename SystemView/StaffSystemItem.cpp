@@ -60,31 +60,11 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
 
     updateLedgerSpaces();
     
-    updateHighlight();
+    updateHighlights();
 
 
     setCorners(7);
 }
-
-void StaffSystemItem::updateHighlight()
-{
-
-    QPolygonF ledsp;
-    ledsp << position().fromStaffCoords(QPointF(0, 1+ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(1, 1+ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(1, 1));
-    ledsp << position().fromStaffCoords(QPointF(0, 1));
-    topLedgerSpace->setPolygon(ledsp);
-
-    ledsp.clear();
-    ledsp << position().fromStaffCoords(QPointF(0, 0));
-    ledsp << position().fromStaffCoords(QPointF(1, 0));
-    ledsp << position().fromStaffCoords(QPointF(1, -ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(0, -ledgerSpaceSize));
-    bottomLedgerSpace->setPolygon(ledsp);
-
-}
-
 
 void StaffSystemItem::updateHighlights()
 {
@@ -180,7 +160,8 @@ void StaffSystemItem::adjustCorner(int number, int size)
 
     setPosition(StaffPosition(p[0], p[1], p[2], p[3]));
 
-    updateHighlight();
+    updateHighlights();
+    updateLedgerSpaces();
     update();
 }
 
