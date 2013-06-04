@@ -43,6 +43,7 @@ public:
     explicit StaffSystem(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~StaffSystem();
     void addElement(StaffSystemElement *sse);
+    QMultiMap<StaffCoords, StaffSystemElement*>::Iterator findMe(StaffSystemElement *child_sse); // zwraca iterator do obiektu child_sse w mapie StaffSystemu
 };
 
 // -----------------------------------------------------------------------------
@@ -58,6 +59,8 @@ public:
     int compare(const StaffSystemElement& sse2) const;
     bool inline operator=(const StaffSystemElement& sse2) const;
     StaffCoords getCoords();
+    StaffSystemElement * previous();
+    StaffSystemElement * next();
 };
 
 // -----------------------------------------------------------------------------

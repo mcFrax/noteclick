@@ -15,3 +15,19 @@ MusicEvent::MusicEvent(ScoreModel *sm_ptr, IdRegister &registered_in, Voice * v,
 MusicEvent::~MusicEvent()
 {
 }
+
+Clef * MusicEvent::precedingClef()
+{
+    StaffSystemElement * it = this->previous();
+    while (dynamic_cast<Clef*>(it) == 0)
+        it = it->previous();
+    return dynamic_cast<Clef*>(it);
+}
+
+KeySignature * MusicEvent::precedingKeySignature()
+{
+    StaffSystemElement * it = this->previous();
+    while (dynamic_cast<KeySignature*>(it) == 0)
+        it = it->previous();
+    return dynamic_cast<KeySignature*>(it);
+}

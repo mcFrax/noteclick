@@ -42,10 +42,15 @@ StaffSystem::~StaffSystem()
 {
 }
 
-//void StaffSystem::addElement(StaffSystemElement &sse)
-//{
-//    elements.insert(sse.getCoords(), sse);
-//}
+void StaffSystem::addElement(StaffSystemElement *sse)
+{
+    elements.insert(sse->getCoords(), sse);
+}
+
+QMultiMap<StaffCoords, StaffSystemElement*>::Iterator StaffSystem::findMe(StaffSystemElement *child_sse)
+{
+    return elements.find(child_sse->getCoords(), child_sse);
+}
 
 // --------------------------- STAFFSYSTEMELEMENT ---------------------------
 StaffSystemElement::StaffSystemElement() :
@@ -92,9 +97,16 @@ inline bool StaffSystemElement::operator= (const StaffSystemElement& sse2) const
     return compare(sse2) == 0;
 }
 
-void StaffSystem::addElement(StaffSystemElement *sse)
+StaffSystemElement * StaffSystemElement::previous()
 {
-    elements.insert(sse->getCoords(), sse);
+    StaffSystem *dad = static_cast<StaffSystem*>(parent());
+    return (--(dad->findMe(this))).value();
+}
+
+StaffSystemElement * StaffSystemElement::next()
+{
+    StaffSystem *dad = static_cast<StaffSystem*>(parent());
+    return (++(dad->findMe(this))).value();
 }
 
 // ------------------------------- CLEF -------------------------------

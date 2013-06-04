@@ -54,7 +54,8 @@ SOURCES +=\
     SystemView/NoteItem.cpp \
     Model/SystemModels.cpp \
     Model/StructureModels.cpp \
-    Model/ModelBase.cpp
+    Model/ModelBase.cpp \
+    Model/MusicEvent.cpp
 
 HEADERS  += \
     ClefInfo.h \
@@ -107,7 +108,8 @@ HEADERS  += \
     SystemView/NoteItem.h \
     Model/SystemModels.h \
     Model/StructureModels.h \
-    Model/ModelBase.h
+    Model/ModelBase.h \
+    Model/MusicEvent.h
 
 FORMS    += mainwindow.ui
 
