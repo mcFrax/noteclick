@@ -7,6 +7,8 @@
 #include "SystemViewItem.h"
 #include "SystemImageItem.h"
 
+class QGraphicsSceneHoverEvent;
+
 namespace SystemView
 {
 
@@ -15,6 +17,15 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     USE_EVENT_HANDLERS(HANDLER(StaffSystemItem), QGraphicsPolygonItem)
     StaffPosition pos;
     //using QGraphicsPolygonItem::setPolygon(const QPolygonF & polygon);
+    class LedgerSpaceItem;
+    LedgerSpaceItem* topLedgerSpace;
+    LedgerSpaceItem* bottomLedgerSpace;
+    QGraphicsPolygonItem* lineHighlight;
+    QGraphicsPolygonItem* spaceHighlight;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    friend class StaffSystemItem::LedgerSpaceItem;
 public:
     StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent);
 
