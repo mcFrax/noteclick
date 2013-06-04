@@ -1,4 +1,5 @@
 #include "SystemModels.h"
+#include "../SignalCommunication/ScoreChange.h"
 
 using namespace Model;
 
@@ -25,6 +26,13 @@ System::System(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent) 
 
 System::~System()
 {
+}
+
+void System::complementCreationList(QList<ScoreChange> *list)
+{
+//    list->append();
+    for (QLinkedList<ModelBase*>::Iterator it = children.begin(); it != children.end(); ++it)
+        (*it)->complementCreationList(list);
 }
 
 // ------------------------------- STAFFSYSTEM -------------------------------
@@ -60,6 +68,13 @@ bool StaffSystem::amIFirst(StaffSystemElement *child_sse)
 bool StaffSystem::amILast(StaffSystemElement *child_sse)
 {
     return findMe(child_sse) == elements.end() - 1;
+}
+
+void StaffSystem::complementCreationList(QList<ScoreChange> *list)
+{
+    list->append(ScoreChange(ScoreChange::StaffSystemCreated, vsa(this->id() /* jeszcze 2 argumenty */)));
+    for (QLinkedList<ModelBase*>::Iterator it = children.begin(); it != children.end(); ++it)
+        (*it)->complementCreationList(list);
 }
 
 // --------------------------- STAFFSYSTEMELEMENT ---------------------------
@@ -145,6 +160,14 @@ Clef::~Clef()
 {
 }
 
+void Clef::complementCreationList(QList<ScoreChange> *list)
+{
+    list->append(ScoreChange(ScoreChange::ClefCreated, vsa(this->id(), 0, position, info /* jeszcze 1 argument */)));
+
+//    for (QLinkedList<ModelBase*>::Iterator it = children.begin(); it != children.end(); ++it)
+//        (*it)->complementCreationList(list);
+}
+
 // ------------------------------- KEYSIGNATURE-------------------------------
 KeySignature::KeySignature() :
     ModelBase(), position(StaffCoords())
@@ -160,6 +183,14 @@ KeySignature::~KeySignature()
 {
 }
 
+void KeySignature::complementCreationList(QList<ScoreChange> *list)
+{
+    list->append(ScoreChange(ScoreChange::KeySignatureCreated, vsa(this->id(), 0, position, signature /* jeszcze 1 argument */)));
+
+//    for (QLinkedList<ModelBase*>::Iterator it = children.begin(); it != children.end(); ++it)
+//        (*it)->complementCreationList(list);
+}
+
 // ------------------------------- TIMESIGNATURE -------------------------------
 TimeSignature::TimeSignature() :
     ModelBase()
@@ -173,4 +204,12 @@ TimeSignature::TimeSignature(ScoreModel *sm_ptr, IdRegister& registered_in, QObj
 
 TimeSignature::~TimeSignature()
 {
+}
+
+void TimeSignature::complementCreationList(QList<ScoreChange> *list)
+{
+    list->append(ScoreChange(ScoreChange::TimeSignatureCreated, vsa(this->id(), 0, position, signature /* jeszcze 1 argument */)));
+
+//    for (QLinkedList<ModelBase*>::Iterator it = children.begin(); it != children.end(); ++it)
+//        (*it)->complementCreationList(list);
 }

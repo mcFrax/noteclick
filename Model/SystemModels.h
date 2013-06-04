@@ -8,6 +8,10 @@
 #include "StaffCoords.h"
 #include "ClefInfo.h"
 
+#warning temp KeySignature & TimeSignature
+typedef int KeySignatureInfo;
+typedef int TimeSignatureInfo;
+
 namespace Model {
 
 class SystemImage
@@ -29,6 +33,7 @@ protected:
 public:
     explicit System(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~System();
+    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 // -----------------------------------------------------------------------------
@@ -46,6 +51,7 @@ public:
     QMultiMap<StaffCoords, StaffSystemElement*>::Iterator findMe(StaffSystemElement *child_sse); // zwraca iterator do obiektu child_sse w mapie StaffSystemu
     bool amIFirst(StaffSystemElement *child_sse);
     bool amILast(StaffSystemElement *child_sse);
+    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 // -----------------------------------------------------------------------------
@@ -63,6 +69,7 @@ public:
     StaffCoords getCoords();
     StaffSystemElement * previous();
     StaffSystemElement * next();
+//    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 // -----------------------------------------------------------------------------
@@ -76,18 +83,21 @@ public:
     explicit Clef(ScoreModel *sm_ptr, IdRegister& registered_in, ClefInfo c_info, ModelBase * parent = 0, StaffCoords coords = StaffCoords());
 //    explicit Clef(IdRegister& registered_in, ClefType c_type, int c_position, int c_octave = 0, ModelBase * parent = 0);
     ~Clef();
+    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 // -----------------------------------------------------------------------------
 
+typedef int KeySignatureInfo;
 class KeySignature: public ModelBase {
 private:
     StaffCoords position;
-    //KeySignatureInfo signature;
+    KeySignatureInfo signature;
     explicit KeySignature();
 public:
     explicit KeySignature(ScoreModel *sm_ptr, IdRegister& registered_in, ModelBase * parent = 0);
     ~KeySignature();
+    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 // -----------------------------------------------------------------------------
@@ -95,9 +105,12 @@ public:
 class TimeSignature: public ModelBase {
 private:
     explicit TimeSignature();
+    StaffCoords position;
+    TimeSignatureInfo signature;
 public:
     explicit TimeSignature(ScoreModel *sm_ptr, IdRegister& registered_in, QObject * parent = 0);
     ~TimeSignature();
+    virtual void complementCreationList(QList<ScoreChange> *list);
 };
 
 }

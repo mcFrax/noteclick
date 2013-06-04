@@ -31,3 +31,5 @@ void ModelBase::unregister()
 {
     registeredIn().unregister(id());
 }
+
+void ModelBase::complementCreationList(QList<ScoreChange> *list) { };

@@ -6,6 +6,8 @@
 
 #include "IdRegisteredClass.h"
 
+class ScoreChange; // forward declaration
+
 namespace Model {
 class ScoreModel; // forward declaration
 
@@ -18,6 +20,7 @@ public:
 //    explicit ModelBase(IdRegister& registered_in, QObject* parent = 0); // obsolete
     explicit ModelBase(ScoreModel *sm_ptr, IdRegister& registered_in, QObject* parent = 0);
     ~ModelBase();
+    virtual void complementCreationList(QList<ScoreChange> *list);
 protected:
     void unregister();
     ScoreModel * score_model;

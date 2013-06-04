@@ -85,6 +85,10 @@ public:
         : category(ScoreChanged), change(change), args(args), affectedSystem(affectedSystem)
     {
     }
+//    ScoreChange(ScoreChange & copy)
+//        : category(copy.category), change(copy.change), args(copy.args), affectedSystem(copy.affectedSystem)
+//    {
+//    }
 
     const ChangeCategory category;
     const int change;
