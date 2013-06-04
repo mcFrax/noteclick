@@ -45,6 +45,8 @@ public:
 protected:
     SystemScene * systemScene();
 
+    void updateHighlight();
+
     // corners - wojtek
     const int left_top = 0;
     const int right_top = 1;

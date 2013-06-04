@@ -33,21 +33,11 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
     topLedgerSpace->setAcceptHoverEvents(1);
     bottomLedgerSpace->setAcceptHoverEvents(1);
 
-    QPolygonF ledsp;
-    ledsp << position().fromStaffCoords(QPointF(0, 1+ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(1, 1+ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(1, 1));
-    ledsp << position().fromStaffCoords(QPointF(0, 1));
-    topLedgerSpace->setPolygon(ledsp);
+
     topLedgerSpace->setBrush(QColor(30,255,30,60));
     topLedgerSpace->setPen(QColor(0,0,0,0));
 
-    ledsp.clear();
-    ledsp << position().fromStaffCoords(QPointF(0, 0));
-    ledsp << position().fromStaffCoords(QPointF(1, 0));
-    ledsp << position().fromStaffCoords(QPointF(1, -ledgerSpaceSize));
-    ledsp << position().fromStaffCoords(QPointF(0, -ledgerSpaceSize));
-    bottomLedgerSpace->setPolygon(ledsp);
+
     bottomLedgerSpace->setBrush(QColor(50,255,50,60));
     bottomLedgerSpace->setPen(QColor(0,0,0,0));
 
@@ -64,7 +54,29 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
     spaceHighlight->setBrush(QColor(0,255,0,80));
     spaceHighlight->setPen(QColor(0,255,0,200));
     
+    updateHighlight();
+
+
     setCorners(7);
+}
+
+void StaffSystemItem::updateHighlight()
+{
+
+    QPolygonF ledsp;
+    ledsp << position().fromStaffCoords(QPointF(0, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1));
+    ledsp << position().fromStaffCoords(QPointF(0, 1));
+    topLedgerSpace->setPolygon(ledsp);
+
+    ledsp.clear();
+    ledsp << position().fromStaffCoords(QPointF(0, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, -ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(0, -ledgerSpaceSize));
+    bottomLedgerSpace->setPolygon(ledsp);
+
 }
 
 void StaffSystemItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
@@ -126,6 +138,10 @@ void StaffSystemItem::adjustCorner(int number, int size)
     p[number].setX(corner[number]->pos().x() + size);
     p[number].setY(corner[number]->pos().y() + size);
     setPolygon(p);
+
+    setPosition(StaffPosition(p[0], p[1], p[2], p[3]));
+
+    updateHighlight();
     update();
 }
 
