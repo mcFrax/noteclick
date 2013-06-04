@@ -29,6 +29,8 @@ class StaffSystemItem : private QGraphicsPolygonItem, public SystemViewItem
     void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    void updateHighlights();
+    void updateLedgerSpaces();
 public:
     StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent);
 
@@ -52,6 +54,9 @@ protected:
     const int right_top = 1;
     const int right_bottom = 2;
     const int left_bottom = 3;
+
+    bool highlighted;
+    int highlightPos;
 
     Corner *corner[4];
 

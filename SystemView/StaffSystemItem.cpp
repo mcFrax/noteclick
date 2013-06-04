@@ -28,11 +28,14 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
     setBrush(QColor(0,255,0,80));
     setPen(QColor(0,255,0,200));
     setAcceptHoverEvents(1);
+
+    highlighted = 0;
+    highlightPos = 0;
+
     topLedgerSpace = new LedgerSpaceItem(this);
     bottomLedgerSpace = new LedgerSpaceItem(this);
     topLedgerSpace->setAcceptHoverEvents(1);
     bottomLedgerSpace->setAcceptHoverEvents(1);
-
 
     topLedgerSpace->setBrush(QColor(30,255,30,60));
     topLedgerSpace->setPen(QColor(0,0,0,0));
@@ -40,6 +43,7 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
 
     bottomLedgerSpace->setBrush(QColor(50,255,50,60));
     bottomLedgerSpace->setPen(QColor(0,0,0,0));
+
 
     lineHighlight = new QGraphicsPolygonItem(this);
     spaceHighlight = new QGraphicsPolygonItem(this);
@@ -53,6 +57,8 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
 
     spaceHighlight->setBrush(QColor(0,255,0,80));
     spaceHighlight->setPen(QColor(0,255,0,200));
+
+    updateLedgerSpaces();
     
     updateHighlight();
 
@@ -79,13 +85,21 @@ void StaffSystemItem::updateHighlight()
 
 }
 
-void StaffSystemItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+
+void StaffSystemItem::updateHighlights()
 {
+    int pos = highlightPos;
+
+    if (!highlighted){
+        lineHighlight->setVisible(0);
+        spaceHighlight->setVisible(0);
+        return;
+    }
+
     static const float lineHighlightWidth = 0.1; //w StaffCoords
     static const float spaceHighlightWidth = 0.125;
     static const float lhw = lineHighlightWidth/2;
     static const float shw = spaceHighlightWidth/2;
-    int pos = position().toStaffCoords(event->pos()).positionOnStaff();
 //    qDebug("%f, %i", position().toStaffCoords(event->pos()).y(), pos);
     if (pos%2 == 0){
         //podświetlamy linię
@@ -110,15 +124,40 @@ void StaffSystemItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
+void StaffSystemItem::updateLedgerSpaces()
+{
+    QPolygonF ledsp;
+    ledsp << position().fromStaffCoords(QPointF(0, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1+ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(1, 1));
+    ledsp << position().fromStaffCoords(QPointF(0, 1));
+    topLedgerSpace->setPolygon(ledsp);
+
+    ledsp.clear();
+    ledsp << position().fromStaffCoords(QPointF(0, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, 0));
+    ledsp << position().fromStaffCoords(QPointF(1, -ledgerSpaceSize));
+    ledsp << position().fromStaffCoords(QPointF(0, -ledgerSpaceSize));
+    bottomLedgerSpace->setPolygon(ledsp);
+}
+
+void StaffSystemItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    highlighted = 1;
+    highlightPos = position().toStaffCoords(event->pos()).positionOnStaff();
+
+    updateHighlights();
+}
+
 void StaffSystemItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     hoverMoveEvent(event);
 }
 
-void StaffSystemItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void StaffSystemItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
-    lineHighlight->setVisible(0);
-    spaceHighlight->setVisible(0);
+    highlighted = 0;
+    updateHighlights();
 }
 
 void StaffSystemItem::setCorners(int size)
