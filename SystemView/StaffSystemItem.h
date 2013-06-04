@@ -6,6 +6,7 @@
 #include "SystemScene.h"
 #include "SystemViewItem.h"
 #include "SystemImageItem.h"
+#include <QMessageBox>
 
 namespace SystemView
 {
@@ -26,7 +27,7 @@ public:
     void setPosition(const StaffPosition& pos);
 
     //corners - wojtek
-    void adjustCorner(int number);
+    void adjustCorner(int number, int size);
     void setCorners(int size);
 
     static QVector<QPointF> setPointOrder(QVector<QPointF> vector);
@@ -49,22 +50,31 @@ protected:
 class Corner : public QGraphicsRectItem
 {
 public:
-    Corner(StaffSystemItem* staff, int number, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent = 0):QGraphicsRectItem(x, y, w, h, parent)
+    Corner(StaffSystemItem* staff, int size, int number, qreal x, qreal y, qreal w, qreal h, QGraphicsItem* parent = 0):QGraphicsRectItem(x, y, w, h, parent)
     {
         this->staff = staff;
         this->number = number;
+        this->size = size;
+        setPen(QColor(0,0,0,255));
+        setBrush(QColor(0,0,0,255));
+        setFlag(ItemSendsScenePositionChanges);
+        setFlag(ItemIsMovable);
+        setFlag(ItemIsSelectable);
     }
 
 protected:
 
     int number;
+    int size;
     StaffSystemItem* staff;
     QVariant itemChange(GraphicsItemChange change, const QVariant &value)
     {
+
+
         switch (change) {
         case ItemPositionHasChanged:
-            staff->adjustCorner(number);
-            break;
+            staff->adjustCorner(number, size);
+          break;
         default:
             break;
         };

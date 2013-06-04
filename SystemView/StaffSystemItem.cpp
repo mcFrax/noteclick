@@ -13,28 +13,31 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
     setBrush(QColor(0,255,0,80));
     setPen(QColor(0,255,0,200));
 
+    setCorners(7);
+
 }
 void StaffSystemItem::setCorners(int size)
 {
     for (int i = 0; i < 4; i++)
     {
-        corner[i] = new Corner(this, i, this[i].x() , this[i].y() , size, size);
+        corner[i] = new Corner(this, size, i, 0, 0 , 2*size, 2*size);
+        corner[i]->setPos(this->polygon()[i]);
         corner[i]->setParentItem(this);
-        corner[i]->setFlag(ItemIsMovable);
-        corner[i]->setFlag(ItemIsSelectable);
     }
 
 
 }
-void StaffSystemItem::adjustCorner(int number)
+void StaffSystemItem::adjustCorner(int number, int size)
 {
-    this[number].setX(corner[number]->pos().x());
-    this[number].setY(corner[number]->pos().y());
+    QPolygonF p = polygon();
+    p[number].setX(corner[number]->pos().x() + size);
+    p[number].setY(corner[number]->pos().y() + size);
+    setPolygon(p);
+    update();
 }
 
 QVector<QPointF> StaffSystemItem::setPointOrder(QVector<QPointF> vector)
 {
-
     // sprawdzam czy punkty są parami rózne
     int counter =0;
     foreach (QPointF p1, vector)
@@ -48,8 +51,8 @@ QVector<QPointF> StaffSystemItem::setPointOrder(QVector<QPointF> vector)
     if (counter > 4)
     {
         QMessageBox msgBox;
-         msgBox.setText("more than 4.");
-         msgBox.exec();
+        msgBox.setText("More than 4 points or equal points passed.");
+        msgBox.exec();
         return vector; // TODO EXCEPTION
     }
     QPointF top_left;
@@ -91,8 +94,8 @@ QVector<QPointF> StaffSystemItem::setPointOrder(QVector<QPointF> vector)
     if (st.y() == nd.y())
     {
         QMessageBox msgBox;
-         msgBox.setText("equal points.");
-         msgBox.exec();
+        msgBox.setText("Brzydki prostokąt! coś nie bedize działać!");
+        msgBox.exec();
         return vector;//EXCEPTION
     }
     else if (st.y() < nd.y())
