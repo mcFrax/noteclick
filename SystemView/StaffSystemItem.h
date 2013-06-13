@@ -42,6 +42,8 @@ public:
     void adjustCorner(int number, int size);
     void setCorners(int size);
 
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+
     static QVector<QPointF> setPointOrder(QVector<QPointF> vector);
 protected:
     SystemScene * systemScene();

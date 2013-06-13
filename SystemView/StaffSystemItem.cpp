@@ -5,6 +5,8 @@
 #include <QPen>
 #include <QGraphicsSceneHoverEvent>
 #include <QMessageBox>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
 
 using namespace SystemView;
 
@@ -25,7 +27,8 @@ static const double ledgerSpaceSize = 0.5;
 StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, SystemImageItem* parent)
     : QGraphicsPolygonItem(pos.toQPolygonF(), parent), SystemViewItem(reg, id), pos(pos)
 {
-    setBrush(QColor(0,255,0,80));
+    setBrush(QColor(0,255,0,50));
+//    setBrush(QColor(Qt::transparent));
     setPen(QColor(0,255,0,200));
     setAcceptHoverEvents(1);
 
@@ -37,11 +40,11 @@ StaffSystemItem::StaffSystemItem(Reg &reg, IdType id, const StaffPosition &pos, 
     topLedgerSpace->setAcceptHoverEvents(1);
     bottomLedgerSpace->setAcceptHoverEvents(1);
 
-    topLedgerSpace->setBrush(QColor(30,255,30,60));
+    topLedgerSpace->setBrush(QColor(30,255,30,30));
     topLedgerSpace->setPen(QColor(0,0,0,0));
 
 
-    bottomLedgerSpace->setBrush(QColor(50,255,50,60));
+    bottomLedgerSpace->setBrush(QColor(50,255,50,40));
     bottomLedgerSpace->setPen(QColor(0,0,0,0));
 
 
@@ -76,8 +79,8 @@ void StaffSystemItem::updateHighlights()
         return;
     }
 
-    static const float lineHighlightWidth = 0.1; //w StaffCoords
-    static const float spaceHighlightWidth = 0.125;
+    static const float lineHighlightWidth = 0.075; //w StaffCoords
+    static const float spaceHighlightWidth = 0.15;
     static const float lhw = lineHighlightWidth/2;
     static const float shw = spaceHighlightWidth/2;
 //    qDebug("%f, %i", position().toStaffCoords(event->pos()).y(), pos);
@@ -151,6 +154,7 @@ void StaffSystemItem::setCorners(int size)
 
 
 }
+
 void StaffSystemItem::adjustCorner(int number, int size)
 {
     QPolygonF p = polygon();
@@ -279,6 +283,14 @@ QVector<QPointF> StaffSystemItem::setPointOrder(QVector<QPointF> vector)
     result.append(bot_left);
 
     return result;
+}
+
+void StaffSystemItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+//    QPainter::CompositionMode compmode = painter->compositionMode();
+    painter->setCompositionMode(QPainter::CompositionMode_Darken);
+    QGraphicsPolygonItem::paint(painter, option, widget);
+//    painter->setCompositionMode(compmode);
 }
 
 const StaffPosition &StaffSystemItem::position() const
