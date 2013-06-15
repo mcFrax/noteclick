@@ -15,7 +15,8 @@ class EraseState : public SystemSceneState, public ItemEventHandler
     void onExit(QEvent * event);
     SceneEventHandlers handlers;
 
-    virtual bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
+    bool mousePressEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
+    bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *) override;
 public:
     explicit EraseState(QState *parent, SystemScene *scene);
     

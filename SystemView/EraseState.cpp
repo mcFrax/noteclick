@@ -1,4 +1,7 @@
 #include "EraseState.h"
+#include <QGraphicsItem>
+#include <QtGlobal>
+#include <QGraphicsSceneMouseEvent>
 #include "SystemViewItem.h"
 
 #include "SignalCommunication/UserAction.h"
@@ -15,19 +18,30 @@ EraseState::EraseState(QState *parent, SystemScene *scene) :
 }
 
 
+bool EraseState::mousePressEvent(QGraphicsItem *, QGraphicsSceneMouseEvent *e)
+{
+    e->accept();
+    return 0;
+}
+
 bool EraseState::mouseReleaseEvent(QGraphicsItem *self, QGraphicsSceneMouseEvent *)
 {
 //    delete self;
-    sceneEmitUserAction(UserAction(UserAction::EraseSystemObject, vsa(dynamic_cast<SystemViewItem*>(self)->id())));
+    SystemViewItem* svi = dynamic_cast<SystemViewItem*>(self);
+    if (svi)
+        sceneEmitUserAction(UserAction(UserAction::EraseSystemObject, vsa(svi->id())));
+    else
+        qDebug("No kurcze.");
+    return 0;
 }
 
 
-void EraseState::onEntry(QEvent *event)
+void EraseState::onEntry(QEvent *)
 {
     scene->setHandlers(&handlers);
 }
 
-void EraseState::onExit(QEvent *event)
+void EraseState::onExit(QEvent *)
 {
     scene->setHandlers(0);
 }

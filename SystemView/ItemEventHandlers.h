@@ -32,7 +32,7 @@ struct SceneEventHandlers
     ItemEventHandler* HANDLER(SystemImageItem);
     ItemEventHandler* HANDLER(StaffSystemItem);
     ItemEventHandler* HANDLER(ClefItem);
-    //ItemEventHandler* noteItemHandler;
+    ItemEventHandler* HANDLER(NoteItem);
 };
 
 struct IgnoringSceneEventHandlers : public SceneEventHandlers
