@@ -22,6 +22,7 @@ class SystemSceneState;
 class AddStaffState;
 class AddClefState;
 class AddNoteState;
+class EraseState;
 class VoiceElementItem;
 
 class SystemScene : public QGraphicsScene, protected IdRegisteredClass
@@ -36,6 +37,7 @@ public:
         AddStaffState* addStaff;
         AddClefState *addClef;
         AddNoteState *addNote;
+        EraseState *erase;
     };
 
 public:
@@ -66,6 +68,7 @@ friend class SystemSceneState;
 friend class AddStaffState;
 friend class AddClefState;
 friend class AddNoteState;
+friend class EraseState;
 friend class VoiceElementItem;
 
 private:

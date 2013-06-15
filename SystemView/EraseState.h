@@ -2,21 +2,29 @@
 #define ERASESTATE_H
 
 #include "SystemSceneState.h"
-#include "ItemEventHandler.h"
+#include "ItemEventHandlers.h"
 
-using namespace SystemView;
+namespace SystemView
+{
 
 class EraseState : public SystemSceneState, public ItemEventHandler
 {
     Q_OBJECT
+
+    void onEntry(QEvent * event);
+    void onExit(QEvent * event);
+    SceneEventHandlers handlers;
+
     virtual bool mouseReleaseEvent(QGraphicsItem * self, QGraphicsSceneMouseEvent *);
 public:
-    explicit EraseState(QState *parent = 0);
+    explicit EraseState(QState *parent, SystemScene *scene);
     
 signals:
     
 public slots:
     
 };
+
+}
 
 #endif // ERASESTATE_H

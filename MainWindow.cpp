@@ -11,6 +11,7 @@
 #include "SystemView/AddStaffState.h"
 #include "SystemView/AddClefState.h"
 #include "SystemView/AddNoteState.h"
+#include "SystemView/EraseState.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -91,6 +92,8 @@ void MainWindow::setupSceneStateTransitions()
     scene.states().editSystem->assignProperty(ui->toolButton_3, "down", false);
     scene.states().editSystem->assignProperty(ui->toolButton_4, "down", false);
 
+    scene.states().editSystem->assignProperty(ui->toolButton_8, "down", false);
+
     scene.states().editSystem->addTransition(
                 ui->toolButton, SIGNAL(clicked()),
                 scene.states().normalCursor);
@@ -107,5 +110,10 @@ void MainWindow::setupSceneStateTransitions()
                 ui->toolButton_4, SIGNAL(clicked()),
                 scene.states().addNote);
     scene.states().addNote->assignProperty(ui->toolButton_4, "down", true);
+
+    scene.states().editSystem->addTransition(
+                ui->toolButton_8, SIGNAL(clicked()),
+                scene.states().erase);
+    scene.states().addNote->assignProperty(ui->toolButton_8, "down", true);
 }
 

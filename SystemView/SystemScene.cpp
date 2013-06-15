@@ -10,6 +10,7 @@
 #include "AddStaffState.h"
 #include "AddClefState.h"
 #include "AddNoteState.h"
+#include "EraseState.h"
 #include "StaffSystemItem.h"
 #include "ClefItem.h"
 #include "NoteItem.h"
@@ -50,6 +51,7 @@ void SystemScene::setupMachine()
     statesVal.addStaff = new AddStaffState(statesVal.editSystem, this);
     statesVal.addClef = new AddClefState(statesVal.editSystem, this);
     statesVal.addNote = new AddNoteState(statesVal.editSystem, this);
+    statesVal.erase = new EraseState(statesVal.editSystem, this);
 
     statesVal.editSystem->setInitialState(statesVal.normalCursor);
     stateMachine.addState(statesVal.editSystem);
