@@ -177,9 +177,11 @@ void SystemScene::handleSystemChanged(ScoreChange change)
         case ScoreChange::SynchroMarkIdChanged: //(IdType synchroMarkId, IdType new_synchroId)
 
         case ScoreChange::SystemCreated:
+            emit warning(tr("Not handled system change")+" ("+__func__+")");
+            return;
 
         case ScoreChange::SystemObjectErased:    //(IdType objectId)
-            emit warning(tr("Not handled system change")+" ("+__func__+")");
+            systemObjectErased(change);
             return;
 
         //Nie wstawiac default!
@@ -279,6 +281,21 @@ void SystemScene::noteCreated(const ScoreChange &change)
     }
 
     new NoteItem(idReg, id, voiceId, staff, noteValue, coords);
+}
+
+void SystemScene::systemObjectErased(const ScoreChange &change)
+{
+    IdType id;
+
+    change.args.unpackTo(id);
+
+    SystemViewItem* item = idReg.ptrAs<SystemViewItem>(id);
+    if (!item){
+        emit error(QString(__PRETTY_FUNCTION__)+':'+tr("Incorrect id"));
+        return;
+    }
+
+    delete item;
 }
 
 void SystemScene::registerVoiceElement(IdType voiceId, VoiceElementItem *item)
